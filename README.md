@@ -140,4 +140,4 @@ src/
 
 ## License
 
-This project is private and proprietary
+This project is private and proprietary.
