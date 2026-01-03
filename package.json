@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "eslint"
+},
+
   "dependencies": {
     "@clerk/nextjs": "6.10.3",
     "@hookform/resolvers": "^5.2.2",
@@ -41,6 +42,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "concurrently": "9.1.2",
     "date-fns": "^4.1.0",
     "dotenv": "16.4.7",
     "drizzle-orm": "0.39.0",
