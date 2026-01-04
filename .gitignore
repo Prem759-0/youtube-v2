@@ -1,0 +1,101 @@
+
+
+# ===============================
+# Dependencies
+# ===============================
+node_modules/
+.pnp
+.pnp.js
+
+# ===============================
+# Next.js
+# ===============================
+.next/
+out/
+build/
+dist/
+.vercel/
+
+# ===============================
+# Environment variables
+# ======================
+
+# ===============================
+# Logs
+# ===============================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# ===============================
+# TypeScript
+# ===============================
+*.tsbuildinfo
+
+# ===============================
+# Drizzle / Database
+# ===============================
+drizzle/
+*.sqlite
+*.db
+*.db-journal
+
+# ===============================
+# Testing
+# ===============================
+coverage/
+
+# ===============================
+# Cache
+# ===============================
+.cache/
+.turbo/
+.eslintcache
+
+# ===============================
+# OS files
+# ===============================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ===============================
+# Editor / IDE
+# ===============================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# ===============================
+# Misc
+# ===============================
+*.pem
+*.key
+*.crt
+node_modules
+node_modules
+.next
+out
+
+# dependencies
+node_modules
+
+# next.js
+.next
+out
+
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
