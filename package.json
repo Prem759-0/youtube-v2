@@ -64,6 +64,7 @@
     "recharts": "2.15.4",
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
+    "superjson": "^2.2.6",
     "svix": "1.45.1",
     "tailwind-merge": "^3.4.0",
     "vaul": "^1.1.2",
