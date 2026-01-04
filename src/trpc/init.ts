@@ -1,14 +1,20 @@
 import { initTRPC } from '@trpc/server';
 import {cache} from "react";
+import { auth } from '@clerk/nextjs/server';
+import superjson from "superjson";
+
 export const createTRPCContext = cache(async() => {
-    return {userId: "user_123"};
-})
-// Avoid exporting the entire t-object
+    const {userId} = await auth();
+
+    return {clerkUserId: userId}
+});
+
+export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
 // since it's not very descriptive.
 // For instance, the use of a t variable
 // is common in i18n libraries.
-const t = initTRPC.create({
-
+const t = initTRPC.context<Context>().create({
+   transformer: superjson,
 });
 // Base router and procedure helpers
 export const createTRPCrouter = t.router;
