@@ -299,4 +299,4 @@ This project is private and proprietary.
 - Video management features
 - User profiles and channels
 - Comments and interactions
-- Search and recommendations .
+- Search and recommendations 
