@@ -13,6 +13,7 @@ interface PageProps {
  const Page = async ({
   searchParams
  }:PageProps) => {
+  
   const {categoryId} = await searchParams;
    void trpc.categories.getMany.prefetch();
    
