@@ -236,23 +236,191 @@ If you need to test authentication flows with ngrok:
 ## Project Structure
 
 ```
-src/
-├── app/                    # Next.js app router
-│   ├── (auth)/            # Authentication routes (sign-in/sign-up)
-│   ├── (home)/            # Protected home routes
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout with Clerk provider
-│   └── page.tsx           # Home page (redirects to home)
-├── components/            # Reusable UI components
-│   └── ui/               # Radix UI components
-├── db/                   # Database configuration
-│   ├── index.ts          # Drizzle client setup
-│   └── schema.ts         # Database schema (users table)
-├── hooks/                # Custom React hooks
-├── lib/                  # Utility functions
-└── modules/              # Feature modules
-    ├── auth/             # Authentication module
-    └── home/             # Home module with navbar/sidebar
+.
+├── .env.local
+├── .gitignore
+├── bun.lock
+├── components.json
+├── drizzle.config.ts
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tsconfig.json
+├── public/
+│   ├── favicon.png
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── logo.svg
+│   ├── placeholder.svg
+│   ├── user-placeholder.svg
+│   ├── window.svg
+│   ├── Y_logo.ico
+│   └── Y_logo.png
+└── src/
+    ├── constants.ts
+    ├── middleware.ts
+    ├── README.md
+    ├── app/
+    │   ├── globals.css
+    │   ├── layout.tsx
+    │   ├── (auth)/
+    │   │   ├── layout.tsx
+    │   │   ├── sign-in/
+    │   │   │   └── [[...sign-in]]/
+    │   │   │       └── page.tsx
+    │   │   └── sign-up/
+    │   │       └── [[...sign-up]]/
+    │   │           └── page.tsx
+    │   ├── (home)/
+    │   │   ├── client.tsx
+    │   │   ├── layout.tsx
+    │   │   ├── page.tsx
+    │   │   └── protected/
+    │   │       └── page.tsx
+    │   ├── (studio)/
+    │   │   ├── layout.tsx
+    │   │   └── studio/
+    │   │       └── page.tsx
+    │   └── api/
+    │       ├── trpc/
+    │       │   └── [trpc]/
+    │       │       └── route.ts
+    │       ├── users/
+    │       │   └── webhook/
+    │       │       └── route.ts
+    │       └── videos/
+    │           └── webhook/
+    │               └── route.ts
+    ├── components/
+    │   ├── filter-carousel.tsx
+    │   ├── infinite-scroll.tsx
+    │   ├── responsive-dialog.tsx
+    │   ├── user-avatar.tsx
+    │   └── ui/
+    │       ├── accordion.tsx
+    │       ├── alert-dialog.tsx
+    │       ├── alert.tsx
+    │       ├── aspect-ratio.tsx
+    │       ├── avatar.tsx
+    │       ├── badge.tsx
+    │       ├── breadcrumb.tsx
+    │       ├── button-group.tsx
+    │       ├── button.tsx
+    │       ├── calendar.tsx
+    │       ├── card.tsx
+    │       ├── carousel.tsx
+    │       ├── chart.tsx
+    │       ├── checkbox.tsx
+    │       ├── collapsible.tsx
+    │       ├── command.tsx
+    │       ├── context-menu.tsx
+    │       ├── dialog.tsx
+    │       ├── drawer.tsx
+    │       ├── dropdown-menu.tsx
+    │       ├── empty.tsx
+    │       ├── field.tsx
+    │       ├── form.tsx
+    │       ├── hover-card.tsx
+    │       ├── input-group.tsx
+    │       ├── input-otp.tsx
+    │       ├── input.tsx
+    │       ├── item.tsx
+    │       ├── kbd.tsx
+    │       ├── label.tsx
+    │       ├── menubar.tsx
+    │       ├── navigation-menu.tsx
+    │       ├── pagination.tsx
+    │       ├── popover.tsx
+    │       ├── progress.tsx
+    │       ├── radio-group.tsx
+    │       ├── resizable.tsx
+    │       ├── scroll-area.tsx
+    │       ├── select.tsx
+    │       ├── separator.tsx
+    │       ├── sheet.tsx
+    │       ├── sidebar.tsx
+    │       ├── skeleton.tsx
+    │       ├── slider.tsx
+    │       ├── sonner.tsx
+    │       ├── spinner.tsx
+    │       ├── switch.tsx
+    │       ├── table.tsx
+    │       ├── tabs.tsx
+    │       ├── textarea.tsx
+    │       ├── toggle-group.tsx
+    │       ├── toggle.tsx
+    │       └── tooltip.tsx
+    ├── db/
+    │   ├── index.ts
+    │   └── schema.ts
+    ├── hooks/
+    │   ├── use-intersection-observer.ts
+    │   └── use-mobile.ts
+    ├── lib/
+    │   ├── mux.ts
+    │   ├── ratelimit.ts
+    │   ├── redis.ts
+    │   └── utils.ts
+    ├── modules/
+    │   ├── auth/
+    │   │   └── ui/
+    │   │       └── components/
+    │   │           └── auth-button.tsx
+    │   ├── categories/
+    │   │   └── server/
+    │   │       └── procedures.ts
+    │   ├── home/
+    │   │   └── ui/
+    │   │       ├── components/
+    │   │       │   ├── home-navbar/
+    │   │       │   │   ├── home-input.tsx
+    │   │       │   │   └── index.tsx
+    │   │       │   └── home-sidebar/
+    │   │       │       ├── index.tsx
+    │   │       │       ├── main-section.tsx
+    │   │       │       └── personal-section.tsx
+    │   │       ├── layouts/
+    │   │       │   └── home-layouts.tsx
+    │   │       ├── sections/
+    │   │       │   └── categories-section.tsx
+    │   │       └── views/
+    │   │           └── home-view.tsx
+    │   ├── studio/
+    │   │   ├── server/
+    │   │   │   └── procedures.ts
+    │   │   └── ui/
+    │   │       ├── components/
+    │   │       │   ├── studio-upload-modal.tsx
+    │   │       │   ├── studio-uploader.tsx
+    │   │       │   ├── studio-navbar/
+    │   │       │   │   └── index.tsx
+    │   │       │   └── Studio-sidebar/
+    │   │       │       ├── index.tsx
+    │   │       │       └── studio-sidebar-header.tsx
+    │   │       ├── layouts/
+    │   │       │   └── studio-layout.tsx
+    │   │       ├── sections/
+    │   │       │   └── videos-section.tsx
+    │   │       └── view/
+    │   │           └── studio-view.tsx
+    │   └── videos/
+    │       ├── server/
+    │       │   └── procedures.tsx
+    │       └── ui/
+    │           └── components/
+    │               └── video-thumbnail.tsx
+    ├── scripts/
+    │   └── seed-categories.ts
+    └── trpc/
+        ├── client.tsx
+        ├── init.ts
+        ├── query-client.ts
+        ├── server.tsx
+        └── routers/
+            └── _app.ts
 ```
 
 ## Troubleshooting
