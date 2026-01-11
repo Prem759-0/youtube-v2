@@ -1,3 +1,4 @@
+import { formatDuration } from "@/lib/utils";
 import Image from "next/image"
 
 interface VideoThumbnailProps {
@@ -24,6 +25,7 @@ export const VideoThumbnail = ({
         />
 
         <Image
+        unoptimized={!!previewUrl}
           src={previewUrl ?? "/placeholder.svg"}
           alt={title ?? "Video preview"}
           fill
@@ -31,9 +33,11 @@ export const VideoThumbnail = ({
         />
       </div>
 
-      <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
-           {duration}
-      </div>
+      {typeof duration === "number" && (
+        <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
+          {formatDuration(duration)}
+        </div>
+      )}
 
     </div>
   )
