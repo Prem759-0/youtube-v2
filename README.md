@@ -1,6 +1,6 @@
 # YouTube V2
 
-This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
+This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing..
 
 ## Overview
 
@@ -82,6 +82,8 @@ Follow these instructions to get a local copy of the project up and running.
     UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
     UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
     ```
+  
+
 
 4.  **Run database migrations:**
     This command will push the schema from `src/db/schema.ts` to your Neon database.
