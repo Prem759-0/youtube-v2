@@ -1,10 +1,16 @@
 import { z } from "zod";
 import { db } from "@/db";
-import { videos } from "@/db/schema";
+import { videos, videoUpdateSchema } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { mux } from "@/lib/mux";
 
 export const videosRouter = createTRPCRouter({
+  update: protectedProcedure
+  .input(videoUpdateSchema)
+  .mutation(async ({ctx, input}) => {
+      
+  }),
+
   create: protectedProcedure.mutation(async ({ ctx }) => {
     const { id: userId } = ctx.user;
 
