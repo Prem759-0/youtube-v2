@@ -58,6 +58,30 @@ Follow these instructions to get a local copy of the project up and running.
 3.  **Set up environment variables:**
     Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
 
+    ```env
+    # Neon Database URL
+    DATABASE_URL="your_database_url"
+
+    # Clerk Authentication
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
+    CLERK_SECRET_KEY="your_clerk_secret_key"
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
+    CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
+
+
+    # Mux Video
+    MUX_TOKEN_ID="your_mux_token_id"
+    MUX_TOKEN_SECRET="your_mux_token_secret"
+    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
+
+
+    # Upstash Rate Limiting
+    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
+    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
+    ```
   
 
 
