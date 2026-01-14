@@ -5,6 +5,7 @@ import {
     createSelectSchema,
     createUpdateSchema,
 } from "drizzle-zod";
+import { z } from "zod";
 
 import {pgTable, text, uuid, integer, timestamp, uniqueIndex, pgEnum} from "drizzle-orm/pg-core"
 
@@ -63,7 +64,10 @@ export const videos = pgTable("videos", {
 
 export const videoInsertSchema = createInsertSchema(videos);
 export const videoSelectSchema = createSelectSchema(videos);
-export const videoUpdateSchema = createUpdateSchema(videos);
+export const videoUpdateSchema = createUpdateSchema(videos, {
+  visibility: z.enum(["private", "public"]),
+});
+
 
 
 export const videoRelations = relations(videos,({one})=>({
