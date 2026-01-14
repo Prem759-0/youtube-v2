@@ -10,6 +10,8 @@ import { MoreVerticalIcon, TrashIcon } from "lucide-react";
 import { trpc } from "@/trpc/client";
 import { videoUpdateSchema } from "@/db/schema";
 
+import {VideoPlayer} from "@/modules/videos/ui/components/video-player"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -132,6 +134,7 @@ export const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <FormControl>
                     <Textarea
                       {...field}
+                           value={field.value ?? ""} 
                       className="min-h-[168px] max-w-[640px] text-sm px-3 py-2 resize-none"
                       placeholder="Add a description to your video"
                     />
@@ -149,7 +152,7 @@ export const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 <FormItem className="max-w-[320px]">
                   <FormLabel>Category</FormLabel>
                   <Select
-                    value={field.value} 
+                    value={field.value ?? ""} 
                     onValueChange={field.onChange}
                   >
                     <FormControl>
@@ -170,6 +173,18 @@ export const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </FormItem>
               )}
             />
+          </div>
+
+          <div className="flex flex-col gap-y-8 lg:col-span-2">
+               <div className="flex flex-col gap-4 bg-[#F9F9F9] rounded-xl overflow-hidden h-fit">
+                  <div className="aspect-video relative">
+                  <VideoPlayer
+                     playbackId={video.muxPlaybackId}
+                      thumbnailUrl={video.thumbnailUrl}
+                  />
+                </div>
+
+               </div>
           </div>
         </div>
       </form>
