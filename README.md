@@ -4,17 +4,7 @@
 This project is a modern, full-stack YouTube clone built with the T3 stack and -to-end typesafe APIs.
 
 ## Features
- their uploaded videos.
--   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
--   **Video Categories:** Videos can be assigned to different categories for better organization.
--   **Typesafe API:** End-to-end typesafety with tRPC.
--   **ORM:** Drizzle ORM for querying a PostgreSQL database.
--   **Responsive Design:** A fully responsive UI that works on all devices.
-
-## Tech Stack
-
--   **Framework:** [Next.js](https://nextjs.org/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+ their  CSS](https://tailwindcss.com/)
 -   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 -   **Authentication:** [Clerk](https://clerk.com/)
 -   **API:** [tRPC](https://trpc.io/)
