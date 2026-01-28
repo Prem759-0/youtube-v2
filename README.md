@@ -4,10 +4,7 @@
 This project is a modern, full-stack YouTube clone built with the T3 stack and -to-end typesafe APIs.
 
 ## Features
-
--   **Authentication:** Secure and easy user sign-up and sign-in provided by Clerk.
--   **Video Uploads:** Direct-to-Mux video uploads for efficient and robust video processing.
--   **Creator Studio:** A dedicated dashboard for creators to view and manage their uploaded videos.
+ their uploaded videos.
 -   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
 -   **Video Categories:** Videos can be assigned to different categories for better organization.
 -   **Typesafe API:** End-to-end typesafety with tRPC.
