@@ -1,11 +1,7 @@
 
 # YouTube V2
 
-This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign  user-friendly interface built with Next.js and Tailwind CSS. User authentication is handled by Clerk, and video content is managed, processed, and streamed via Mux. The backend is powered by tRPC, providing end-to-end typesafe APIs.
-
-## Features
-
--   **Authentication:** Secure and easy user sign-up and sign-in provided by Clerk.
+This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign  
 -   **Video Uploads:** Direct-to-Mux video uploads for efficient and robust video processing.
 -   **Creator Studio:** A dedicated dashboard for creators to view and manage their uploaded videos.
 -   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
