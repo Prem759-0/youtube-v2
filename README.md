@@ -1,17 +1,4 @@
-
-# YouTube V2
-
-This project is a modern, full-stack YouTube clone built with the T3 stack and 
--   [Bun](https://bun.sh/)
--   A   the following environment  NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-    CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
-
-
-    # Mux Video
-    MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
+ MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
 
 
     # Upstash Rate Limiting
