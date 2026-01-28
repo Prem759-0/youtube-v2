@@ -1,14 +1,7 @@
 
 # YouTube V2
 
-This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign  
--   **Video Uploads:** Direct-to-Mux video uploads for efficient and robust video processing.
--    [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
+This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to 
 
 ## Getting Started
 
