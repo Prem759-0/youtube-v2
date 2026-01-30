@@ -1,6 +1,6 @@
 # YouTube V2
 
-This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing..
+This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
 
 ## Overview
 
@@ -28,6 +28,204 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 -   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
 -   **Video Processing:** [Mux](https://www.mux.com/)
 -   **Deployment:** Vercel
+
+## Project Structure
+
+```
+├── public
+│   ├── favicon.png
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── logo.svg
+│   ├── placeholder.svg
+│   ├── user-placeholder.svg
+│   ├── window.svg
+│   ├── Y_logo.ico
+│   └── Y_logo.png
+├── scripts
+│   └── generate-tree.ts
+├── src
+│   ├── app
+│   │   ├── (auth)
+│   │   │   ├── sign-in
+│   │   │   │   └── [[...sign-in]]
+│   │   │   │       └── page.tsx
+│   │   │   ├── sign-up
+│   │   │   │   └── [[...sign-up]]
+│   │   │   │       └── page.tsx
+│   │   │   └── layout.tsx
+│   │   ├── (home)
+│   │   │   ├── protected
+│   │   │   │   └── page.tsx
+│   │   │   ├── client.tsx
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── (studio)
+│   │   │   ├── studio
+│   │   │   │   ├── video
+│   │   │   │   │   └── [videoId]
+│   │   │   │   │       └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx
+│   │   ├── api
+│   │   │   ├── trpc
+│   │   │   │   └── [trpc]
+│   │   │   │       └── route.ts
+│   │   │   ├── users
+│   │   │   │   └── webhook
+│   │   │   │       └── route.ts
+│   │   │   └── videos
+│   │   │       └── webhook
+│   │   │           └── route.ts
+│   │   ├── globals.css
+│   │   └── layout.tsx
+│   ├── components
+│   │   ├── ui
+│   │   │   ├── accordion.tsx
+│   │   │   ├── alert-dialog.tsx
+│   │   │   ├── alert.tsx
+│   │   │   ├── aspect-ratio.tsx
+│   │   │   ├── avatar.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── breadcrumb.tsx
+│   │   │   ├── button-group.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── calendar.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── carousel.tsx
+│   │   │   ├── chart.tsx
+│   │   │   ├── checkbox.tsx
+│   │   │   ├── collapsible.tsx
+│   │   │   ├── command.tsx
+│   │   │   ├── context-menu.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── drawer.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── empty.tsx
+│   │   │   ├── field.tsx
+│   │   │   ├── form.tsx
+│   │   │   ├── hover-card.tsx
+│   │   │   ├── input-group.tsx
+│   │   │   ├── input-otp.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── item.tsx
+│   │   │   ├── kbd.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── menubar.tsx
+│   │   │   ├── navigation-menu.tsx
+│   │   │   ├── pagination.tsx
+│   │   │   ├── popover.tsx
+│   │   │   ├── progress.tsx
+│   │   │   ├── radio-group.tsx
+│   │   │   ├── resizable.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── select.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+│   │   │   ├── sidebar.tsx
+│   │   │   ├── skeleton.tsx
+│   │   │   ├── slider.tsx
+│   │   │   ├── sonner.tsx
+│   │   │   ├── spinner.tsx
+│   │   │   ├── switch.tsx
+│   │   │   ├── table.tsx
+│   │   │   ├── tabs.tsx
+│   │   │   ├── textarea.tsx
+│   │   │   ├── toggle-group.tsx
+│   │   │   ├── toggle.tsx
+│   │   │   └── tooltip.tsx
+│   │   ├── filter-carousel.tsx
+│   │   ├── infinite-scroll.tsx
+│   │   ├── responsive-dialog.tsx
+│   │   └── user-avatar.tsx
+│   ├── db
+│   │   ├── index.ts
+│   │   └── schema.ts
+│   ├── hooks
+│   │   ├── use-intersection-observer.ts
+│   │   └── use-mobile.ts
+│   ├── lib
+│   │   ├── mux.ts
+│   │   ├── ratelimit.ts
+│   │   ├── redis.ts
+│   │   └── utils.ts
+│   ├── modules
+│   │   ├── auth
+│   │   │   └── ui
+│   │   │       └── components
+│   │   │           └── auth-button.tsx
+│   │   ├── categories
+│   │   │   └── server
+│   │   │       └── procedures.ts
+│   │   ├── home
+│   │   │   └── ui
+│   │   │       ├── components
+│   │   │       │   ├── home-navbar
+│   │   │       │   │   ├── home-input.tsx
+│   │   │       │   │   └── index.tsx
+│   │   │       │   └── home-sidebar
+│   │   │       │       ├── index.tsx
+│   │   │       │       ├── main-section.tsx
+│   │   │       │       └── personal-section.tsx
+│   │   │       ├── layouts
+│   │   │       │   └── home-layouts.tsx
+│   │   │       ├── sections
+│   │   │       │   └── categories-section.tsx
+│   │   │       └── views
+│   │   │           └── home-view.tsx
+│   │   ├── studio
+│   │   │   ├── server
+│   │   │   │   └── procedures.ts
+│   │   │   └── ui
+│   │   │       ├── components
+│   │   │       │   ├── studio-navbar
+│   │   │       │   │   └── index.tsx
+│   │   │       │   ├── Studio-sidebar
+│   │   │       │   │   ├── index.tsx
+│   │   │       │   │   └── studio-sidebar-header.tsx
+│   │   │       │   ├── studio-upload-modal.tsx
+│   │   │       │   └── studio-uploader.tsx
+│   │   │       ├── layouts
+│   │   │       │   └── studio-layout.tsx
+│   │   │       ├── sections
+│   │   │       │   ├── form-section.tsx
+│   │   │       │   └── videos-section.tsx
+│   │   │       └── views
+│   │   │           ├── studio-view.tsx
+│   │   │           └── video-view.tsx
+│   │   └── videos
+│   │       ├── server
+│   │       │   └── procedures.tsx
+│   │       └── ui
+│   │           └── components
+│   │               ├── video-player.tsx
+│   │               └── video-thumbnail.tsx
+│   ├── scripts
+│   │   └── seed-categories.ts
+│   ├── trpc
+│   │   ├── routers
+│   │   │   └── _app.ts
+│   │   ├── client.tsx
+│   │   ├── init.ts
+│   │   ├── query-client.ts
+│   │   └── server.tsx
+│   ├── constants.ts
+│   ├── middleware.ts
+│   └── README.md
+├── .gitignore
+├── bun.lock
+├── components.json
+├── desktop.ini
+├── drizzle.config.ts
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tsconfig.json
+└── tsconfig.tsbuildinfo
+```
 
 ## Getting Started
 
@@ -84,7 +282,6 @@ Follow these instructions to get a local copy of the project up and running.
     ```
   
 
-
 4.  **Run database migrations:**
     This command will push the schema from `src/db/schema.ts` to your Neon database.
     ```bash
@@ -106,4 +303,4 @@ Follow these instructions to get a local copy of the project up and running.
 -   `bun drizzle-kit push`: Pushes the database schema to the database.
 
 ---
-This README provides a comprehensive guide for developers to understand, set up, and contribute to the project .
+This README provides a comprehensive guide for developers to understand, set up, and contribute to the project.

@@ -28,6 +28,7 @@ export const VideoPlayer = ({
       accentColor="#FF2056" 
       onPlay={onPlay} 
       streamType="on-demand"
-    />
+/>
+
   );
 };
