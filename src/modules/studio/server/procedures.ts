@@ -117,4 +117,31 @@ export const studioRouter = createTRPCRouter({
 
       return result[0];
     }),
+
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+      const { id: userId } = ctx.user;
+
+      const result = await db
+        .delete(videos)
+        .where(
+          and(
+            eq(videos.id, id),
+            eq(videos.userId, userId)
+          )
+        )
+        .returning();
+
+      if (!result.length) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+
+      return result[0];
+    }),
 });
