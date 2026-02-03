@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import Link from "next/link";
+import Image from "next/image";
+import {THUMBNAIL_FALLBACK} from "@/modules/videos/constants";
 import {
   MoreVerticalIcon,
   CopyCheckIcon,
@@ -13,6 +15,9 @@ import {
   CopyIcon,
   Globe2Icon,
   LockIcon,
+  ImagePlusIcon,
+  SparklesIcon,
+  RotateCcwIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -60,6 +65,7 @@ import {
 
 import { snakeCaseToTitle } from "@/lib/utils";
 import { toast } from "sonner";
+import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
 
 interface FormSectionProps {
   videoId: string;
@@ -84,6 +90,7 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const router = useRouter();
+  const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false)
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
@@ -136,9 +143,24 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     setTimeout(() => setIsCopied(false), 2000);
   };
 
-
+  const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({id: videoId});
+      toast.success("Thumbnail restored successfully ✅");
+    },
+    onError: ()=>{
+      toast.error("Something went wrong")
+    }
+  })
 
   return (
+    <> 
+     <ThumbnailUploadModal
+       open={thumbnailModalOpen}
+       onOpenChange={setThumbnailModalOpen}
+       videoId={videoId}
+     />
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {/* HEADER */}
@@ -213,6 +235,55 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="thumbnailUrl"
+              control={form.control}
+              render={() => (
+                <FormItem>
+                  <FormLabel>Thumbnail</FormLabel>
+                  <FormControl>
+                    <div className="p-0.5 border border-dashed border-neutral-400 relative h-[84px] w-[153px] group">
+                       <Image
+                        src={video.thumbnailUrl || THUMBNAIL_FALLBACK}
+                        className="object-cover"
+                        fill
+                        alt="Thumbnail"
+                       />
+                       <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            type="button"
+                            size="icon"
+                            className="bg-black/50 hover:bg-black/50 absolute top-1 right-1 
+                             rounded-full opacity-100 md:opacity-0 group-hover:opacity-100 
+                             duration-300 size-7 "
+                          >
+                            <MoreVerticalIcon className="text-white" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" side="right">
+                          <DropdownMenuItem onClick={()=> setThumbnailModalOpen(true)} >
+                            <ImagePlusIcon className="size-4 mr-1" />
+                            Change thumbnail
+                          </DropdownMenuItem>
+
+                          <DropdownMenuItem >
+                            <SparklesIcon className="size-4 mr-1" />
+                            AI-generated
+                          </DropdownMenuItem>
+
+                          <DropdownMenuItem onClick={()=> restoreThumbnail.mutate({id: videoId})}>
+                            <RotateCcwIcon className="size-4 mr-1" />
+                             Restore
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                       </DropdownMenu>
+                    </div>
+                  </FormControl> 
                 </FormItem>
               )}
             />
@@ -368,5 +439,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         </AlertDialogContent>
       </AlertDialog>
     </Form>
+    </>
   );
 };

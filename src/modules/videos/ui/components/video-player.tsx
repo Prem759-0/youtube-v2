@@ -15,11 +15,21 @@ export const VideoPlayer = ({
   autoPlay = false,
   onPlay,
 }: VideoPlayerProps) => {
-  if (!playbackId) return null;
+  //if (!playbackId) {
+  //  return (
+  //    <div className="w-full h-full flex items-center justify-center bg-black">
+  //      <img
+  //        src={thumbnailUrl || "/placeholder.svg"}
+  //        className="w-full h-full object-contain"
+  //        alt="Video placeholder"
+  //      />
+  //    </div>
+  //  );
+  //}
 
   return (
     <MuxPlayer
-      playbackId={playbackId}
+      playbackId={playbackId || ""}
       poster={thumbnailUrl || "/placeholder.svg"}
       autoPlay={autoPlay}
       className="w-full h-full object-contain"

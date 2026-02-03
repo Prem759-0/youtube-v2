@@ -7,6 +7,45 @@ import { mux } from "@/lib/mux";
 import { TRPCError } from "@trpc/server";
 
 export const videosRouter = createTRPCRouter({
+  restoreThumbnail: protectedProcedure
+    .input(z.object({ id: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const { id: userId } = ctx.user;
+      
+      const [existingVideo] = await db
+       .select()
+       .from(videos)
+       .where(and(
+        eq(videos.id, input.id),
+        eq(videos.userId, userId),
+       ));
+
+       if(!existingVideo) {
+        throw new TRPCError({ code: "NOT_FOUND" })
+       }
+
+       if (!existingVideo.muxPlaybackId){
+        throw new TRPCError({code: "BAD_REQUEST"});
+       }
+
+       const thumbnailUrl = `https://image.mux.com/${existingVideo.muxPlaybackId}/thumbnail.jpg`;
+
+       const [updatedVideo] = await db
+        .update(videos)
+        .set({ thumbnailUrl })
+        .where(and(
+          eq(videos.id, input.id),
+          eq(videos.userId, userId),
+        ))
+        .returning();
+
+        if (!updatedVideo) {
+          throw new TRPCError({ code: "NOT_FOUND" })
+        }
+
+        return updatedVideo;
+    }),
+
   update: protectedProcedure
     .input(videoUpdateSchema)
     .mutation(async ({ ctx, input }) => {
@@ -43,7 +82,7 @@ export const videosRouter = createTRPCRouter({
       cors_origin: "*",
       new_asset_settings: {
         playback_policy: ["public"],
-        mp4_support: "standard",
+
         input: [
           {
             generated_subtitles: [

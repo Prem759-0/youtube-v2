@@ -57,12 +57,12 @@ export const studioRouter = createTRPCRouter({
             eq(videos.userId, userId),
             cursor
               ? or(
-                  lt(videos.updatedAt, cursor.updatedAt),
-                  and(
-                    eq(videos.updatedAt, cursor.updatedAt),
-                    lt(videos.id, cursor.id)
-                  )
+                lt(videos.updatedAt, cursor.updatedAt),
+                and(
+                  eq(videos.updatedAt, cursor.updatedAt),
+                  lt(videos.id, cursor.id)
                 )
+              )
               : undefined
           )
         )
@@ -75,9 +75,9 @@ export const studioRouter = createTRPCRouter({
       const lastItem = items[items.length - 1];
       const nextCursor = hasMore
         ? {
-            id: lastItem.id,
-            updatedAt: lastItem.updatedAt,
-          }
+          id: lastItem.id,
+          updatedAt: lastItem.updatedAt,
+        }
         : null;
 
       return {
