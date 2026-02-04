@@ -4,6 +4,3 @@
     ```
     The application should now be running 
 
--   `bun run dev`: Starts the development server.
-
-
