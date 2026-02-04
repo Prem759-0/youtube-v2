@@ -4,9 +4,7 @@ This project is a modern, full-stack YouTube clone built with the T3 stack and o
 
 ## Overview
 
-This YouTube clone provides a comprehensive platform for video sharing and viewing. It features a clean,  [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
+This YouTube clone provides a comprehensive platform for video sharing and viewing. https://neon.tech/))
 -   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
 -   **Video Processing:** [Mux](https://www.mux.com/)
 -   **Deployment:** Vercel
