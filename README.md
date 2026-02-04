@@ -19,8 +19,7 @@ This YouTube clone provides a comprehensive platform for video sharing and
 │   └── Y_logo.png
 ├── scripts
 │   └── generate-tree.ts
-├── src
-│   ├── app
+├── src│   ├── app
 │   │   ├── (auth)
 │   │   │   ├── sign-in
 │   │   │   │   └── [[...sign-in]]
