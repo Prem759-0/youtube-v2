@@ -1,12 +1,7 @@
 ="/sign-in"
     NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-     MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
-
-
-    # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
-    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
+     MUX_WEBHOOK_SECRET=
     ```
   
 
