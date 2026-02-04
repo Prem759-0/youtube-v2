@@ -4,7 +4,7 @@ This project is a modern, full-stack YouTube clone built with the T3 stack and o
 
 ## Overview
 
-This YouTube clone provides a comprehensive platform for video sharing and 
+
 
 ```
 ├── public
