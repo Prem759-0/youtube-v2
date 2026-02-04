@@ -6,9 +6,7 @@
     ```bash
     bun run dev
     ```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Scripts
+    The application should now be running 
 
 -   `bun run dev`: Starts the development server.
 
