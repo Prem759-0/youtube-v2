@@ -1,12 +1,4 @@
- # YouTube V2
-
--   A 
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    ```
-
-2.  **Install dependencies:**
-    ```bash
+ # 
     bun install
     ```
 
