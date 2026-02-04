@@ -1,12 +1,6 @@
  # YouTube V2
 
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
+-   A 
     git clone https://github.com/your-username/youtube-v2.git
     cd youtube-v2
     ```
