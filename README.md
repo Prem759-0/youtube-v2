@@ -1,14 +1,7 @@
 ="/sign-in"
     NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
     NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-    CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
-
-
-    # Mux Video
-    MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
+     MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
 
 
     # Upstash Rate Limiting
