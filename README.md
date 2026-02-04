@@ -2,21 +2,7 @@
 
 This project is a modern, full-stack YouTube clone built with the T3 stack and other 
 │   ├── file.svg
-│   ├── globe.svg
-│   ├── logo.svg
-│   ├── placeholder.svg
-│   ├── user-placeholder.svg
-│   ├── window.svg
-│   ├── Y_logo.ico
-│   └── Y_logo.png
-├── scripts
-│   └── generate-tree.ts
-├── src│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── sign-in
-│   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
+│   ├── 
 │   │   │   │   └── [[...sign-up]]
 │   │   │   │       └── page.tsx
 │   │   │   └── layout.tsx
