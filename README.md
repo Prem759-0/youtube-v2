@@ -11,43 +11,7 @@ UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 │   ├── window.svg
 │   ├── Y_logo.ico
 │   └── Y_logo.png
-├── scripts
-│   └── generate-tree.ts
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── sign-in
-│   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
-│   │   │   │   └── webhook
-│   │   │   │       └── route.ts
-│   │   │   └── videos
-│   │   │       └── webhook
-│   │   │           └── route.ts
-│   │   ├── globals.css
-│   │   └── layout.tsx
+├── l└── layout.tsx
 │   ├── components
 │   │   ├── ui
 │   │   │   ├── accordion.tsx
