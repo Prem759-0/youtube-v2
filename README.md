@@ -221,17 +221,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 ├── next-env.d.ts
 ├── next.config.ts
 ├── package.json
-├── postcss.config.mjs
-├── README.md
-├── tsconfig.json
-└── tsconfig.tsbuildinfo
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
+├── 
 
 
 
