@@ -272,10 +272,7 @@ Follow these instructions to get a local copy of the project up and running.
 
     # Mux Video
     MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
-
-
+   
     # Upstash Rate Limiting
    l
    
