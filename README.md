@@ -1,17 +1,7 @@
  # YouTube V2
 
 UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
-├── public
+- 
 │   ├── favicon.png
 │   ├── file.svg
 │   ├── globe.svg
