@@ -261,7 +261,4 @@ Follow these instructions to get a local copy of the project up and running.
     DATABASE_URL="your_database_url"
 
     # Clerk Authentication
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
-    CLERK_SECRET_KEY="your_clerk_secret_key"
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-  
+    
