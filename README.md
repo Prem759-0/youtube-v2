@@ -282,7 +282,5 @@ Follow these instructions to get a local copy of the project up and running.
     ```
   
 
-4.  **Run database migrations:**
-    This command will push the schema from `src/db/
-    ```
+4.  **Run l
 
