@@ -277,5 +277,5 @@ Follow these instructions to get a local copy of the project up and running.
 
 
     # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
+   l
    
