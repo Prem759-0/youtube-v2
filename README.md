@@ -273,6 +273,3 @@ Follow these instructions to get a local copy of the project up and running.
     # Mux Video
     MUX_TOKEN_ID="your_mux_token_id"
    
-    # Upstash Rate Limiting
-   l
-   
