@@ -1,6 +1,4 @@
   ```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
 
-## Scripts
 
 
