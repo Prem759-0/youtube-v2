@@ -1,18 +1,4 @@
-
-│   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
+── [videoId]
 │   │   │   │   │       └── page.tsx
 │   │   │   │   └── page.tsx
 │   │   │   └── layout.tsx
