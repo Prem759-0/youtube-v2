@@ -296,7 +296,4 @@ Follow these instructions to get a local copy of the project up and running.
 
 ## Scripts
 
--   `bun 
--   `bun 
-
 
