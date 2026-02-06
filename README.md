@@ -1,38 +1,5 @@
 
-│   │   ├── mux.ts
-│   │   ├── ratelimit.ts
-│   │   ├── redis.ts
-│   │   └── utils.ts
-│   ├── modules
-│   │   ├── auth
-│   │   │   └── ui
-│   │   │       └── components
-│   │   │           └── auth-button.tsx
-│   │   ├── categories
-│   │   │   └── server
-│   │   │       └── procedures.ts
-│   │   ├── home
-│   │   │   └── ui
-│   │   │       ├── components
-│   │   │       │   ├── home-navbar
-│   │   │       │   │   ├── home-input.tsx
-│   │   │       │   │   └── index.tsx
-│   │   │       │   └── home-sidebar
-│   │   │       │       ├── index.tsx
-│   │   │       │       ├── main-section.tsx
-│   │   │       │       └── personal-section.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── home-layouts.tsx
-│   │   │       ├── sections
-│   │   │       │   └── categories-section.tsx
-│   │   │       └── views
-│   │   │           └── home-view.tsx
-│   │   ├── studio
-│   │   │   ├── server
-│   │   │   │   └── procedures.ts
-│   │   │   └── ui
-│   │   │       ├── components
-│   │   │       │   ├── studio-navbar
+
 │   │   │       │   │   └── index.tsx
 │   │   │       │   ├── Studio-sidebar
 │   │   │       │   │   ├── index.tsx
