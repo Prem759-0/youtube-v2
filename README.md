@@ -1,8 +1,5 @@
 
 
-    ```env
-    # Neon Database URL
-    DATABASE_URL="your_database_url"
 
     # Clerk Authentication
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
