@@ -1,20 +1,4 @@
-── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
-│   │   │   │   └── webhook
-│   │   │   │       └── route.ts
-│   │   │   └── videos
-│   │   │       └── webhook
-│   │   │           └── route.ts
-│   │   ├── globals.css
-│   │   └── layout.tsx
-│   ├── components
+nts
 │   │   ├── ui
 │   │   │   ├── accordion.tsx
 │   │   │   ├── alert-dialog.tsx
