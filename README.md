@@ -1,33 +1,4 @@
 
-
-│   │   │       │   │   └── index.tsx
-│   │   │       │   ├── Studio-sidebar
-│   │   │       │   │   ├── index.tsx
-│   │   │       │   │   └── studio-sidebar-header.tsx
-│   │   │       │   ├── studio-upload-modal.tsx
-│   │   │       │   └── studio-uploader.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── studio-layout.tsx
-│   │   │       ├── sections
-│   │   │       │   ├── form-section.tsx
-│   │   │       │   └── videos-section.tsx
-│   │   │       └── views
-│   │   │           ├── studio-view.tsx
-│   │   │           └── video-view.tsx
-│   │   └── videos
-│   │       ├── server
-│   │       │   └── procedures.tsx
-│   │       └── ui
-│   │           └── components
-│   │               ├── video-player.tsx
-│   │               └── video-thumbnail.tsx
-│   ├── scripts
-│   │   └── seed-categories.ts
-│   ├── trpc
-│   │   ├── routers
-│   │   │   └── _app.ts
-│   │   ├── client.tsx
-│   │   ├── init.ts
 │   │   ├── query-client.ts
 │   │   └── server.tsx
 │   ├── constants.ts
