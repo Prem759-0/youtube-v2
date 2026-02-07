@@ -7,12 +7,6 @@
 ```
 
 ```
-
-## Getting Started
-
-
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
 ### Installation
 
 1.  **Clone the repository:**
