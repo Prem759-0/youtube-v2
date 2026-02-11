@@ -1,6 +1,4 @@
-neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
+://www.mux.com/)
 -   **Deployment:** Vercel
 
 ## Project Structure
