@@ -1,12 +1,4 @@
-://www.mux.com/)
--   **Deployment:** Vercel
 
-## Project Structure
-
-```
-├── public
-│   ├── favicon.png
-│   ├── file.svg
 │   ├── globe.svg
 │   ├── logo.svg
 │   ├── placeholder.svg
