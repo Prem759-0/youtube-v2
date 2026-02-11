@@ -1,20 +1,4 @@
 
-│   │   ├── ratelimit.ts
-│   │   ├── redis.ts
-│   │   └── utils.ts
-│   ├── modules
-│   │   ├── auth
-│   │   │   └── ui
-│   │   │       └── components
-│   │   │           └── auth-button.tsx
-│   │   ├── categories
-│   │   │   └── server
-│   │   │       └── procedures.ts
-│   │   ├── home
-│   │   │   └── ui
-│   │   │       ├── components
-│   │   │       │   ├── home-navbar
-│   │   │       │   │   ├── home-input.tsx
 │   │   │       │   │   └── index.tsx
 │   │   │       │   └── home-sidebar
 │   │   │       │       ├── index.tsx
