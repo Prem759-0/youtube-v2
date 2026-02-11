@@ -1,8 +1,5 @@
   
- Uploads:** Direct-to-Mux video uploads for efficient and robust video processing.
--   **Creator Studio:** A dedicated dashboard for creators to view and manage their uploaded videos.
--   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
--   **Video Categories:** Videos can be assigned to different categories for better organization.
+  categories for better organization.
 -   **Typesafe API:** End-to-end typesafety with tRPC.
 -   **ORM:** Drizzle ORM for querying a PostgreSQL database.
 -   **Responsive Design:** A fully responsive UI that works on all devices.
