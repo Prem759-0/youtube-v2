@@ -1,11 +1,4 @@
-  
-  categories for better organization.
--   **Typesafe API:** End-to-end typesafety with tRPC.
--    CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
+neon.tech/))
 -   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
 -   **Video Processing:** [Mux](https://www.mux.com/)
 -   **Deployment:** Vercel
