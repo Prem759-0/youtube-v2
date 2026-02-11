@@ -1,6 +1,4 @@
-  application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
-
-## Overview
+  application is designed to be scalable 
 
 This YouTube clone provides a comprehensive platform for video sharing and viewing. It features a clean, user-friendly interface built with Next.js and Tailwind CSS. User authentication is handled by Clerk, and video content is managed, processed, and streamed via Mux. The backend is powered by tRPC, providing end-to-end typesafe APIs.
 
