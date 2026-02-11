@@ -1,19 +1,5 @@
 
-│   │   │       │   │   └── index.tsx
-│   │   │       │   └── home-sidebar
-│   │   │       │       ├── index.tsx
-│   │   │       │       ├── main-section.tsx
-│   │   │       │       └── personal-section.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── home-layouts.tsx
-│   │   │       ├── sections
-│   │   │       │   └── categories-section.tsx
-│   │   │       └── views
-│   │   │           └── home-view.tsx
-│   │   ├── studio
-│   │   │   ├── server
-│   │   │   │   └── procedures.ts
-│   │   │   └── ui
+│ 
 │   │   │       ├── components
 │   │   │       │   ├── studio-navbar
 │   │   │       │   │   └── index.tsx
