@@ -1,20 +1,6 @@
 
 │ 
-│   │   │       ├── components
-│   │   │       │   ├── studio-navbar
-│   │   │       │   │   └── index.tsx
-│   │   │       │   ├── Studio-sidebar
-│   │   │       │   │   ├── index.tsx
-│   │   │       │   │   └── studio-sidebar-header.tsx
-│   │   │       │   ├── studio-upload-modal.tsx
-│   │   │       │   └── studio-uploader.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── studio-layout.tsx
-│   │   │       ├── sections
-│   │   │       │   ├── form-section.tsx
-│   │   │       │   └── videos-section.tsx
-│   │   │       └── views
-│   │   │           ├── studio-view.tsx
+│-view.tsx
 │   │   │           └── video-view.tsx
 │   │   └── videos
 │   │       ├── server
