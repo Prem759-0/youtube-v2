@@ -1,26 +1,4 @@
-       ├── avatar.tsx
-│   │     ├   └── components
-│   │               ├── video-player.tsx
-│   │               └── video-thumbnail.tsx
-│   ├── scripts
-│   │   └── seed-categories.ts
-│   ├── trpc
-│   │   ├── routers
-│   │   │   └── _app.ts
-│   │   ├── client.tsx
-│   │   ├── init.ts
-│   │   ├── query-client.ts
-│   │   └── server.tsx
-│   ├── constants.ts
-│   ├── middleware.ts
-│   └── README.md
-├── .gitignore
-├── bun.lock
-├── components.json
-├── desktop.ini
-├── drizzle.config.ts
-├── eslint.config.mjs
-├── next-env.d.ts
+       ├─
 ├── next.config.ts
 ├── package.json
 ├── postcss.config.mjs
