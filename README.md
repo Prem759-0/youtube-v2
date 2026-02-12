@@ -1,18 +1,4 @@
-
-   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
-│   │   │   │   └── webhook
-│   │   │   │       └── route.ts
+       └── route.ts
 │   │   │   └── videos
 │   │   │       └── webhook
 │   │   │           └── route.ts
