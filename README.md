@@ -1,16 +1,4 @@
-       └── route.ts
-│   │   │   └── videos
-│   │   │       └── webhook
-│   │   │           └── route.ts
-│   │   ├── globals.css
-│   │   └── layout.tsx
-│   ├── components
-│   │   ├── ui
-│   │   │   ├── accordion.tsx
-│   │   │   ├── alert-dialog.tsx
-│   │   │   ├── alert.tsx
-│   │   │   ├── aspect-ratio.tsx
-│   │   │   ├── avatar.tsx
+       ├── avatar.tsx
 │   │   │   ├── badge.tsx
 │   │   │   ├── breadcrumb.tsx
 │   │   │   ├── button-group.tsx
