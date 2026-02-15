@@ -1,39 +1,7 @@
 
 ## Project Structure
 
-```
-├─
-│   │   │   ├── kbd.tsx
-│   │   │   ├── label.tsx
-│   │   │   ├── menubar.tsx
-│   │   │   ├── navigation-menu.tsx
-│   │   │   ├── pagination.tsx
-│   │   │   ├── popover.tsx
-│   │   │   ├── progress.tsx
-│   │   │   ├── radio-group.tsx
-│   │   │   ├── resizable.tsx
-│   │   │   ├── scroll-area.tsx
-│   │   │   ├── select.tsx
-│   │   │   ├── separator.tsx
-│   │   │   ├── sheet.tsx
-│   │   │   ├── sidebar.tsx
-│   │   │   ├── skeleton.tsx
-│   │   │   ├── slider.tsx
-│   │   │   ├── sonner.tsx
-│   │   │   ├── spinner.tsx
-│   │   │   ├── switch.tsx
-│   │   │   ├── table.tsx
-│   │   │   ├── tabs.tsx
-│   │   │   ├── textarea.tsx
-│   │   │   ├── toggle-group.tsx
-│   │   │   ├── toggle.tsx
-│   │   │   └── tooltip.tsx
-│   │   ├── filter-carousel.tsx
-│   │   ├── infinite-scroll.tsx
-│   │   ├── responsive-dialog.tsx
-│   │   └── user-avatar.tsx
-│   ├── db
-│   │   ├── index.ts
+``
 │   │   └── schema.ts
 │   ├── hooks
 │   │   ├── use-intersection-observer.ts
