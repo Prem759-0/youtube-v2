@@ -1,48 +1,5 @@
 
 ├── scripts
-│   └── generate-tree.ts
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── sign-in
-│   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
-│   │   │   │   └── webhook
-│   │   │   │       └── route.ts
-│   │   │   └── videos
-│   │   │       └── webhook
-│   │   │           └── route.ts
-│   │   ├── globals.css
-│   │   └── layout.tsx
-│   ├── components
-│   │   ├── ui
-│   │   │   ├── accordion.tsx
-│   │   │   ├── alert-dialog.tsx
-│   │   │   ├── alert.tsx
-│   │   │   ├── aspect-ratio.tsx
-│   │   │   ├── avatar.tsx
 │   │   │   ├── badge.tsx
 │   │   │   ├── breadcrumb.tsx
 │   │   │   ├── button-group.tsx
