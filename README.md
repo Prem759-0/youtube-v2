@@ -3,38 +3,7 @@
 
 # 
 │   │   │  
-│   │   ├── index.ts
-│   │   └── schema.ts
-│   ├── hooks
-│   │   ├── use-intersection-observer.ts
-│   │   └── use-mobile.ts
-│   ├── lib
-│   │   ├── mux.ts
-│   │   ├── ratelimit.ts
-│   │   ├── redis.ts
-│   │   └── utils.ts
-│   ├── modules
-│   │   ├── auth
-│   │   │   └── ui
-│   │   │       └── components
-│   │   │           └── auth-button.tsx
-│   │   ├── categories
-│   │   │   └── server
-│   │   │       └── procedures.ts
-│   │   ├── home
-│   │   │   └── ui
-│   │   │       ├── components
-│   │   │       │   ├── home-navbar
-│   │   │       │   │   ├── home-input.tsx
-│   │   │       │   │   └── index.tsx
-│   │   │       │   └── home-sidebar
-│   │   │       │       ├── index.tsx
-│   │   │       │       ├── main-section.tsx
-│   │   │       │       └── personal-section.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── home-layouts.tsx
-│   │   │       ├── sections
-│   │   │       │   └── categories-section.tsx
+│   │l │   └── categories-section.tsx
 │   │   │       └── views
 │   │   │           └── home-view.tsx
 │   │   ├── studio
