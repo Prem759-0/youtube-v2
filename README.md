@@ -4,34 +4,7 @@
 # 
 │   │   
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    bun install
-    ```
-
-3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
-
-    ```env
-    # Neon Database URL
-    DATABASE_URL="your_database_url"
-
-    # Clerk Authentication
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
-    CLERK_SECRET_KEY="your_clerk_secret_key"
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-    CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
-
-
+1.  **Clone the 
     # Mux Video
     MUX_TOKEN_ID="your_mux_token_id"
     MUX_TOKEN_SECRET="your_mux_token_secret"
