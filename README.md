@@ -51,35 +51,4 @@ Follow these instructions to get a local copy of the project up and running.
 
 ### Installation
 
-2.  **Install dependencies:**
-    ```bash
-    bun install
-    ```
-
-3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
-
-    ```env
-    ```
-  
-
-4.  **Run database migrations:**
-    This command will push the schema from `src/db/schema.ts` to your Neon database.
-    ```bash
-    bun drizzle-kit pus
-    ```
-
-5.  **Run the development server:**
-    ```bash
-    bun run dev
-    ```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Scripts
-
--   `bun run dev`: Starts the development server.
--   `bun run build`: Creates a production-ready build of the application.
--   `bun run start`: Starts the production server.
--   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
--   `bun drizzle-kit push`: Pushes the database schema to the database.
 
