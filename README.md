@@ -66,15 +66,6 @@ Follow these instructions to get a local copy of the project up and running.
     Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
 
     ```env
-    # Mux Video
-    MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
-
-
-    # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
-    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
     ```
   
 
