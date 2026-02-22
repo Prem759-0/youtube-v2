@@ -2,50 +2,7 @@
 # YouTube V2
 
 
--    UI that works on all devices.
-
-## Tech Stack
-
--   **Framework:** [Next.js](https://nextjs.org/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
-├── public
-│   ├── favicon.png
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── logo.svg
-│   ├── placeholder.svg
-│   ├── user-placeholder.svg
-│   ├── window.svg
-│   ├── Y_logo.ico
-│   └── Y_logo.png
-├── scripts
-│   └── generate-tree.ts
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── sign-in
-│   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
+-    │   ├── layout.tsx
 │   │   │   └── page.tsx
 │   │   ├── (studio)
 │   │   │   ├── studio
