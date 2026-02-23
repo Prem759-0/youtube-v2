@@ -1,14 +1,4 @@
 
-└
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
-### Installation
-
-1.  **Clone the repository:**
-    ```bash
     git clone https://github.com/your-username/youtube-v2.git
     cd youtube-v2
     ```
