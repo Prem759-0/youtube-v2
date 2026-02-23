@@ -1,18 +1,4 @@
- [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
-├── public
-│   ├── favicon.png
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── logo.svg
-│   ├── placeholder.svg
-│   ├── user-placeholder.svg
-│   ├── window.svg
-│   ├── Y_logo.ico
+ 
 │   └── Y_logo.png
 ├── scripts
 │   └── generate-tree.ts
