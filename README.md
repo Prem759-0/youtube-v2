@@ -3,28 +3,7 @@
 This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
 
 ##  to different categories for better organization.
--   **Typesafe API:** End-to-end typesafety with tRPC.
--   **ORM:** Drizzle ORM for querying a PostgreSQL database.
--   **Responsive Design:** A fully responsive UI that works on all devices.
-
-## Tech Stack
-
--   **Framework:** [Next.js](https://nextjs.org/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
-├── public
-│   ├── favicon.png
-│   ├── file.svg
+-    ├── file.svg
 │   ├── globe.svg
 │   ├── logo.svg
 │   ├── placeholder.svg
