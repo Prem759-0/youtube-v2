@@ -4,9 +4,6 @@ This project is a modern, full-stack YouTube clone built with the T3 stack and o
 
 
 
-## Features
-://www.mux.com/)
--   **Deployment:** Vercel
 
 ## Project Structure
 
