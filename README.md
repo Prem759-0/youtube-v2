@@ -3,62 +3,7 @@
 This project is a modern, full-stack    ├│   ├── app
 │   │   ├── (auth)
 │   │   │   ├── button.tsx
-│   │   │   ├── calendar.tsx
-│  -uploader.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── studio-layout.tsx
-│   │   │       ├── sections
-│   │   │       │   ├── form-section.tsx
-│   │   │       │   └── videos-section.tsx
-│   │   │       └── views
-│   │   │           ├── studio-view.tsx
-│   │   │           └── video-view.tsx
-│   │   └── videos
-│   │       ├── server
-│   │       │   └── procedures.tsx
-│   │       └── ui
-│   │           └── components
-│   │               ├── video-player.tsx
-│   │               └── video-thumbnail.tsx
-│   ├── scripts
-│   │   └── seed-categories.ts
-│   ├── trpc
-│   │   ├── routers
-│   │   │   └── _app.ts
-│   │   ├── client.tsx
-│   │   ├── init.ts
-│   │   ├── query-client.ts
-│   │   └── server.tsx
-│   ├── constants.ts
-│   ├── middleware.ts
-│   └── README.md
-├── .gitignore
-├── bun.lock
-├── components.json
-├── desktop.ini
-├── drizzle.config.ts
-├── eslint.config.mjs
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── postcss.config.mjs
-├── README.md
-├── tsconfig.json
-└── tsconfig.tsbuildinfo
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later)
--   [Bun](https://bun.sh/)
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
+│   /) account for Redis and Rate Limiting
 
 ### Installation
 
