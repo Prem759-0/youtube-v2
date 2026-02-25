@@ -1,17 +1,6 @@
 # YouTube V2
 
-This project is a modern, full-stack    ├── file.svg
-│   ├── globe.svg
-│   ├── logo.svg
-│   ├── placeholder.svg
-│   ├── user-placeholder.svg
-│   ├── window.svg
-│   ├── Y_logo.ico
-│   └── Y_logo.png
-├── scripts
-│   └── generate-tree.ts
-├── src
-│   ├── app
+This project is a modern, full-stack    ├│   ├── app
 │   │   ├── (auth)
 │   │   │   ├── sign-in
 │   │   │   │   └── [[...sign-in]]
