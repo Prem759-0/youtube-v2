@@ -4,29 +4,7 @@ This project is a modern, full-stack    ├│   ├── app
 │   │   ├── (auth)
 │   │   │   ├── sign-in
 │   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
+│   ││   │   ├── users
 │   │   │   │   └── webhook
 │   │   │   │       └── route.ts
 │   │   │   └── videos
