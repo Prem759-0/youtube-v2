@@ -81,25 +81,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   │   └── layout.tsx
 │   ├── components
 │   │   
-│   ├── db
-│   │   ├── index.ts
-│   │   └── schema.ts
-│   ├── hooks
-│   │   ├── use-intersection-observer.ts
-│   │   └── use-mobile.ts
-│   ├── lib
-│   │   ├── mux.ts
-│   │   ├── ratelimit.ts
-│   │   ├── redis.ts
-│   │   └── utils.ts
-│   ├── modules
-│   │   ├── auth
-│   │   │   └── ui
-│   │   │       └── components
-│   │   │           └── auth-button.tsx
-│   │   ├── categories
-│   │   │   └── server
-│   │   │       └── procedures.ts
+│ 
 │   │  
 
 │ 
