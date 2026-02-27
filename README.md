@@ -61,18 +61,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   │   │   ├── layout.tsx
 │   │   │   └── page.tsx
 │   │  
-│   │   ├── api
-│   │   │   ├── trpc
-│   │   │   │   └── [trpc]
-│   │   │   │       └── route.ts
-│   │   │   ├── users
-│   │   │   │   └── webhook
-│   │   │   │       └── route.ts
-│   │   │   └── videos
-│   │   │       └── webhook
-│   │   │           └── route.ts
-│   │   ├── globals.css
-│   │   └── layout.tsx
+│   │  
 │   ├── components
 │   │   
 │ 
