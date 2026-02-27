@@ -288,14 +288,6 @@ Follow these instructions to get a local copy of the project up and running.
     bun drizzle-kit pus
     ```
 
-5.  **Run the development server:**
-    ```bash
-    bun run dev
-    ```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Scripts
-
 
 
 
