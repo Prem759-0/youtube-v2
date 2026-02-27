@@ -60,13 +60,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   │   │   ├── client.tsx
 │   │   │   ├── layout.tsx
 │   │   │   └── page.tsx
-│   │   ├── (studio)
-│   │   │   ├── studio
-│   │   │   │   ├── video
-│   │   │   │   │   └── [videoId]
-│   │   │   │   │       └── page.tsx
-│   │   │   │   └── page.tsx
-│   │   │   └── layout.tsx
+│   │  
 │   │   ├── api
 │   │   │   ├── trpc
 │   │   │   │   └── [trpc]
