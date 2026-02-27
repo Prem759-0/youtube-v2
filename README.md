@@ -100,23 +100,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   │   ├── categories
 │   │   │   └── server
 │   │   │       └── procedures.ts
-│   │   ├── home
-│   │   │   └── ui
-│   │   │       ├── components
-│   │   │       │   ├── home-navbar
-│   │   │       │   │   ├── home-input.tsx
-│   │   │       │   │   └── index.tsx
-│   │   │       │   └── home-sidebar
-│   │   │       │       ├── index.tsx
-│   │   │       │       ├── main-section.tsx
-│   │   │       │       └── personal-section.tsx
-│   │   │       ├── layouts
-│   │   │       │   └── home-layouts.tsx
-│   │   │       ├── sections
-│   │   │       │   └── categories-section.tsx
-│   │   │       └── views
-│   │   │           └── home-view.tsx
-│   │   ├── studio
+│   │  
 
 │ 
 ```
