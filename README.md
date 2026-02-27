@@ -44,28 +44,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   └── Y_logo.png
 ├── scripts
 │   └── generate-tree.ts
-├── src
-│   ├── app
-│   │   ├── (auth)
-│   │   │   ├── sign-in
-│   │   │   │   └── [[...sign-in]]
-│   │   │   │       └── page.tsx
-│   │   │   ├── sign-up
-│   │   │   │   └── [[...sign-up]]
-│   │   │   │       └── page.tsx
-│   │   │   └── layout.tsx
-│   │   ├── (home)
-│   │   │   ├── protected
-│   │   │   │   └── page.tsx
-│   │   │   ├── client.tsx
-│   │   │   ├── layout.tsx
-│   │   │   └── page.tsx
-│   │  
-│   │  
-│   ├── components
-│   │   
-│ 
-│   │  
+
 
 │ 
 ```
