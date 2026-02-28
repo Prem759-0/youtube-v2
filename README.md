@@ -1,4 +1,4 @@
- # YouTube V2
+# YouTube V2
 
 This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
 
@@ -300,6 +300,8 @@ Follow these instructions to get a local copy of the project up and running.
 -   `bun run build`: Creates a production-ready build of the application.
 -   `bun run start`: Starts the production server.
 -   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
--   `bun drizzle-kit push`: Pushes the database schema to the database. f
+-   `bun drizzle-kit push`: Pushes the database schema to the database.
+
+
 
 
