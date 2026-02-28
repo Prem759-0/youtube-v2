@@ -47,7 +47,7 @@ export const { POST } = serve(
       messages: [
         {
           role: "system",
-          content: "Assistant says 'hello!'",
+          content: TITLE_SYSTEM_PROMPT,
         },
         {
           role: "user",
