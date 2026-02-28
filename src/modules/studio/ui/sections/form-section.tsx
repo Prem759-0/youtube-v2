@@ -90,11 +90,32 @@ export const FormSection = ({ videoId }: FormSectionProps) => {
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const router = useRouter();
+  const utils = trpc.useUtils();
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false)
   const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+  const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
+    onSuccess: () => {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({id:videoId});
+      toast.success("Thumbnail restored ✅");
+    },
+    onError:()=>{
+      toast.error("Something went wrong ❌")
+    }
+  });
+
+  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
+    onSuccess: () => {
+      toast.success("Background job started", {description: "this may take some time"});
+    },
+    onError:()=>{
+      toast.error("Something went wrong ❌")
+    }
+  });
 
   const form = useForm<z.infer<typeof videoUpdateSchema>>({
     resolver: zodResolver(videoUpdateSchema),
@@ -124,6 +145,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     });
 
   const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
+    if (!data.categoryId || data.categoryId.trim() === "") {
+      toast.error("Please select a category before saving");
+      return;
+    }
     update({ id: video.id, ...data });
   };
 
@@ -142,17 +167,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
-
-  const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
-    onSuccess: () => {
-      utils.studio.getMany.invalidate();
-      utils.studio.getOne.invalidate({id: videoId});
-      toast.success("Thumbnail restored successfully ✅");
-    },
-    onError: ()=>{
-      toast.error("Something went wrong")
-    }
-  })
 
   return (
     <> 
@@ -253,6 +267,31 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         fill
                         alt="Thumbnail"
                        />
+                       {/* Spinner overlay while upload modal is open */}
+                       {thumbnailModalOpen && (
+                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                           <svg
+                             className="w-6 h-6 text-white animate-spin"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                           >
+                             <circle
+                               className="opacity-25"
+                               cx="12"
+                               cy="12"
+                               r="10"
+                               stroke="currentColor"
+                               strokeWidth="4"
+                             ></circle>
+                             <path
+                               className="opacity-75"
+                               fill="currentColor"
+                               d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                             ></path>
+                           </svg>
+                         </div>
+                       )}
                        <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
@@ -271,7 +310,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             Change thumbnail
                           </DropdownMenuItem>
 
-                          <DropdownMenuItem >
+                          <DropdownMenuItem 
+                            onClick={()=> generateThumbnail.mutate({id:videoId})}
+                          >
                             <SparklesIcon className="size-4 mr-1" />
                             AI-generated
                           </DropdownMenuItem>

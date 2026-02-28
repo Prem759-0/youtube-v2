@@ -8,6 +8,8 @@ const isPublicRoute = createRouteMatcher([
   "/api/videos/webhook(.*)",
   "/api/users/webhook(.*)",
   "/api/uploadthing(.*)",
+  // workflows endpoints need to be public so they can be triggered by Upstash/QStash
+  "/api/videos/workflows(.*)",
 ])
 
 export default clerkMiddleware(async (auth, req) => {
