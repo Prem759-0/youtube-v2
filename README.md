@@ -200,18 +200,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   │           └── components
 │   │               ├── video-player.tsx
 │   │               └── video-thumbnail.tsx
-│   ├── scripts
-│   │   └── seed-categories.ts
-│   ├── trpc
-│   │   ├── routers
-│   │   │   └── _app.ts
-│   │   ├── client.tsx
-│   │   ├── init.ts
-│   │   ├── query-client.ts
-│   │   └── server.tsx
-│   ├── constants.ts
-│   ├── middleware.ts
-│   └── README.md
+
 
 ```
 
