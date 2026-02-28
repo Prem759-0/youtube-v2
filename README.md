@@ -212,19 +212,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 │   ├── constants.ts
 │   ├── middleware.ts
 │   └── README.md
-├── .gitignore
-├── bun.lock
-├── components.json
-├── desktop.ini
-├── drizzle.config.ts
-├── eslint.config.mjs
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── postcss.config.mjs
-├── README.md
-├── tsconfig.json
-└── tsconfig.tsbuildinfo
+
 ```
 
 
