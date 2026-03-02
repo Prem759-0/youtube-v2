@@ -9,13 +9,12 @@ interface InputType {
   videoId: string;
 }
 
-const TITLE_SYSTEM_PROMPT = `Your task is to generate a compelling, SEO-focused YouTube title based on the video's transcript. Follow these rules strictly:
-- **Engaging & Clickable:** The title must be catchy and spark curiosity.
-- **Benefit-Oriented:** Focus on what the viewer will learn or gain.
-- **Keyword-Rich:** Naturally include relevant keywords for search.
-- **Concise:** 3 to 8 words, under 100 characters.
-- **Highlight Uniqueness:** Emphasize the most interesting part of the video.
-- **Plain Text Only:** Return ONLY the title text, with no quotes or extra formatting.`;
+const DESCRIPTION_SYSTEM_PROMPT = `Your task is to summarize the transcript of a video. Please follow these guidelines:
+- Be brief. Condense the content into a summary that captures the key points and main ideas without losing important details.
+- Avoid jargon or overly complex language unless necessary for the context.
+- Focus on the most critical information, ignoring filler, repetitive statements, or irrelevant tangents.
+- ONLY return the summary, no other text, annotations, or comments.
+- Aim for a summary that is 3-5 sentences long and no more than 200 characters.`;
 
 export const { POST } = serve(async (context) => {
   const input = context.requestPayload as InputType;
@@ -63,18 +62,18 @@ export const { POST } = serve(async (context) => {
     apiKey: process.env.OPENROUTER_API_KEY!,
   });
 
-  // ✅ Generate Title
+  // ✅ Generate DESCRIPTION
   const result = await openrouter.chat.completions.create({
     model: "bytedance-seed/seed-2.0-mini",
     messages: [
-        { role: "system", content: TITLE_SYSTEM_PROMPT },
+        { role: "system", content: DESCRIPTION_SYSTEM_PROMPT },
         { role: "user", content: transcript },
     ],
   });
-  const title = result.choices[0].message.content?.trim();
+  const description = result.choices[0]?.message.content;
 
-  if (!title) {
-    throw new Error("Generated title is empty.");
+  if (!description) {
+    throw new Error("Generated description is empty.");
   }
 
   // ✅ Update DB
@@ -82,7 +81,7 @@ export const { POST } = serve(async (context) => {
     await db
       .update(videos)
       .set({
-        title: title || video.title,
+        description: description || video.description,
       })
       .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
   });
