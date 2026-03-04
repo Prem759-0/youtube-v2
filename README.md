@@ -1,9 +1,3 @@
-
-
-## Project Structure
-
-```
-
 ```
 
 ## Getting Started
