@@ -60,10 +60,3 @@ bash
     
 ```
 
-2.  **Install dependencies:**
-    
-```
-bash
-    bun install
-    
-
