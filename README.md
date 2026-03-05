@@ -32,7 +32,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 ## Project Structure
 
 ```
-youtube-v2/
+
 
 ```
 
