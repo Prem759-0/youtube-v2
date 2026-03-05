@@ -33,11 +33,3 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 
 ```
 
-
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-
