@@ -1,13 +1,4 @@
 
-### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later)
--   [Bun](https://bun.sh/)
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
 ### Installation
 
 1.  **Clone the repository:**
