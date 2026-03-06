@@ -1,11 +1,4 @@
 
-
-### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
-- Video upload functionality
-- Video editing capabilities
-
 ### API Routes
 - `src/app/api/trpc/` - tRPC API endpoints
 - `src/app/api/videos/webhook/` - Video processing webhooks
