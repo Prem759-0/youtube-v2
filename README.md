@@ -1,9 +1,4 @@
 
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
 ### Prerequisites
 
 -   [Node.js](https://nodejs.org/en/) (v20 or later)
