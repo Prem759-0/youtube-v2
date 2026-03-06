@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -150,6 +150,18 @@ const FormSectionSkeleton = () => {
 }
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const storageKey = `studio_video_reloaded_${videoId}`;
+    const hasReloaded = sessionStorage.getItem(storageKey);
+
+    if (!hasReloaded) {
+      sessionStorage.setItem(storageKey, "true");
+      window.location.reload();
+    }
+  }, [videoId]);
+
   const router = useRouter();
   const utils = trpc.useUtils();
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
