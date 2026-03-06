@@ -1,13 +1,4 @@
 
-### Installation
-
-1.  **Clone the repository:**
-    
-```
-bash
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    
 ```
 
 2.  **Install dependencies:**
