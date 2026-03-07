@@ -355,13 +355,4 @@ The main home page is in `src/app/(home)/` with components in `src/modules/home/
 - Sidebar with categories
 - Video feed
 
-### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
-- Video upload functionality
-- Video editing capabilities
-
-### API Routes
-- `src/app/api/trpc/` - tRPC API endpoints
-- `src/app/api/videos/webhook/` - Video processing webhooks
-- `src/app/api/videos/workflows/` - AI workflows for title/description 
+### Creator 
