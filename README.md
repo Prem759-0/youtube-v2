@@ -324,12 +324,3 @@ env
     
 ```
 
-4.  **Run database migrations:**
-    This command will push the schema from `src/db/schema.ts` to your Neon database.
-    
-```
-bash
-    bun drizzle-kit push
-    
-```
-
