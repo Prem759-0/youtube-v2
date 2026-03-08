@@ -350,10 +350,5 @@ bash
 -   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
 -   `bun drizzle-kit push`: Pushes the database schema to the database.
 
-## Project Overview
-
-### Authentication (Clerk)
-The project uses Clerk for authentication. The auth routes are located in `src/app/(auth)/` and include:
-- Sign-in page at `/sign-in`
 
 
