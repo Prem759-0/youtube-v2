@@ -333,9 +333,3 @@ bash
     
 ```
 
-5.  **Run the development server:**
-    
-```
-bash
-    bun run dev
-
