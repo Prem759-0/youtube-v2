@@ -54,41 +54,7 @@ youtube-v2/
 │   ├── globe.svg                      # Globe icon
 │   ├── logo.svg                       # Logo
 │   ├── placeholder.svg                # Placeholder image
-│   ├── user-placeholder.svg           # User placeholder
-│   ├── window.svg                     # Window icon
-│   ├── Y_logo.ico                     # YouTube logo ico
-│   └── Y_logo.png                     # YouTube logo png
-│
-└── src/                               # Source code
-    ├── constants.ts                   # Application constants
-    ├── proxy.ts                       # Proxy configuration
-    ├── README.md                      # Source README
-    │
-    ├── app/                           # Next.js App Router
-    │   ├── globals.css                # Global CSS styles
-    │   ├── layout.tsx                 # Root layout
-    │   │
-    │   ├── (auth)/                    # Auth route group
-    │   │   ├── layout.tsx             # Auth layout
-    │   │   ├── sign-in/
-    │   │   │   └── [[...sign-in]]/
-    │   │   │       └── page.tsx       # Sign-in page
-    │   │   └── sign-up/
-    │   │       └── [[...sign-up]]/
-    │   │           └── page.tsx       # Sign-up page
-    │   │
-    │   ├── (home)/                    # Home route group
-    │   │   ├── client.tsx             # Home client component
-    │   │   ├── layout.tsx             # Home layout
-    │   │   ├── page.tsx               # Home page
-    │   │   └── protected/
-    │   │       └── page.tsx           # Protected home page
-    │   │
-    │   ├── (studio)/                  # Studio route group
-    │   │   ├── layout.tsx             # Studio layout
-    │   │   └── studio/
-    │   │       ├── page.tsx           # Studio dashboard page
-    │   │       └─
+│   ├── user-p  └─
 
 ```
 
