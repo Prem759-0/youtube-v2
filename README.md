@@ -32,29 +32,7 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 ## Project Structure
 
 ```
-youtube-v2/
-├── .gitignore                          # Git ignore file
-├── bun.lock                           # Bun lock file
-├── components.json                    # Shadcn UI components configuration
-├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # ESLint configuration
-├── next-env.d.ts                      # Next.js type definitions
-├── next.config.ts                     # Next.js configuration
-├── package-lock.json                  # NPM lock file
-├── package.json                       # Project dependencies
-├── postcss.config.mjs                 # PostCSS configuration
-├── README.md                          # Project documentation
-├── TODO.md                            # Todo list
-├── tsconfig.json                      # TypeScript configuration
-├── tsconfig.tsbuildinfo               # TypeScript build info
-│
-├── public/                            # Static assets
-│   ├── favicon.png                    # Favicon
-│   ├── file.svg                       # File icon
-│   ├── globe.svg                      # Globe icon
-│   ├── logo.svg                       # Logo
-│   ├── placeholder.svg                # Placeholder image
-│   ├── user-p  └─
+
 
 ```
 
