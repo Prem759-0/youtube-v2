@@ -220,47 +220,7 @@ youtube-v2/
     │   │       └── views/
     │   │           └── home-view.tsx
     │   │
-    │   ├── studio/
-    │   │   ├── server/
-    │   │   │   └── procedures.ts      # Studio procedures
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── studio-upload-modal.tsx
-    │   │       │   ├── studio-uploader.tsx
-    │   │       │   ├── thumbnail-upload-modal.tsx
-    │   │       │   ├── studio-navbar/
-    │   │       │   │   └── index.tsx
-    │   │       │   └── Studio-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       └── studio-sidebar-header.tsx
-    │   │       ├── layouts/
-    │   │       │   └── studio-layout.tsx
-    │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.tsx
-    │
-    ├── scripts/                       # Utility scripts
-    │   └── seed-categories.ts        # Category seeding script
-    │
-    └── trpc/                          # tRPC configuration
-        ├── client.tsx                 # tRPC client
-        ├── init.ts                    # tRPC initialization
-        ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
+
 ```
 
 
