@@ -295,9 +295,6 @@ bash
     
 ```
 
-3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
-
 
 
 
