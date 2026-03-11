@@ -242,16 +242,3 @@ youtube-v2/
     │   │           ├── studio-view.tsx
     │   │           └── video-view.tsx
     │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.tsx
-    │
-    ├── scripts/                       # Utility scripts
-    │   └── seed-categories.ts        # Category seeding script
-    │
-    └── trpc/                          # tRPC /en
