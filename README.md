@@ -72,36 +72,4 @@ youtube-v2/
     │   │   ├── layout.tsx             # Auth layout
     │   │   ├── sign-in/
     │   │   │   └── [[...sign-in]]/
-    │   │   │       └── page.tsx       # Sign-in page
-    │   │   └── sign-up/
-    │   │       └── [[...sign-up]]/
-    │   │           └── page.tsx       # Sign-up page
-    │   │
-    │   ├── (home)/                    # Home route group
-    │   │   ├── client.tsx             # Home client component
-    │   │   ├── layout.tsx             # Home layout
-    │   │   ├── page.tsx               # Home page
-    │   │   └── protected/
-    │   │       └── page.tsx           # Protected home page
-    │   │
-    │   ├── (studio)/                  # Studio route group
-    │   │   ├── layout.tsx             # Studio layout
-    │   │   └── studio/
-    │   │       ├── page.tsx           # Studio dashboard page
-    │   │       └── video/
-    │   │           └── [videoId]/
-    │   │               └── page.tsx   # Video edit page
-    │   │
-    │   ├── api/                       # API routes
-    │   │   ├── trpc/
-    │   │   │   └── [trpc]/
-    │   │   │       └── route.ts       # tRPC API route
-    │   │   │
-    │   │   ├── uploadthing/
-    │   │   │   ├── core.ts            # UploadThing core
-    │   │   │   └── route.ts           # UploadThing route
-    │   │   │
-    │   │   ├── users/
-    │   │   │   └── webhook/
-    │   │   │       └── route.ts       # User webhook route
-    │   │   │
+    │   │   │       └── 
