@@ -321,13 +321,4 @@ env
     # Upstash Rate Limiting
     UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
     UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
-    
-```
-
-4.  **Run database migrations:**
-    This command will push the schema from `src/db/schema.ts` to your Neon database.
-    
-```
-bash
-    bun drizzle-kit push
-    
+ 
