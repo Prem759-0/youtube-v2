@@ -331,13 +331,3 @@ env
 bash
     bun drizzle-kit push
     
-```
-
-5.  **Run the development server:**
-    
-```
-bash
-    bun run dev
-    
-```
-    The application should now be running at [http://localhost 
