@@ -282,17 +282,4 @@ Follow these instructions to get a local copy of the project up and running.
     
 ```
 bash
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    
-```
-
-2.  **Install dependencies:**
-    
-```
-bash
-    bun install
-    
-```
-
-3.  **Set up environment variables
+    git clone https://github.com/your-username/
