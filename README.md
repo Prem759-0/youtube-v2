@@ -2,16 +2,7 @@
 │   ├── globe.svg                      # Globe icon
 │
     │   │
-    │   ├── (auth)/                    # Auth route group
-    │   │   ├── layout.tsx             # Auth layout
-    │   │   ├── sign-in/
-    │   │   │   └── [[...sign-in]]/
-    │   │   │       └── page.tsx       # Sign-in page
-    │   │   └── sign-up/
-    │   │       └── [[...sign-up]]/
-    │   │           └── page.tsx       # Sign-up page
-    │   │
-    │   ├── (home)/                    # Home route group
+─ (home)/                    # Home route group
     │   │   ├── client.tsx             # Home client component
     │   │   ├── layout.tsx             # Home layout
     │   │   ├── page.tsx               # Home page
