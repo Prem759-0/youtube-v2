@@ -1,16 +1,4 @@
-##YouTube V2
-
-This project is a modern, full-stack  is  Vercel
-
-## Project Structure
-
-                  # 
-├── tsconfig.json                      # TypeScript configuration
-├── tsconfig.tsbuildinfo               # TypeScript build info
-│
-├── public/                            # Static assets
-│   ├── favicon.png                    # Favicon
-│   ├── file.svg                       # File icon
+                      # File icon
 │   ├── globe.svg                      # Globe icon
 │   ├── logo.svg                       # Logo
 │   ├── placeholder.svg                # Placeholder image
