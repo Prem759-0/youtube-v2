@@ -1,13 +1,6 @@
 ##YouTube V2
 
-This project is a modern, full-stack  is handled by Clerk, and video content is  categories for better organization.
--   **Typesafe API:** End-to-end 
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
+This project is a modern, full-stack  is  Vercel
 
 ## Project Structure
 
