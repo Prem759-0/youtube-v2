@@ -372,12 +372,6 @@ The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`
 ### API Routes
 - `src/app/api/trpc/` - tRPC API endpoints
 - `src/app/api/videos/webhook/` - Video processing webhooks
-- `src/app/api/videos/workflows/` - AI workflows for title/description generation
-- `src/app/api/uploadthing/` - File upload handling
-- `src/app/api/users/webhook/` - User management webhooks
-
-
-
 
 
 
