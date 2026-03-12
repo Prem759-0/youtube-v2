@@ -4,13 +4,7 @@ This project is a modern, full-stack  is  Vercel
 
 ## Project Structure
 
-```
-youtube-v2/
-├── .gitignore                          # Git ignore file
-├── bun.lock                           # Bun lock file
-├── components.json                    # Shadcn UI components configuration
-├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # 
+                  # 
 ├── tsconfig.json                      # TypeScript configuration
 ├── tsconfig.tsbuildinfo               # TypeScript build info
 │
