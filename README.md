@@ -1,9 +1,6 @@
 ##YouTube V2
 
-This project is a modern, full-stack  is handled by Clerk, and video content is managed, processed, and streamed via Mux. The backend is powered by tRPC, providing end-to-end typesafe APIs.
- Studio:** A dedicated dashboard for creators to view and manage their uploaded videos.
--   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
--   **Video Categories:** Videos can be assigned to different categories for better organization.
+This project is a modern, full-stack  is handled by Clerk, and video content is  categories for better organization.
 -   **Typesafe API:** End-to-end typesafety with tRPC.
 -   **ORM:** Drizzle ORM for querying a PostgreSQL database.
 -   **Responsive Design:** A fully responsive UI that works on all devices.
