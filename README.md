@@ -1,17 +1,4 @@
-── │
-    │   │   ├── uploadthing/
-    │   │   │   ├── core.ts            # UploadThing core
-    │   │   │   └── route.ts           # UploadThing route
-    │   │   │
-    │   │   ├── users/
-    │   │   │   └── webhook/
-    │   │   │       └── route.ts       # User webhook route
-    │   │   │
-    │   │   └── videos/
-    │   │       ├── webhook/
-    │   │       │   └── route.ts       # Video webhook route
-    │   │       └── workflows/
-    │   │           ├── description/
+           ├── description/
     │   │           │   └── route.ts   # Description workflow
     │   │           └── title/
     │   │               └── route.ts   # Title workflow
