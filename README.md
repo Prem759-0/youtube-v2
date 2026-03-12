@@ -79,59 +79,7 @@
     │   ├── ratelimit.ts               # Rate limiting utility
     │   ├── redis.ts                   # Redis configuration
     │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
-    │   ├── auth/
-    │   │   └── ui/
-    │   │       └── components/
-    │   │           └── auth-button.tsx
-    │   │
-    │   ├── categories/
-    │   │   └── server/
-    │   │       └── procedures.ts      # Category procedures
-    │   │
-    │   ├── home/
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── home-navbar/
-    │   │       │   │   ├── home-input.tsx
-    │   │       │   │   └── index.tsx
-    │   │       │   └── home-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       ├── main-section.tsx
-    │   │       │       └── personal-section.tsx
-    │   │       ├── layouts/
-    │   │       │   └── home-layouts.tsx
-    │   │       ├── sections/
-    │   │       │   └── categories-section.tsx
-    │   │       └── views/
-    │   │           └── home-view.tsx
-    │   │
-    │   ├── studio/
-    │   │   ├── server/
-    │   │   │   └── procedures.ts      # Studio procedures
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── studio-upload-modal.tsx
-    │   │       │   ├── studio-uploader.tsx
-    │   │       │   ├── thumbnail-upload-modal.tsx
-    │   │       │   ├── studio-navbar/
-    │   │       │   │   └── index.tsx
-    │   │       │   └── Studio-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       └── studio-sidebar-header.tsx
-    │   │       ├── layouts/
-    │   │       │   └── studio-layout.tsx
-    │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
+  
     │       ├── constants.ts            # Video constants
     │       ├── server/
     │       │   └── procedures.tsx     # Video procedures
