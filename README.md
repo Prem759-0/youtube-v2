@@ -1,15 +1,4 @@
-                      # File icon
-│   ├── globe.svg                      # Globe icon
-│
-    │   │
-─ (home)/                    # Home route group
-    │   │   ├── client.tsx             # Home client component
-    │   │   ├── layout.tsx             # Home layout
-    │   │   ├── page.tsx               # Home page
-    │   │   └── protected/
-    │   │       └── page.tsx           # Protected home page
-    │   │
-    │   ├── (studio)/                  # Studio route group
+── (studio)/                  # Studio route group
     │   │   ├── layout.tsx             # Studio layout
     │   │   └── studio/
     │   │       ├── page.tsx           # Studio dashboard page
