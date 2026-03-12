@@ -175,28 +175,4 @@ bash
 -   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
 -   `bun drizzle-kit push`: Pushes the database schema to the database.
 
-## Project Overview
-
-### Authentication (Clerk)
-The project uses Clerk for authentication. The auth routes are located in `src/app/(auth)/` and include:
-- Sign-in page at `/sign-in`
-- Sign-up page at `/sign-up`
-
-### Home Page
-The main home page is in `src/app/(home)/` with components in `src/modules/home/ui/`. It includes:
-- Navigation bar
-- Sidebar with categories
-- Video feed
-
-### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
-- Video upload functionality
-- Video editing capabilities
-
-### API Routes
-- `src/app/api/trpc/` - tRPC API endpoints
-- `src/app/api/videos/webhook/` - Video processing webhooks
-
-
 
