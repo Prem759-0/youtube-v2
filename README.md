@@ -1,21 +1,4 @@
- ─ aspect-ratio.tsx
-    │   │   ├── avatar.tsx
-    │   │   ├── badge.tsx
-    │   │   ├── breadcrumb.tsx
-    │   │   ├── button-group.tsx
-    │   │   ├── button.tsx
-    │   │   ├── calendar.tsx
-    │   │   ├── card.tsx
-    │   │   ├── carousel.tsx
-    │   │   ├── chart.tsx
-    │   │   ├── checkbox.tsx
-    │   │   ├── collapsible.tsx
-    │   │   ├── command.tsx
-    │   │   ├── context-menu.tsx
-    │   │   ├── dialog.tsx
-    │   │   ├── drawer.tsx
-    │   │   ├── dropdown-menu.tsx
-    │   │   ├── empty.tsx
+ ─ ── empty.tsx
     │   │   ├── field.tsx
     │   │   ├── form.tsx
     │   │   ├── hover-card.tsx
