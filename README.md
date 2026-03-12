@@ -1,14 +1,6 @@
                       # File icon
 │   ├── globe.svg                      # Globe icon
-│   ├── logo.svg                       # Logo
-
-    ├── constants.ts                   # Application constants
-    ├── proxy.ts                       # Proxy configuration
-    ├── README.md                      # Source README
-    │
-    ├── app/                           # Next.js App Router
-    │   ├── globals.css                # Global CSS styles
-    │   ├── layout.tsx                 # Root layout
+│
     │   │
     │   ├── (auth)/                    # Auth route group
     │   │   ├── layout.tsx             # Auth layout
