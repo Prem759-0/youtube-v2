@@ -17,14 +17,7 @@ youtube-v2/
 ├── bun.lock                           # Bun lock file
 ├── components.json                    # Shadcn UI components configuration
 ├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # ESLint configuration
-├── next-env.d.ts                      # Next.js type definitions
-├── next.config.ts                     # Next.js configuration
-├── package-lock.json                  # NPM lock file
-├── package.json                       # Project dependencies
-├── postcss.config.mjs                 # PostCSS configuration
-├── README.md                          # Project documentation
-├── TODO.md                            # Todo list
+├── eslint.config.mjs                  # 
 ├── tsconfig.json                      # TypeScript configuration
 ├── tsconfig.tsbuildinfo               # TypeScript build info
 │
