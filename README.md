@@ -342,11 +342,6 @@ bash
 ```
     The application should now be running at [http://localhost:3000](http://localhost:3000).
 
-## Scripts
-
--   `bun run dev`: Starts the development server.
--   `bun run build`: Creates a production-ready build of the application.
--   `bun run start`: Starts the production server.
 
 
 
