@@ -364,8 +364,6 @@ The main home page is in `src/app/(home)/` with components in `src/modules/home/
 - Video feed
 
 ### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
 
 
 
