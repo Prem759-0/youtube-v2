@@ -315,11 +315,4 @@ env
 
     # Mux Video
     MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
-
-    # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
-    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
-    
-```
+   
