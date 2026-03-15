@@ -285,7 +285,4 @@ bash
     git clone https://github.com/your-username/youtube-v2.git
     cd youtube-v2
     
-```
-
-2.  **Install dependencies:**
 
