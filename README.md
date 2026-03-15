@@ -187,19 +187,4 @@ youtube-v2/
     │
     ├── lib/                           # Utility libraries
     │   ├── mux.ts                     # Mux video configuration
-    │   ├── ratelimit.ts               # Rate limiting utility
-    │   ├── redis.ts                   # Redis configuration
-    │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
-    │   ├── auth/
-    │   │   └── ui/
-    │   │       └── components/
-    │   │           └── auth-button.tsx
-    │   │
-    │   ├── categories/
-    │   │   └── server/
-    │   │       └── procedures
 
