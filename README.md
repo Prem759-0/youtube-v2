@@ -21,5 +21,3 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 
 -   **Framework:** [Next.js](https://nextjs.org/)
 -   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
