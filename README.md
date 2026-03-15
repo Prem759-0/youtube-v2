@@ -278,7 +278,4 @@ Follow these instructions to get a local copy of the project up and running.
 
 ### Installation
 
-1.  **Clone the repository:**
-    
-```
 
