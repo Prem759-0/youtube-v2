@@ -23,6 +23,3 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 -   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 -   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
 -   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [
