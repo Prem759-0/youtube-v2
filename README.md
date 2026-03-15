@@ -201,22 +201,5 @@ youtube-v2/
     │   │
     │   ├── categories/
     │   │   └── server/
-    │   │       └── procedures.ts      # Category procedures
-    │   │
-    │   ├── home/
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── home-navbar/
-    │   │       │   │   ├── home-input.tsx
-    │   │       │   │   └── index.tsx
-    │   │       │   └── home-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       ├── main-section.tsx
-    │   │       │       └── personal-section.tsx
-    │   │       ├── layouts/
-    │   │       │   └── home-layouts.tsx
-    │   │       ├── sections/
-    │   │       │   └── categories-section.tsx
-    │   │       └── views/
-
+    │   │       └── procedures
 
