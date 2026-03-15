@@ -363,12 +363,4 @@ The main home page is in `src/app/(home)/` with components in `src/modules/home/
 - Sidebar with categories
 - Video feed
 
-### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
-- Video upload functionality
-- Video editing capabilities
-- 
-Videos are processed and streamed via Mux. Configuration is in `src/lib/mux.ts`.
-
 
