@@ -234,18 +234,5 @@ youtube-v2/
     │   │       │       ├── index.tsx
     │   │       │       └── studio-sidebar-header.tsx
     │   │       ├── layouts/
-    │   │       │   └── studio-layout.tsx
-    │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           
-        ├── client.tsx                 # tRPC client
-        ├── init.ts                    # tRPC initialization
-        ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
-```
+    │   │       │   
 
