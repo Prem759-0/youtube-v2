@@ -25,10 +25,4 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 -   **Authentication:** [Clerk](https://clerk.com/)
 -   **API:** [tRPC](https://trpc.io/)
 -   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
+-   **ORM:** [
