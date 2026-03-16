@@ -4,8 +4,4 @@ This project is a modern, full-stack YouTube clone built with the T3 stack and o
 
 ## Overview
 
-This YouTube clone provides a comprehensive platform for video sharing and viewing. It features a clean, user-friendly interface built with Next.js and Tailwind CSS. User authentication is handled by Clerk, and video content is managed, processed, and streamed via Mux. The backend is powered by tRPC, providing end-to-end typesafe APIs.
-
-## Features
-
--   **Authentication:** Secure and easy user sign-up and sign-in provided by Clerk.
+This YouTube clone provides a comprehensive platform for video sharing and viewing. It features a clean, user-friendly interface built with Next.js and Tailwind CSS. User authentication is handled by Clerk, and video content is managed, processed, and 
