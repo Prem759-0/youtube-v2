@@ -333,9 +333,5 @@ bash
     
 ```
 
-5.  **Run the development server:**
-    
-```
-
 
 
