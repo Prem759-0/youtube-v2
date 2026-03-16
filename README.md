@@ -160,26 +160,3 @@ youtube-v2/
     │   │   ├── separator.tsx
     │   │   ├── sheet.tsx
     │   │   ├── sidebar.tsx
-    │   │   ├── skeleton.tsx
-    │   │   ├── slider.tsx
-    │   │   ├── sonner.tsx
-    │   │   ├── spinner.tsx
-    │   │   ├── switch.tsx
-    │   │   ├── table.tsx
-    │   │   ├── tabs.tsx
-    │   │   ├── textarea.tsx
-    │   │   ├── toggle-group.tsx
-    │   │   ├── toggle.tsx
-    │   │   └── tooltip.tsx
-    │   │
-    │   ├── filter-carousel.tsx        # Filter carousel component
-    │   ├── infinite-scroll.tsx        # Infinite scroll component
-    │   ├── responsive-dialog.tsx      # Responsive dialog component
-    │   └── user-avatar.tsx            # User avatar component
-    │
-    ├── db/                            # Database configuration
-    │   ├── index.ts                   # Database instance
-    │   └── schema.ts                  # Database schema
-
-
-
