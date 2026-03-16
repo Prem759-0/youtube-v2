@@ -45,10 +45,3 @@ youtube-v2/
 ├── postcss.config.mjs                 # PostCSS configuration
 ├── README.md                          # Project documentation
 ├── TODO.md                            # Todo list
-├── tsconfig.json                      # TypeScript configuration
-├── tsconfig.tsbuildinfo               # TypeScript build info
-│
-├── public/                            # Static assets
-│   ├── favicon.png                    # Favicon
-    │   ├── layout.tsx                 
-    │   │   ├── sidebar.tsx
