@@ -180,27 +180,6 @@ youtube-v2/
     ├── db/                            # Database configuration
     │   ├── index.ts                   # Database instance
     │   └── schema.ts                  # Database schema
-    │
-    ├── hooks/                         # Custom React hooks
-    │   ├── use-intersection-observer.ts
-    │   └── use-mobile.ts
-    │
-    ├── lib/                           # Utility libraries
-    │   ├── mux.ts                     # Mux video configuration
-    │   ├── ratelimit.ts               # Rate limiting utility
-    │   ├── redis.ts                   # Redis configuration
-    │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
-    │   ├── auth/
-    │   │   └── ui/
-    │   │       └── components/
-    │   │           └── auth-button.tsx
-    │   │
-    │   ├── categories/
-    │   │   └── server/
 
 
 
