@@ -66,16 +66,5 @@ youtube-v2/
     │
     ├── app/                           # Next.js App Router
     │   ├── globals.css                # Global CSS styles
-    │   ├── layout.tsx                 # Root layout
-    │   │
-    │   ├── (auth)/                    # Auth route group
-    │   │   ├── layout.tsx             # Auth layout
-    │   │   ├── sign-in/
-    │   │   │   └── [[...sign-in]]/
-    │   │   │       └── page.tsx       # Sign-in page
-    │   │   └── sign-up/
-    │   │       └── [[...sign-up]]/
-    │   │           └── page.tsx       # Sign-up page
-    │   │
-    │   ├── (home)/                    # Home route group
+    │   ├── layout.tsx                 
     │   │   ├── sidebar.tsx
