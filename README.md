@@ -263,9 +263,7 @@ youtube-v2/
             └── _app.ts                # Main router
 ```
 
-## Getting Started
 
-Follow these instructions to get a local copy of the project up and running.
 
 
 
