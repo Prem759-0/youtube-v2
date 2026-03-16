@@ -34,14 +34,3 @@ This YouTube clone provides a comprehensive platform for video sharing and viewi
 ```
 youtube-v2/
 ├── .gitignore                          # Git ignore file
-├── bun.lock                           # Bun lock file
-├── components.json                    # Shadcn UI components configuration
-├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # ESLint configuration
-├── next-env.d.ts                      # Next.js type definitions
-├── next.config.ts                     # Next.js configuration
-├── package-lock.json                  # NPM lock file
-├── package.json                       # Project dependencies
-├── postcss.config.mjs                 # PostCSS configuration
-├── README.md                          # Project documentation
-├── TODO.md                            # Todo list
