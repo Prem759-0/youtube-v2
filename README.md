@@ -358,8 +358,4 @@ The project uses Clerk for authentication. The auth routes are located in `src/a
 - Sign-up page at `/sign-up`
 
 ### Home Page
-The main home page is in `src/app/(home)/` with components in `src/modules/home/ui/`. It includes:
-- Navigation bar
-- Sidebar with categories
-- Video feed
-
+The main home pag
