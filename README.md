@@ -301,9 +301,4 @@ bash
     
 ```
 env
-    # Neon Database URL
-    DATABASE_URL="your_database_url"
-
-    # Clerk Authentication
-    NEX
 
