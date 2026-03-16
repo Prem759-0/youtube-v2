@@ -50,21 +50,5 @@ youtube-v2/
 │
 ├── public/                            # Static assets
 │   ├── favicon.png                    # Favicon
-│   ├── file.svg                       # File icon
-│   ├── globe.svg                      # Globe icon
-│   ├── logo.svg                       # Logo
-│   ├── placeholder.svg                # Placeholder image
-│   ├── user-placeholder.svg           # User placeholder
-│   ├── window.svg                     # Window icon
-│   ├── Y_logo.ico                     # YouTube logo ico
-│   └── Y_logo.png                     # YouTube logo png
-│
-└── src/                               # Source code
-    ├── constants.ts                   # Application constants
-    ├── proxy.ts                       # Proxy configuration
-    ├── README.md                      # Source README
-    │
-    ├── app/                           # Next.js App Router
-    │   ├── globals.css                # Global CSS styles
     │   ├── layout.tsx                 
     │   │   ├── sidebar.tsx
