@@ -237,16 +237,4 @@ youtube-v2/
     │   │       │   └── studio-layout.tsx
     │   │       ├── sections/
     │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.
+    │   │       │   └── videos-se
