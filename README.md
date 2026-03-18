@@ -167,31 +167,4 @@ youtube-v2/
     │   │   ├── switch.tsx
     │   │   ├── table.tsx
     │   │   ├── tabs.tsx
-    │   │   ├── textarea.tsx
-    │   │   ├── toggle-group.tsx
-    │   │   ├── toggle.tsx
-    │   │   └── tooltip.tsx
-    │   │
-    │   ├── filter-carousel.tsx        # Filter carousel component
-    │   ├── infinite-scroll.tsx        # Infinite scroll component
-    │   ├── responsive-dialog.tsx      # Responsive dialog component
-    │   └── user-avatar.tsx            # User avatar component
-    │
-    ├── db/                            # Database configuration
-    │   ├── index.ts                   # Database instance
-    │   └── schema.ts                  # Database schema
-    │
-    ├── hooks/                         # Custom React hooks
-    │   ├── use-intersection-observer.ts
-    │   └── use-mobile.ts
-    │
-    ├── lib/                           # Utility libraries
-    │   ├── mux.ts                     # Mux video configuration
-    │   ├── ratelimit.ts               # Rate limiting utility
-    │   ├── redis.ts                   # Redis configuration
-    │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
     │   ├── auth/
