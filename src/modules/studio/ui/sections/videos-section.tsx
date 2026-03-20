@@ -10,7 +10,7 @@ import { trpc } from "@/trpc/client";
 import { format } from "date-fns";
 import { Globe2Icon, LockIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export const VideosSection = () => {
@@ -79,6 +79,7 @@ const VideosSectionSkeleton = () => {
 
 export const VideosSectionSuspense = () => {
   const router = useRouter();
+  const [isNavigating, setIsNavigating] = useState(false);
   const [videos, query] = trpc.studio.getMany.useSuspenseInfiniteQuery(
     {
       limit: DEFAULT_LIMIT,
@@ -89,7 +90,12 @@ export const VideosSectionSuspense = () => {
   );
 
   return (
-    <div>
+    <div className="relative">
+      {isNavigating && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/70 backdrop-blur-sm">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-muted-foreground border-t-transparent" />
+        </div>
+      )}
       <div className="border-y overflow-x-auto">
         {/* Same min-width applied here for consistency */}
         <Table className="table-fixed w-full min-w-[1000px]">
@@ -111,7 +117,10 @@ export const VideosSectionSuspense = () => {
                 <TableRow
                   key={video.id}
                   className="cursor-pointer"
-                  onClick={() => router.push(`/studio/video/${video.id}`)}
+                  onClick={() => {
+                    setIsNavigating(true);
+                    router.push(`/studio/video/${video.id}`);
+                  }}
                 >
                   <TableCell className="pl-6">
                     <div className="flex items-center gap-4">

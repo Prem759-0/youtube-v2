@@ -31,14 +31,36 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(opts){
         throw new TRPCError({code: "UNAUTHORIZED"});
     }
 
-    const [user] = await db
+    const [selectedUser] = await db
      .select()
      .from(users)
      .where(eq(users.clerkId, ctx.clerkUserId))
      .limit(1)
 
-     if (!user){
-        throw new TRPCError({code: "UNAUTHORIZED"});
+    let user = selectedUser;
+
+    // Webhook timing/race: Clerk may have the user session before `users` row exists in DB.
+    // Create a minimal placeholder user so protected actions don't fail with 401.
+    if (!user){
+        await db.insert(users)
+        .values({
+            clerkId: ctx.clerkUserId,
+            name: "",
+            imageUrl: "/placeholder.svg",
+        })
+        .onConflictDoNothing();
+
+        const [freshUser] = await db
+        .select()
+        .from(users)
+        .where(eq(users.clerkId, ctx.clerkUserId))
+        .limit(1);
+
+        if (!freshUser){
+            throw new TRPCError({code: "UNAUTHORIZED"});
+        }
+
+        user = freshUser;
      }
 
      const {success} = await ratelimit.limit(user.id);

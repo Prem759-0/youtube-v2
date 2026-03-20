@@ -13,6 +13,7 @@
         "@mux/mux-uploader-react": "^1.1.1",
         "@neondatabase/serverless": "0.10.4",
         "@openrouter/sdk": "^0.9.11",
+        "@player.style/yt": "^0.2.1",
         "@radix-ui/react-accordion": "^1.2.12",
         "@radix-ui/react-alert-dialog": "^1.1.15",
         "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -389,6 +390,8 @@
     "@opentelemetry/semantic-conventions": ["@opentelemetry/semantic-conventions@1.39.0", "", {}, "sha512-R5R9tb2AXs2IRLNKLBJDynhkfmx7mX0vi8NkhZb3gUkPWHn6HXk5J8iQ/dql0U3ApfWym4kXXmBDRGO+oeOfjg=="],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
+
+    "@player.style/yt": ["@player.style/yt@0.2.1", "", { "peerDependencies": { "media-chrome": ">=1.0.0" } }, "sha512-UGC9pHx8P5Rg4fnLc2yR14YeB+cxhva+MZNEUfricwF7bC2byc5o+NmqugpGLNlFXxiie+V95SUsZajGC6fnFw=="],
 
     "@protobufjs/aspromise": ["@protobufjs/aspromise@1.1.2", "", {}, "sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ=="],
 

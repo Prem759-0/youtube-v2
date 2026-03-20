@@ -47,11 +47,12 @@ export async function POST(req: Request) {
 
   if (evt.type === "user.created") {
     const { data } = evt;
+    const imageUrl = data.image_url ?? "/placeholder.svg";
 
     await db.insert(users).values({
       clerkId: data.id,
       name: `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim(),
-      imageUrl: data.image_url,
+      imageUrl,
     });
   }
 
@@ -73,11 +74,12 @@ export async function POST(req: Request) {
       return new Response("Missing user id", { status: 400 });
     }
 
+    const imageUrl = data.image_url ?? "/placeholder.svg";
     await db
       .update(users)
       .set({
         name: `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim(),
-        imageUrl: data.image_url,
+        imageUrl,
       })
       .where(eq(users.clerkId, clerkId));
   }
