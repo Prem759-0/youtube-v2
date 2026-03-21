@@ -319,9 +319,4 @@ env
     MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
 
     # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
-    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
-    
-```
-
-4.  **Run database 
+    UPSTASH_REDIS_REST_URL="your_upstash_redis_url 
