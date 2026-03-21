@@ -258,15 +258,4 @@ youtube-v2/
         ├── client.tsx                 # tRPC client
         ├── init.ts                    # tRPC initialization
         ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later
+ later
