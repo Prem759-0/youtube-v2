@@ -177,35 +177,3 @@ youtube-v2/
     │   ├── responsive-dialog.tsx      # Responsive dialog component
     │   └── user-avatar.tsx            # User avatar component
     │
-    ├── db/                            # Database configuration
-    │   ├── index.ts                   # Database instance
-    │   └── schema.ts                  # Database schema
-    │
-    ├── hooks/                         # Custom React hooks
-    │   ├── use-intersection-observer.ts
-    │   └── use-mobile.ts
-    │
-    ├── lib/                           # Utility libraries
-    │   ├── mux.ts                     # Mux video configuration
-    │   ├── ratelimit.ts               # Rate limiting utility
-    │   ├── redis.ts                   # Redis configuration
-    │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
-    │   ├── auth/
-    │   │   └── ui/
-    │   │       └── components/
-    │   │           └── auth-button.tsx
-    │   │
-    │   ├── categories/
-    │   │   └── server/
-    │   │       └── procedures.ts      # Category procedures
-    │   │
-    │   ├── home/
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── home-navbar/
-    │   │       │   │   ├── home-input.tsx
-    │   │       │   │   └── index.tsx
