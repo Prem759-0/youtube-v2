@@ -241,46 +241,6 @@ youtube-v2/
     │   │       └── views/
     │   │           ├── studio-view.tsx
     │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.tsx
-    │
-    ├── scripts/                       # Utility scripts
-    │   └── seed-categories.ts        # Category seeding script
-    │
-    └── trpc/                          # tRPC configuration
-        ├── client.tsx                 # tRPC client
-        ├── init.ts                    # tRPC initialization
-        ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later)
--   [Bun](https://bun.sh/)
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
-### Installation
-
-1.  **Clone the repository:**
-    
-```
 ```
 bash
     bun install
