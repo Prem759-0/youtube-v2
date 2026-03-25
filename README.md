@@ -221,21 +221,3 @@ youtube-v2/
     │   │           └── home-view.tsx
     │   │
     │   ├── studio/
-    │   │   ├── server/
-    │   │   │   └── procedures.ts      # Studio procedures
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── studio-upload-modal.tsx
-    │   │       │   ├── studio-uploader.tsx
-    │   │       │   ├── thumbnail-upload-modal.tsx
-    │   │       │   ├── studio-navbar/
-    │   │       │   │   └── index.tsx
-    │   │       │   └── Studio-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       └── studio-sidebar-header.tsx
-    │   │       ├── layouts/
-    │   │       │   └── studio-layout.tsx
-    │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
