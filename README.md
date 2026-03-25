@@ -239,12 +239,3 @@ youtube-v2/
     │   │       │   ├── form-section.tsx
     │   │       │   └── videos-section.tsx
     │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-```
-bash
-    bun install
-    
-```
-
-3.  **Set up environment variables:**
