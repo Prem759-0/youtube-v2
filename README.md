@@ -107,22 +107,3 @@ youtube-v2/
     │   │   │
     │   │   └── videos/
     │   │       ├── webhook/
-    │   │       │   └── route.ts       # Video webhook route
-    │   │       └── workflows/
-    │   │           ├── description/
-    │   │           │   └── route.ts   # Description workflow
-    │   │           └── title/
-    │   │               └── route.ts   # Title workflow
-    │   │
-    │   └── test-image/                # Test images directory
-    │
-    ├── components/                    # Shared components
-    │   ├── ui/                        # Shadcn UI components
-    │   │   ├── accordion.tsx
-    │   │   ├── alert-dialog.tsx
-    │   │   ├── alert.tsx
-    │   │   ├── aspect-ratio.tsx
-    │   │   ├── avatar.tsx
-    │   │   ├── badge.tsx
-    │   │   ├── breadcrumb.tsx
-    │   │   ├── button-group.tsx
