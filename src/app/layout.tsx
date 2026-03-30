@@ -11,6 +11,7 @@ import {
 } from '@clerk/nextjs'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { OfflineOverlay } from "@/modules/videos/ui/components/offline-overlay";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         >
           <TRPCProvider>
             <Toaster />
+            <OfflineOverlay/>
             {children}
           </TRPCProvider>
         </body>

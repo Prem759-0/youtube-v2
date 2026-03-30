@@ -159,32 +159,20 @@ export const VideoPlayer = ({
   );
 };
 
-export const VideoPlayerSkeleton = () => {
+export function YoutubeStyleLoader() {
   return (
     <div
-      style={{
-        width: "100%",
-        aspectRatio: "16 / 9",
-        background: "#1f1f1f",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className="relative flex aspect-video w-full min-w-0 max-w-full items-center justify-center overflow-hidden bg-[#1f1f1f]"
+      role="status"
+      aria-busy="true"
+      aria-label="Loading video player"
     >
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
-          animation: "shimmer 1.5s infinite",
-        }}
+        className="size-12 rounded-full border-[3px] border-white/15 border-t-[#FF0000] animate-spin"
+        style={{ animationDuration: "0.75s" }}
       />
-      <style>{`
-        @keyframes shimmer {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </div>
   );
-};
+}
+
+export const VideoPlayerSkeleton = YoutubeStyleLoader;
