@@ -34,7 +34,7 @@ const CommentsSectionSuspense = ({videoId}: CommentsSectionProps) => {
     return (
         <div className="mt-6">
             <div className="flex flex-col gap-6">
-                <h1>
+                <h1 className='text-xl font-bold'>
                     0 Comments
                     </h1>
                     <CommentForm videoId={videoId}/>
@@ -46,6 +46,7 @@ const CommentsSectionSuspense = ({videoId}: CommentsSectionProps) => {
                         />
                       ))}
                       <InfiniteScroll
+                        isManual
                         hasNextPage={query.hasNextPage}
                         isFetchingNextPage={query.isFetchingNextPage}
                         fetchNextPage={query.fetchNextPage}

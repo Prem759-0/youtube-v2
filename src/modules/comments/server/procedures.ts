@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { comments, users } from "@/db/schema";
 import { baseProcedure,createTRPCRouter, protectedProcedure } from "@/trpc/init";
-import { and ,desc, eq, getTableColumns, lt, or } from "drizzle-orm";
+import { and ,count,desc, eq, getTableColumns, lt, or } from "drizzle-orm";
 import {z} from "zod";
 
 export const commentsRouter = createTRPCRouter({
@@ -40,6 +40,7 @@ export const commentsRouter = createTRPCRouter({
       .select({
         ...getTableColumns(comments),
         user: users,
+        total: count(comments.id),
       })
       .from(comments)
       .innerJoin(users, eq(comments.userId, users.id))
