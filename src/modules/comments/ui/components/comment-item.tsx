@@ -2,12 +2,22 @@ import Link from "next/link";
 import { CommentsGetManyOutput } from "../../types";
 import { UserAvatar } from "@/components/user-avatar";
 import { formatDistanceToNow } from "date-fns";
+import { trpc } from "@/trpc/client";
+import {
+    DropdownMenu,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+    
+} from "@/components/ui/dropdown-menu"
 
 interface CommentItemProps {
-    comment: CommentsGetManyOutput[number];
+    comment: CommentsGetManyOutput["items"][number];
 };
 
 export const CommentItem = ({ comment }: CommentItemProps) =>{
+
+    const remove = trpc.comments.remove.useMutation();
+
     return(
         <div>
             <div className="flex gap-4">

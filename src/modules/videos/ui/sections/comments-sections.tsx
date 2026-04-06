@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import {DEFAULT_LIMIT} from "@/constants"
 import { InfiniteScroll } from '@/components/infinite-scroll';
+import { Loader2Icon } from 'lucide-react';
 
 interface CommentsSectionProps{
     videoId: string;
@@ -14,11 +15,19 @@ interface CommentsSectionProps{
 
 export const CommentsSection = ({videoId}: CommentsSectionProps) => {
     return(
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<CommentsSectionSkeleton/>}>
             <ErrorBoundary fallback={<p>Error</p>}>
             <CommentsSectionSuspense videoId={videoId}/>
             </ErrorBoundary>
         </Suspense>
+    )
+}
+
+const CommentsSectionSkeleton = () => {
+    return (
+        <div className="mt-6 flex justify-center items-center">
+             <Loader2Icon className="text-muted-foreground size-7 animate-spin"/>
+        </div>
     )
 }
 
@@ -35,7 +44,7 @@ const CommentsSectionSuspense = ({videoId}: CommentsSectionProps) => {
         <div className="mt-6">
             <div className="flex flex-col gap-6">
                 <h1 className='text-xl font-bold'>
-                    0 Comments
+                    {comments.pages[0].totalCount} Comments
                     </h1>
                     <CommentForm videoId={videoId}/>
                     <div className="flex flex-col gap-4 mt-2">
