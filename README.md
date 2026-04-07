@@ -303,29 +303,4 @@ env
     # Clerk Authentication
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
     CLERK_SECRET_KEY="your_clerk_secret_key"
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-    CLERK_WEBHOOK_SECRET="
-bash
-    bun drizzle-kit push
-    
-```
-
-5.  **Run the development server:**
-    
-```
-bash
-    bun run dev
-    
-```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Scripts
-
--   `bun run dev`: Starts the development server.
--   `bun run build`: Creates a production-ready build of the application.
--   `bun run start`: Starts the production server.
--   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
--   `bun drizzle-kit push`: Pushes the database schema to the database.
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL=
