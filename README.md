@@ -1,14 +1,5 @@
 
-├── tsconfig.json                      # TypeScript configuration
-├── tsconfig.tsbuildinfo               # TypeScript build info
-│
-├── public/                            # Static assets
-│   ├── favicon.png                    # Favicon
-│   ├── file.svg                       # File icon
-│   ├── globe.svg                      # Globe icon
-│   ├── logo.svg                       # Logo
-│   ├── placeholder.svg                # Placeholder image
-│   ├── user-placeholder.svg           # User placeholder
+├──
 │   ├── window.svg                     # Window icon
 │   ├── Y_logo.ico                     # YouTube logo ico
 │   └── Y_logo.png                     # YouTube logo png
