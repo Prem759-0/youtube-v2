@@ -251,16 +251,4 @@ youtube-v2/
     │   └── seed-categories.ts        # Category seeding script
     │
     └── trpc/                          # tRPC configuration
-        ├── client.tsx                 # tRPC client
-        ├── init.ts                    # tRPC initialization
-        ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
-```
-
-## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
+        ├── client.tsx                 
