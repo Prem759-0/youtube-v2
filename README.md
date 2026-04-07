@@ -1,32 +1,4 @@
 
-## Tech Stack
-
--   **Framework:** [Next.js](https://nextjs.org/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
-
-```
-youtube-v2/
-├── .gitignore                          # Git ignore file
-├── bun.lock                           # Bun lock file
-├── components.json                    # Shadcn UI components configuration
-├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # ESLint configuration
-├── next-env.d.ts                      # Next.js type definitions
-├── next.config.ts                     # Next.js configuration
-├── package-lock.json                  # NPM lock file
-├── package.json                       # Project dependencies
-├── postcss.config.mjs                 # PostCSS configuration
-├── README.md                          # Project documentation
-├── TODO.md                            # Todo list
 ├── tsconfig.json                      # TypeScript configuration
 ├── tsconfig.tsbuildinfo               # TypeScript build info
 │
