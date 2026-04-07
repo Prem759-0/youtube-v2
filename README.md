@@ -232,23 +232,4 @@ youtube-v2/
     │   │       ├── layouts/
     │   │       │   └── studio-layout.tsx
     │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.tsx
-    │
-    ├── scripts/                       # Utility scripts
-    │   └── seed-categories.ts        # Category seeding script
-    │
-    └── trpc/                          # tRPC configuration
-        ├── client.tsx                 
+    │   │       │   ├── form-                 
