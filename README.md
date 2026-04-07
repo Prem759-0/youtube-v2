@@ -264,38 +264,3 @@ youtube-v2/
 Follow these instructions to get a local copy of the project up and running.
 
 ### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later)
--   [Bun](https://bun.sh/)
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
-
-### Installation
-
-1.  **Clone the repository:**
-    
-```
-bash
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    
-```
-
-2.  **Install dependencies:**
-    
-```
-bash
-    bun install
-    
-```
-
-3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
-
-    
-```
-env
-    # Neon Database URL
-    DATABASE_URL="your_database_url"
