@@ -75,7 +75,7 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
                         </Button>
 
                         <span className="text-xs text-muted-foreground">
-                            0    
+                            {comment.likeCount}    
                         </span>
 
                         <Button 
@@ -89,7 +89,7 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
                         </Button>
 
                         <span className="text-xs text-muted-foreground">
-                            0    
+                            {comment.dislikeCount}    
                         </span>
                         
                      </div>
