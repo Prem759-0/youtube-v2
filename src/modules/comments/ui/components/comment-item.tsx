@@ -11,8 +11,9 @@ import {
     DropdownMenuTrigger,
     DropdownMenuContent,
 } from "@/components/ui/dropdown-menu"
-import { MessageSquareIcon, MoreVerticalIcon, Trash2Icon } from "lucide-react";
+import { MessageSquareIcon, MoreVerticalIcon, ThumbsDownIcon, ThumbsUpIcon, Trash2Icon } from "lucide-react";
 import { useAuth, useClerk } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
 
 interface CommentItemProps {
     comment: CommentsGetManyOutput["items"][number];
@@ -61,6 +62,38 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
                       </div>
                    </Link>
                    <p className="text-sm">{comment.value}</p>
+                   <div className="flex items-center gap-2 mt-1">
+                     <div className="flex items-center">
+                        <Button 
+                           disabled={false}
+                           variant="ghost"
+                           size="icon"
+                           className="size-8"
+                           onClick={()=>{}}
+                        >
+                          <ThumbsUpIcon className={cn()}/>
+                        </Button>
+
+                        <span className="text-xs text-muted-foreground">
+                            0    
+                        </span>
+
+                        <Button 
+                           disabled={false}
+                           variant="ghost"
+                           size="icon"
+                           className="size-8"
+                           onClick={()=>{}}
+                        >
+                          <ThumbsDownIcon className={cn()}/>
+                        </Button>
+
+                        <span className="text-xs text-muted-foreground">
+                            0    
+                        </span>
+                        
+                     </div>
+                   </div>
 
                 </div>
                 <DropdownMenu modal={false}>
