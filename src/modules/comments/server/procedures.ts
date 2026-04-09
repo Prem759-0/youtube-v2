@@ -67,8 +67,11 @@ export const commentsRouter = createTRPCRouter({
     const [user] = await db
     .select()
     .from(users)
-    .where(clerkUserId ? eq(users.clerkId, clerkUserId) : undefined)
-    //.where(inArray(users.clerkId, clerkUserId ? [clerkUserId] : []))
+    .where(inArray(users.clerkId, clerkUserId ? [clerkUserId] : []))
+
+    if (user){
+      userId = user.id;
+    }
 
     const viewerReactions = db.$with("viewer_reactions").as(
       db
@@ -77,7 +80,7 @@ export const commentsRouter = createTRPCRouter({
           type: commentReactions.type,
         })
         .from(commentReactions)
-        .where(eq(commentReactions.userId, "viewer_id_placeholder"))
+        .where(inArray(commentReactions.userId, userId ? [userId] : []))
     );
 
     const [totalData, data] = await Promise.all([
@@ -88,9 +91,11 @@ export const commentsRouter = createTRPCRouter({
      .from(comments)
      .where(eq(comments.videoId, videoId)),
       db
+      .with(viewerReactions)
       .select({
         ...getTableColumns(comments),
         user: users,
+        viewerReaction: viewerReactions.type,
         likeCount: db.$count(
              commentReactions,
              and(
@@ -108,19 +113,20 @@ export const commentsRouter = createTRPCRouter({
         
       })
       .from(comments)
-      .innerJoin(users, eq(comments.userId, users.id))
       .where(and(
         eq(comments.videoId, videoId),
         cursor
-              ? or(
-                lt(comments.updatedAt, cursor.updatedAt),
-                and(
-                  eq(comments.updatedAt, cursor.updatedAt),
-                  lt(comments.id, cursor.id)
-                )
-              )
-              : undefined,
+        ? or(
+          lt(comments.updatedAt, cursor.updatedAt),
+          and(
+            eq(comments.updatedAt, cursor.updatedAt),
+            lt(comments.id, cursor.id)
+          )
+        )
+        : undefined,
       ))
+      .innerJoin(users, eq(comments.userId, users.id))
+      .leftJoin(viewerReactions, eq(viewerReactions.commentId, comments.id))
       .orderBy(desc(comments.updatedAt), desc(comments.id)) 
       .limit(limit + 1)
     ])

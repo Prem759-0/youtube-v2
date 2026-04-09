@@ -15,7 +15,7 @@ import { MessageSquareIcon, MoreVerticalIcon, ThumbsDownIcon, ThumbsUpIcon, Tras
 import { useAuth, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
-interface CommentItemProps {
+interface CommentItemProps { 
     comment: CommentsGetManyOutput["items"][number];
 };
 
@@ -37,6 +37,31 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
             }
         },
     });
+
+    const like = trpc.commentReactions.like.useMutation({
+        onSuccess: ()  => {
+            utils.comments.getMany.invalidate({videoId: comment.videoId})
+        },
+        onError: (error)  => {
+            toast.error("Something went wrong");
+
+            if(error.data?.code === "UNAUTHORIZED"){
+                clerk.openSignIn();
+            }
+        }
+    })
+    const dislike = trpc.commentReactions.dislike.useMutation({
+        onSuccess: ()  => {
+            utils.comments.getMany.invalidate({videoId: comment.videoId})
+        },
+        onError: (error)  => {
+            toast.error("Something went wrong");
+
+            if(error.data?.code === "UNAUTHORIZED"){
+                clerk.openSignIn();
+            }
+        }
+    })
 
     return(
         <div>
@@ -63,15 +88,17 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
                    </Link>
                    <p className="text-sm">{comment.value}</p>
                    <div className="flex items-center gap-2 mt-1">
-                     <div className="flex items-center">
+                     <div className="flex items-center gap-1.5 ">
                         <Button 
-                           disabled={false}
+                           disabled={like.isPending}
                            variant="ghost"
                            size="icon"
                            className="size-8"
-                           onClick={()=>{}}
+                           onClick={()=> like.mutate({commentId: comment.id})}
                         >
-                          <ThumbsUpIcon className={cn()}/>
+                          <ThumbsUpIcon className={cn(
+                            comment.viewerReaction === "like" && "fill-black",
+                          )}/>
                         </Button>
 
                         <span className="text-xs text-muted-foreground">
@@ -79,13 +106,15 @@ export const CommentItem = ({ comment }: CommentItemProps) =>{
                         </span>
 
                         <Button 
-                           disabled={false}
+                           disabled={dislike.isPending}
                            variant="ghost"
                            size="icon"
                            className="size-8"
-                           onClick={()=>{}}
+                           onClick={()=> dislike.mutate({commentId: comment.id})}
                         >
-                          <ThumbsDownIcon className={cn()}/>
+                          <ThumbsDownIcon className={cn(
+                            comment.viewerReaction === "dislike" && "fill-black",
+                          )}/>
                         </Button>
 
                         <span className="text-xs text-muted-foreground">
