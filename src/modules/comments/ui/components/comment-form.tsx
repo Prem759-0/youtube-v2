@@ -9,6 +9,7 @@ import {toast} from "sonner"
 import {trpc} from "@/trpc/client"
 import {commentsInsertSchema} from "@/db/schema"
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form"
+import { Loader2Icon } from "lucide-react";
 
 
 interface CommentFormProps {
@@ -69,29 +70,35 @@ export const CommentForm = ({
         imageUrl={user?.imageUrl || "/user.jpg"}
         name={user?.username || "User"}
       />
-      <div className="flex-1">
+      <div className="flex-1 min-w-0">
         <FormField
          name="value"
          control={form.control}
          render={({field})=>(
           <FormItem>
             <FormControl>
-            <Textarea
-            {...field}
-              placeholder="Add a comment..."
-              className="resize-none bg-transparent overflow-hidden min-h-0"
-            />
+              <div className="relative">
+                <Textarea
+                  {...field}
+                  placeholder="Add a comment..."
+                  className="resize-none bg-transparent overflow-x-hidden overflow-y-auto pb-10 max-h-[128px] min-h-0 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                />
+                {(!!field.value.trim() || create.isPending) && (
+                  <Button 
+                    disabled={create.isPending} 
+                    type="submit" 
+                    size="sm"
+                    className="absolute bottom-1.5 right-1.5 rounded-full"
+                  >
+                    {create.isPending ? <Loader2Icon className="animate-spin" /> : "Comment"}
+                  </Button>
+                )}
+              </div>
             </FormControl>
             <FormMessage/>
           </FormItem>
          )}
         />
-
-        <div className="justify-end gap-2 mt-2 flex">
-          <Button disabled={create.isPending} type="submit" size="sm">
-            Comment
-          </Button>
-        </div>
       </div>
     </form>
       </Form>

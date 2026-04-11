@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import {VideoGetOneOutput} from "../../types";
 import {useClerk} from "@clerk/nextjs";
 import {trpc} from "@/trpc/client"
@@ -57,7 +58,14 @@ export const VideoReactions = ({
               variant="secondary"
               className="rounded-l-full rounded-r-none gap-2 pr-4 cursor-pointer"
             >
-                <ThumbsUpIcon className={cn("size-5", viewerReaction === "like" && "fill-black")}/>
+                <div className="relative">
+                  <ThumbsUpIcon className={cn("size-5", viewerReaction === "like" && "fill-black")}/>
+                  {like.isPending && (
+                    <div className="absolute -inset-1 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Spinner className="size-4" />
+                    </div>
+                  )}
+                </div>
                 {likes}
             </Button>
             <Separator orientation="vertical" className="h-7" />
@@ -67,7 +75,14 @@ export const VideoReactions = ({
               variant="secondary"
               className="rounded-l-none rounded-r-full  pl-3 cursor-pointer"
             >
-                <ThumbsDownIcon className={cn("size-5", viewerReaction === "dislike" && "fill-black")}/>
+                <div className="relative">
+                  <ThumbsDownIcon className={cn("size-5", viewerReaction === "dislike" && "fill-black")}/>
+                  {dislike.isPending && (
+                    <div className="absolute -inset-1 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Spinner className="size-4" />
+                    </div>
+                  )}
+                </div>
                 {dislikes}
             </Button>
         </div>

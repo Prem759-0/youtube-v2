@@ -21,18 +21,19 @@ import {
   ThumbsUpIcon,
   Trash2Icon,
 } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 import { useAuth, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
 interface CommentItemProps {
   comment: CommentsGetManyOutput["items"][number];
-  variant?: "reply" | "comment",
+  variant?: "reply" | "comment";
 }
 
-export const CommentItem = ({ 
-  comment ,
-   variant = "comment",
-  }: CommentItemProps) => {
+export const CommentItem = ({
+  comment,
+  variant = "comment",
+}: CommentItemProps) => {
   const clerk = useClerk();
   const { userId } = useAuth();
 
@@ -47,7 +48,6 @@ export const CommentItem = ({
     },
     onError: (error) => {
       toast.error("Failed to delete comment ‼️");
-
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
       }
@@ -60,7 +60,6 @@ export const CommentItem = ({
     },
     onError: (error) => {
       toast.error("Something went wrong");
-
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
       }
@@ -73,7 +72,6 @@ export const CommentItem = ({
     },
     onError: (error) => {
       toast.error("Something went wrong");
-
       if (error.data?.code === "UNAUTHORIZED") {
         clerk.openSignIn();
       }
@@ -83,6 +81,7 @@ export const CommentItem = ({
   return (
     <div>
       <div className="flex gap-4">
+        
         {/* Avatar */}
         <Link href={`/users/${comment.userId}`}>
           <UserAvatar
@@ -94,6 +93,7 @@ export const CommentItem = ({
 
         {/* Content */}
         <div className="flex-1 min-w-0">
+          
           {/* Name + Time */}
           <Link href={`/users/${comment.userId}`}>
             <div className="flex items-center gap-2 mb-0.5">
@@ -103,12 +103,13 @@ export const CommentItem = ({
               <span className="text-xs text-muted-foreground">
                 {formatDistanceToNow(comment.createdAt, {
                   addSuffix: true,
+                  includeSeconds: false,
                 })}
               </span>
             </div>
           </Link>
 
-          {/* 🔥 Comment Text with Read More */}
+          {/* Comment Text */}
           <div className="text-sm">
             <p
               className={cn(
@@ -122,7 +123,7 @@ export const CommentItem = ({
             {comment.value.length > 120 && (
               <button
                 onClick={() => setExpanded(!expanded)}
-                className="text-xs font-medium text-muted-foreground mt-1 hover:text-black"
+                className="text-xs font-medium text-muted-foreground mt-1 px-2 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
               >
                 {expanded ? "Show less" : "Read more"}
               </button>
@@ -132,19 +133,28 @@ export const CommentItem = ({
           {/* Actions */}
           <div className="flex items-center gap-2 mt-1">
             <div className="flex items-center gap-1.5">
+              
               {/* Like */}
               <Button
                 disabled={like.isPending}
                 variant="ghost"
                 size="icon"
-                className="size-8"
+                className="size-8 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
                 onClick={() => like.mutate({ commentId: comment.id })}
               >
-                <ThumbsUpIcon
-                  className={cn(
-                    comment.viewerReaction === "like" && "fill-black"
+                <div className="relative">
+                  <ThumbsUpIcon
+                    className={cn(
+                      comment.viewerReaction === "like" &&
+                        "fill-black dark:fill-white"
+                    )}
+                  />
+                  {like.isPending && (
+                    <div className="absolute inset-0 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Spinner className="size-4" />
+                    </div>
                   )}
-                />
+                </div>
               </Button>
 
               <span className="text-xs text-muted-foreground">
@@ -156,20 +166,40 @@ export const CommentItem = ({
                 disabled={dislike.isPending}
                 variant="ghost"
                 size="icon"
-                className="size-8"
+                className="size-8 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
                 onClick={() => dislike.mutate({ commentId: comment.id })}
               >
-                <ThumbsDownIcon
-                  className={cn(
-                    comment.viewerReaction === "dislike" && "fill-black"
+                <div className="relative">
+                  <ThumbsDownIcon
+                    className={cn(
+                      comment.viewerReaction === "dislike" &&
+                        "fill-black dark:fill-white"
+                    )}
+                  />
+                  {dislike.isPending && (
+                    <div className="absolute inset-0 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Spinner className="size-4" />
+                    </div>
                   )}
-                />
+                </div>
               </Button>
 
               <span className="text-xs text-muted-foreground">
                 {comment.dislikeCount}
               </span>
             </div>
+
+            {/* Reply */}
+            {variant === "comment" && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 px-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800"
+                onClick={() => {}}
+              >
+                Reply
+              </Button>
+            )}
           </div>
         </div>
 
@@ -183,7 +213,7 @@ export const CommentItem = ({
 
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => {}}>
-              <MessageSquareIcon className="size-4" />
+              <MessageSquareIcon className="size-4 mr-2" />
               Reply
             </DropdownMenuItem>
 
@@ -191,7 +221,7 @@ export const CommentItem = ({
               <DropdownMenuItem
                 onClick={() => remove.mutate({ id: comment.id })}
               >
-                <Trash2Icon className="size-4" />
+                <Trash2Icon className="size-4 mr-2" />
                 Delete
               </DropdownMenuItem>
             )}

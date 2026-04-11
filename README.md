@@ -1,380 +1,194 @@
-  # YouTube V2
-
-This project is a modern, full-stack YouTube clone built with the T3 stack and other modern technologies. It allows users to sign up, upload videos, and browse content. The application is designed to be scalable and performant, leveraging serverless technologies for the database and video processing.
+# YouTube V2 - Full-Stack YouTube Clone
 
 ## Overview
+Modern YouTube clone with T3 stack (Next.js 16 App Router, tRPC, TypeScript, Tailwind, Drizzle ORM on PostgreSQL/Neon). Features: Clerk auth, Mux video upload/streaming/processing, creator studio, home feed with categories/sidebar/infinite scroll, comments/reactions/views/subscriptions, AI workflows (title/desc/thumbnail gen via OpenRouter/Google GenAI), Shadcn UI, responsive design. Scalable, typesafe end-to-end.
 
-This YouTube clone provides a comprehensive platform for video sharing and viewing. It features a clean, user-friendly interface built with Next.js and Tailwind CSS. User authentication is handled by Clerk, and video content is managed, processed, and streamed via Mux. The backend is powered by tRPC, providing end-to-end typesafe APIs.
+**Key Modules**: auth, categories, comments (form/item UI, server procs), home (feed/navbar/sidebar), studio (upload/edit/dashboard), subscriptions, users, video-reactions/views, videos (upload/edit/categories/player/thumbnail).
 
-## Features
+## Tech Stack (from package.json)
+- **Framework**: Next.js 16.1.1, React 19.2.3
+- **Styling/UI**: Tailwind CSS 4, Shadcn/Radix-UI (50+ components), Lucide icons, clsx/cva/tailwind-merge
+- **API/Data**: tRPC 11-rc.730 (react-query), Drizzle ORM 0.39/Neon serverless, Zod validation
+- **Auth**: Clerk 6.10.3 (webhooks)
+- **Video/Media**: Mux (player/uploader/node/sdk), Uploadthing 7.7.4
+- **AI/Workflows**: @google/generative-ai 0.24.1, OpenRouter SDK 0.9.11, Upstash Workflow 0.2.6
+- **Cache/DB Utils**: Upstash Redis/Ratelimit 1.34.3/2.0.5
+- **Other**: React Hook Form, Sonner toasts, Recharts, Embla carousel, Vaul drawer, Superjson, Svix webhooks
+- **Dev**: Bun, Drizzle-kit 0.30.3, ESLint 9, tsx 4.19.2
 
--   **Authentication:** Secure and easy user sign-up and sign-in provided by Clerk.
--   **Video Uploads:** Direct-to-Mux video uploads for efficient and robust video processing.
--   **Creator Studio:** A dedicated dashboard for creators to view and manage their uploaded videos.
--   **Infinite Scrolling:** Smooth, paginated loading of videos in the creator studio.
--   **Video Categories:** Videos can be assigned to different categories for better organization.
--   **Typesafe API:** End-to-end typesafety with tRPC.
--   **ORM:** Drizzle ORM for querying a PostgreSQL database.
--   **Responsive Design:** A fully responsive UI that works on all devices.
-
-## Tech Stack
-
--   **Framework:** [Next.js](https://nextjs.org/)
--   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
--   **UI Components:** [Shadcn UI](https://ui.shadcn.com/)
--   **Authentication:** [Clerk](https://clerk.com/)
--   **API:** [tRPC](https://trpc.io/)
--   **Database:** [PostgreSQL](https://www.postgresql.org/) (hosted on [Neon](https://neon.tech/))
--   **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
--   **Video Processing:** [Mux](https://www.mux.com/)
--   **Deployment:** Vercel
-
-## Project Structure
+## Full Detailed Project Structure
+Detailed tree with every file/folder (from recursive scan). Descriptions based on names/conventions (e.g., procedures.ts = TRPC server procedures).
 
 ```
-youtube-v2/
-├── .gitignore                          # Git ignore file
-├── bun.lock                           # Bun lock file
-├── components.json                    # Shadcn UI components configuration
-├── drizzle.config.ts                 # Drizzle ORM configuration
-├── eslint.config.mjs                  # ESLint configuration
-├── next-env.d.ts                      # Next.js type definitions
-├── next.config.ts                     # Next.js configuration
-├── package-lock.json                  # NPM lock file
-├── package.json                       # Project dependencies
-├── postcss.config.mjs                 # PostCSS configuration
-├── README.md                          # Project documentation
-├── TODO.md                            # Todo list
-├── tsconfig.json                      # TypeScript configuration
-├── tsconfig.tsbuildinfo               # TypeScript build info
-│
-├── public/                            # Static assets
-│   ├── favicon.png                    # Favicon
-│   ├── file.svg                       # File icon
-│   ├── globe.svg                      # Globe icon
-│   ├── logo.svg                       # Logo
-│   ├── placeholder.svg                # Placeholder image
-│   ├── user-placeholder.svg           # User placeholder
-│   ├── window.svg                     # Window icon
-│   ├── Y_logo.ico                     # YouTube logo ico
-│   └── Y_logo.png                     # YouTube logo png
-│
-└── src/                               # Source code
-    ├── constants.ts                   # Application constants
-    ├── proxy.ts                       # Proxy configuration
-    ├── README.md                      # Source README
-    │
-    ├── app/                           # Next.js App Router
-    │   ├── globals.css                # Global CSS styles
-    │   ├── layout.tsx                 # Root layout
-    │   │
-    │   ├── (auth)/                    # Auth route group
-    │   │   ├── layout.tsx             # Auth layout
-    │   │   ├── sign-in/
-    │   │   │   └── [[...sign-in]]/
-    │   │   │       └── page.tsx       # Sign-in page
-    │   │   └── sign-up/
-    │   │       └── [[...sign-up]]/
-    │   │           └── page.tsx       # Sign-up page
-    │   │
-    │   ├── (home)/                    # Home route group
-    │   │   ├── client.tsx             # Home client component
-    │   │   ├── layout.tsx             # Home layout
-    │   │   ├── page.tsx               # Home page
-    │   │   └── protected/
-    │   │       └── page.tsx           # Protected home page
-    │   │
-    │   ├── (studio)/                  # Studio route group
-    │   │   ├── layout.tsx             # Studio layout
-    │   │   └── studio/
-    │   │       ├── page.tsx           # Studio dashboard page
-    │   │       └── video/
-    │   │           └── [videoId]/
-    │   │               └── page.tsx   # Video edit page
-    │   │
-    │   ├── api/                       # API routes
-    │   │   ├── trpc/
-    │   │   │   └── [trpc]/
-    │   │   │       └── route.ts       # tRPC API route
-    │   │   │
-    │   │   ├── uploadthing/
-    │   │   │   ├── core.ts            # UploadThing core
-    │   │   │   └── route.ts           # UploadThing route
-    │   │   │
-    │   │   ├── users/
-    │   │   │   └── webhook/
-    │   │   │       └── route.ts       # User webhook route
-    │   │   │
-    │   │   └── videos/
-    │   │       ├── webhook/
-    │   │       │   └── route.ts       # Video webhook route
-    │   │       └── workflows/
-    │   │           ├── description/
-    │   │           │   └── route.ts   # Description workflow
-    │   │           └── title/
-    │   │               └── route.ts   # Title workflow
-    │   │
-    │   └── test-image/                # Test images directory
-    │
-    ├── components/                    # Shared components
-    │   ├── ui/                        # Shadcn UI components
-    │   │   ├── accordion.tsx
-    │   │   ├── alert-dialog.tsx
-    │   │   ├── alert.tsx
-    │   │   ├── aspect-ratio.tsx
-    │   │   ├── avatar.tsx
-    │   │   ├── badge.tsx
-    │   │   ├── breadcrumb.tsx
-    │   │   ├── button-group.tsx
-    │   │   ├── button.tsx
-    │   │   ├── calendar.tsx
-    │   │   ├── card.tsx
-    │   │   ├── carousel.tsx
-    │   │   ├── chart.tsx
-    │   │   ├── checkbox.tsx
-    │   │   ├── collapsible.tsx
-    │   │   ├── command.tsx
-    │   │   ├── context-menu.tsx
-    │   │   ├── dialog.tsx
-    │   │   ├── drawer.tsx
-    │   │   ├── dropdown-menu.tsx
-    │   │   ├── empty.tsx
-    │   │   ├── field.tsx
-    │   │   ├── form.tsx
-    │   │   ├── hover-card.tsx
-    │   │   ├── input-group.tsx
-    │   │   ├── input-otp.tsx
-    │   │   ├── input.tsx
-    │   │   ├── item.tsx
-    │   │   ├── kbd.tsx
-    │   │   ├── label.tsx
-    │   │   ├── menubar.tsx
-    │   │   ├── navigation-menu.tsx
-    │   │   ├── pagination.tsx
-    │   │   ├── popover.tsx
-    │   │   ├── progress.tsx
-    │   │   ├── radio-group.tsx
-    │   │   ├── resizable.tsx
-    │   │   ├── scroll-area.tsx
-    │   │   ├── select.tsx
-    │   │   ├── separator.tsx
-    │   │   ├── sheet.tsx
-    │   │   ├── sidebar.tsx
-    │   │   ├── skeleton.tsx
-    │   │   ├── slider.tsx
-    │   │   ├── sonner.tsx
-    │   │   ├── spinner.tsx
-    │   │   ├── switch.tsx
-    │   │   ├── table.tsx
-    │   │   ├── tabs.tsx
-    │   │   ├── textarea.tsx
-    │   │   ├── toggle-group.tsx
-    │   │   ├── toggle.tsx
-    │   │   └── tooltip.tsx
-    │   │
-    │   ├── filter-carousel.tsx        # Filter carousel component
-    │   ├── infinite-scroll.tsx        # Infinite scroll component
-    │   ├── responsive-dialog.tsx      # Responsive dialog component
-    │   └── user-avatar.tsx            # User avatar component
-    │
-    ├── db/                            # Database configuration
-    │   ├── index.ts                   # Database instance
-    │   └── schema.ts                  # Database schema
-    │
-    ├── hooks/                         # Custom React hooks
-    │   ├── use-intersection-observer.ts
-    │   └── use-mobile.ts
-    │
-    ├── lib/                           # Utility libraries
-    │   ├── mux.ts                     # Mux video configuration
-    │   ├── ratelimit.ts               # Rate limiting utility
-    │   ├── redis.ts                   # Redis configuration
-    │   ├── uploadthing.ts             # UploadThing configuration
-    │   ├── utils.ts                   # General utilities
-    │   └── workflow.ts                # Workflow utilities
-    │
-    ├── modules/                       # Feature modules
-    │   ├── auth/
-    │   │   └── ui/
-    │   │       └── components/
-    │   │           └── auth-button.tsx
-    │   │
-    │   ├── categories/
-    │   │   └── server/
-    │   │       └── procedures.ts      # Category procedures
-    │   │
-    │   ├── home/
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── home-navbar/
-    │   │       │   │   ├── home-input.tsx
-    │   │       │   │   └── index.tsx
-    │   │       │   └── home-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       ├── main-section.tsx
-    │   │       │       └── personal-section.tsx
-    │   │       ├── layouts/
-    │   │       │   └── home-layouts.tsx
-    │   │       ├── sections/
-    │   │       │   └── categories-section.tsx
-    │   │       └── views/
-    │   │           └── home-view.tsx
-    │   │
-    │   ├── studio/
-    │   │   ├── server/
-    │   │   │   └── procedures.ts      # Studio procedures
-    │   │   └── ui/
-    │   │       ├── components/
-    │   │       │   ├── studio-upload-modal.tsx
-    │   │       │   ├── studio-uploader.tsx
-    │   │       │   ├── thumbnail-upload-modal.tsx
-    │   │       │   ├── studio-navbar/
-    │   │       │   │   └── index.tsx
-    │   │       │   └── Studio-sidebar/
-    │   │       │       ├── index.tsx
-    │   │       │       └── studio-sidebar-header.tsx
-    │   │       ├── layouts/
-    │   │       │   └── studio-layout.tsx
-    │   │       ├── sections/
-    │   │       │   ├── form-section.tsx
-    │   │       │   └── videos-section.tsx
-    │   │       └── views/
-    │   │           ├── studio-view.tsx
-    │   │           └── video-view.tsx
-    │   │
-    │   └── videos/
-    │       ├── constants.ts            # Video constants
-    │       ├── server/
-    │       │   └── procedures.tsx     # Video procedures
-    │       └── ui/
-    │           └── components/
-    │               ├── video-player.tsx
-    │               └── video-thumbnail.tsx
-    │
-    ├── scripts/                       # Utility scripts
-    │   └── seed-categories.ts        # Category seeding script
-    │
-    └── trpc/                          # tRPC configuration
-        ├── client.tsx                 # tRPC client
-        ├── init.ts                    # tRPC initialization
-        ├── query-client.ts            # Query client
-        ├── server.tsx                 # tRPC server
-        └── routers/
-            └── _app.ts                # Main router
+youtube-v2/ (Root)
+├── .gitignore                  # Git ignores
+├── bun.lock                    # Bun dependency lock
+├── components.json             # Shadcn UI config
+├── drizzle.config.ts           # Drizzle migrations/config
+├── eslint.config.mjs           # ESLint 9 flat config
+├── next-env.d.ts               # Next.js types
+├── next.config.ts              # Next.js config (e.g., images/Mux)
+├── package-lock.json           # NPM lock (fallback)
+├── package.json                # Deps/scripts (dev: bun run dev -p 3000)
+├── postcss.config.mjs          # PostCSS/Tailwind
+├── README.md                   # This doc
+├── TODO.md                     # Task tracker
+├── tsconfig.json               # TS config
+
+├── public/                     # Static assets
+│   ├── favicon.png
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── logo.svg
+│   ├── placeholder.svg
+│   ├── user-placeholder.svg
+│   ├── user.jpg                # Sample user img (open in tabs)
+│   ├── window.svg
+│   ├── Y_logo.ico
+│   └── Y_logo.png
+
+├── src/                        # All source code
+│   ├── constants.ts            # App constants (e.g., video limits)
+│   ├── proxy.ts                # Proxy config?
+│   └── README.md               # Brief src overview
+
+│   ├── app/                    # Next.js App Router (route groups: (auth)/(home)/(studio))
+│   │   ├── globals.css         # Tailwind global styles
+│   │   └── layout.tsx          # Root layout (providers: TRPC/Clerk/Theme/Query)
+│   │
+│   │   ├── (auth)/             # Auth routes group
+│   │   ├── (home)/             # Home/protected routes
+│   │   └── (studio)/           # Studio/creator routes
+│   │
+│   │   └── api/                # API routes (serverless functions)
+│   │       ├── trpc/[trpc]/route.ts               # Main TRPC handler (_app router)
+│   │       ├── uploadthing/core.ts                # Uploadthing config
+│   │       └── uploadthing/route.ts               # Uploadthing handler
+│   │       ├── users/webhook/route.ts             # Clerk user webhook
+│   │       └── videos/
+│   │           ├── webhook/route.ts               # Mux video webhook (processing)
+│   │           └── workflows/                     # AI workflows (Upstash)
+│   │               ├── description/route.ts       # AI video desc gen
+│   │               ├── thumbnail/route.ts         # AI thumbnail gen
+│   │               └── title/route.ts             # AI title gen
+
+│   ├── components/             # Reusable UI (custom + Shadcn)
+│   │   ├── filter-carousel.tsx # Category filter carousel (Embla)
+│   │   ├── infinite-scroll.tsx # Infinite/paginated scroll
+│   │   ├── responsive-dialog.tsx
+│   │   └── user-avatar.tsx
+│   │   └── ui/                 # Shadcn/Radix primitives (50+ files)
+│   │       ├── accordion.tsx, alert-dialog.tsx, alert.tsx, aspect-ratio.tsx, avatar.tsx
+│   │       ├── badge.tsx, breadcrumb.tsx, button-group.tsx, button.tsx
+│   │       ├── calendar.tsx, card.tsx, carousel.tsx, chart.tsx (Recharts)
+│   │       ├── checkbox.tsx, collapsible.tsx, command.tsx
+│   │       ├── context-menu.tsx, dialog.tsx, drawer.tsx (Vaul), dropdown-menu.tsx
+│   │       ├── empty.tsx, field.tsx, form.tsx (React Hook Form + Zod)
+│   │       ├── hover-card.tsx, input-group.tsx, input-otp.tsx, input.tsx
+│   │       ├── item.tsx, kbd.tsx, label.tsx, menubar.tsx
+│   │       ├── navigation-menu.tsx, pagination.tsx, popover.tsx
+│   │       ├── progress.tsx, radio-group.tsx, resizable.tsx (panels)
+│   │       ├── scroll-area.tsx, select.tsx, separator.tsx
+│   │       ├── sheet.tsx, sidebar.tsx, skeleton.tsx, slider.tsx
+│   │       ├── sonner.tsx (toasts), spinner.tsx, switch.tsx
+│   │       ├── table.tsx, tabs.tsx, textarea.tsx
+│   │       ├── toggle-group.tsx, toggle.tsx, tooltip.tsx
+
+│   ├── db/                     # Drizzle ORM
+│   │   ├── index.ts            # DB client (Neon serverless)
+│   │   └── schema.ts           # Schema (users, videos, comments?, categories, etc.)
+
+│   ├── hooks/                  # Custom React hooks
+│   │   ├── use-intersection-observer.ts  # Virtuoso/infinite scroll observer
+│   │   └── use-mobile.ts       # Mobile detection (responsive)
+
+│   ├── lib/                    # Shared utils
+│   │   ├── mux.ts              # Mux client/token gen
+│   │   ├── ratelimit.ts        # Upstash rate limit
+│   │   ├── redis.ts            # Upstash Redis client
+│   │   ├── uploadthing.ts      # Uploadthing config (Mux direct uploads)
+│   │   ├── utils.ts            # cn() class merger, etc.
+│   │   └── workflow.ts         # Upstash workflow utils (AI tasks)
+
+│   ├── modules/                # Feature modules (domain-driven: server/ui split)
+│   │   ├── auth/ui/components/auth-button.tsx  # Clerk sign-in/up btns
+│   │   ├── categories/server/procedures.ts     # TRPC cat CRUD
+│   │   ├── comment-reactions copy/server/procedures.ts  # Copy? Reactions procs
+│   │   ├── comments/                                   # Comments module (open tabs focus)
+│   │   │   ├── types.ts
+│   │   │   ├── server/procedures.ts    # TRPC: create/read/update/delete comments/reactions
+│   │   │   └── ui/components/
+│   │   │       ├── comment-form.tsx    # Comment input/post form (open/visible)
+│   │   │       └── comment-item.tsx    # Single comment render w/ reactions (open)
+│   │   ├── home/ui/                  # Home feed
+│   │   │   ├── components/home-navbar/ (input/index)
+│   │   │   ├── components/home-sidebar/ (index/main/personal)
+│   │   │   ├── layouts/home-layouts.tsx
+│   │   │   ├── sections/categories-section.tsx
+│   │   │   └── views/home-view.tsx
+│   │   ├── studio/                   # Creator dashboard
+│   │   │   ├── server/procedures.ts   # Studio video CRUD
+│   │   │   ├── ui/components/
+│   │   │   │   ├── studio-upload-modal.tsx
+│   │   │   │   ├── studio-uploader.tsx (Mux/Uploadthing)
+│   │   │   │   ├── thumbnail-generate-modal.tsx (AI workflow)
+│   │   │   │   ├── studio-navbar/
+│   │   │   │   └── Studio-sidebar/ (header/index)
+│   │   │   ├── layouts/
+│   │   │   ├── sections/ (form/videos)
+│   │   │   └── views/ (studio/video)
+│   │   ├── subscriptions/
+│   │   │   ├── hooks/use-subscription.ts
+│   │   │   ├── server/procedures.ts
+│   │   │   └── ui/components/
+│   │   ├── users/ui/components/       # User profiles/avatars
+│   │   ├── video-reactions/server/procedures.ts
+│   │   ├── video-views/server/procedures.ts
+│   │   └── videos/                   # Core video module
+│   │       ├── constants.ts
+│   │       ├── types.ts
+│   │       ├── server/procedures.tsx # TRPC video ops (upload/search/feed)
+│   │       ├── ui/components/ (player/thumbnail)
+│   │       └── ui/sections/views/
+
+│   ├── scripts/seed-categories.ts     # DB seeder script
+
+│   └── trpc/                         # tRPC core
+│       ├── client.tsx
+│       ├── init.ts
+│       ├── query-client.ts (TanStack)
+│       ├── server.tsx
+│       └── routers/_app.ts           # Root router (composes modules)
 ```
+
+## Features (Detailed Analysis)
+- **Auth**: Clerk sign-in/up, protected routes.
+- **Home Feed**: Infinite video grid, categories filter/sidebar, search navbar.
+- **Studio**: Upload videos (Mux direct), manage list w/ pagination, edit metadata, AI title/desc/thumbnail via workflows.
+- **Videos**: Player (Mux/YT-style), views/reactions/comments tracking.
+- **Comments**: Full module UI (form for post/reply, item renderer w/ nested?), server procs for CRUD/reactions.
+- **More**: Subscriptions, categories, responsive mobile/desktop.
 
 ## Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
 ### Prerequisites
-
--   [Node.js](https://nodejs.org/en/) (v20 or later)
--   [Bun](https://bun.sh/)
--   A [Clerk](https://clerk.com/) account
--   A [Neon](https://neon.tech/) account (or any other PostgreSQL provider)
--   A [Mux](https://www.mux.com/) account
--   An [Upstash](https://upstash.com/) account for Redis and Rate Limiting
+- Node/Bun v20+, Clerk/Neon/Mux/Upstash/OpenRouter accounts.
 
 ### Installation
+1. `git clone ... && cd youtube-v2`
+2. `bun install`
+3. `.env.local` (DATABASE_URL, Clerk keys, MUX_TOKEN_ID/SECRET/WEBHOOK_SECRET, UPSTASH_*, etc.)
+4. `bun drizzle-kit push` (migrate schema)
+5. `bun run dev` → http://localhost:3000
 
-1.  **Clone the repository:**
-    
-```
-bash
-    git clone https://github.com/your-username/youtube-v2.git
-    cd youtube-v2
-    
-```
+### Scripts
+- `bun run dev` (3000), `build`, `start`, `lint`
+- `bun drizzle-kit push` (DB)
 
-2.  **Install dependencies:**
-    
-```
-bash
-    bun install
-    
-```
+## Deployment
+Vercel (auto-deploys Next.js/Mux webhooks).
 
-3.  **Set up environment variables:**
-    Create a `.env.local` file in the root of the project and add the following environment variables. You can get these values from the respective service dashboards.
+## Next Steps/TODO
+See TODO.md. Add: full video page, search, subscriptions UI.
 
-    
-```
-env
-    # Neon Database URL
-    DATABASE_URL="your_database_url"
+**Updated by BLACKBOXAI**: Complete rewrite with full file/folder analysis from recursive list, package.json, existing docs, open tabs (detailed comments module)."
 
-    # Clerk Authentication
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
-    CLERK_SECRET_KEY="your_clerk_secret_key"
-    NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-    NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL="/"
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL="/"
-    CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
-
-    # Mux Video
-    MUX_TOKEN_ID="your_mux_token_id"
-    MUX_TOKEN_SECRET="your_mux_token_secret"
-    MUX_WEBHOOK_SECRET="your_mux_webhook_secret"
-
-    # Upstash Rate Limiting
-    UPSTASH_REDIS_REST_URL="your_upstash_redis_url"
-    UPSTASH_REDIS_REST_TOKEN="your_upstash_redis_token"
-    
-```
-
-4.  **Run database migrations:**
-    This command will push the schema from `src/db/schema.ts` to your Neon database.
-    
-```
-bash
-    bun drizzle-kit push
-    
-```
-
-5.  **Run the development server:**
-    
-```
-bash
-    bun run dev
-    
-```
-    The application should now be running at [http://localhost:3000](http://localhost:3000).
-
-## Scripts
-
--   `bun run dev`: Starts the development server.
--   `bun run build`: Creates a production-ready build of the application.
--   `bun run start`: Starts the production server.
--   `bun run lint`: Lints the codebase using Next.js's built-in ESLint configuration.
--   `bun drizzle-kit push`: Pushes the database schema to the database.
-
-## Project Overview
-
-### Authentication (Clerk)
-The project uses Clerk for authentication. The auth routes are located in `src/app/(auth)/` and include:
-- Sign-in page at `/sign-in`
-- Sign-up page at `/sign-up`
-
-### Home Page
-The main home page is in `src/app/(home)/` with components in `src/modules/home/ui/`. It includes:
-- Navigation bar
-- Sidebar with categories
-- Video feed
-
-### Creator Studio
-The studio is in `src/app/(studio)/` with components in `src/modules/studio/ui/`. It provides:
-- Video management dashboard
-- Video upload functionality
-- Video editing capabilities
-
-### API Routes
-- `src/app/api/trpc/` - tRPC API endpoints
-- `src/app/api/videos/webhook/` - Video processing webhooks
-- `src/app/api/videos/workflows/` - AI workflows for title/description generation
-- `src/app/api/uploadthing/` - File upload handling
-- `src/app/api/users/webhook/` - User management webhooks
-
-
-       

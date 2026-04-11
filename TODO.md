@@ -1,19 +1,16 @@
-# Fixes Applied to Resolve Application Errors
+# Loading Spinner Animation for Like/Dislike Icons
 
-## Issues Identified:
-1. **Database Connection Failure**: "Error connecting to database: fetch failed" - Likely due to missing or incorrect DATABASE_URL in .env.local.
-2. **TRPC 404 Errors**: Routes like /api/trpc/categories.getMany returning 404 - Fixed by renaming route directory from [trpc] to [...trpc] for proper catch-all routing in Next.js.
-3. **JSON Parsing Error**: "Unexpected token '<', "<!DOCTYPE "... is not valid JSON" - Caused by TRPC returning HTML (404 page) instead of JSON due to routing issues.
+## Approved Plan
+- Add spinning animation overlays to like/dislike icons during pending states
+- Files: comment-item.tsx (comments), video-reactions.tsx (videos)
+- Use existing Spinner component with relative/absolute positioning
 
-## Fixes Implemented:
-- [x] Renamed `src/app/api/trpc/[trpc]` to `src/app/api/trpc/[...trpc]` to enable catch-all routing for TRPC endpoints.
-- [x] Added error handling in `src/db/index.ts` to throw a clear error if DATABASE_URL is not set, improving debugging.
+## Steps
+- [x] Step 1: Edit src/modules/comments/ui/components/comment-item.tsx - Add imports, wrap icons with spinner overlays for individual pending states
+- [x] Step 2: Edit src/modules/videos/ui/components/video-reactions.tsx - Add imports, add shared spinner overlay for both icons
+- [x] Step 3: Test functionality - Click like/dislike buttons on video and comments, verify spinners appear on icons
+- [x] Step 4: Complete task
 
-## Remaining Steps:
-- [ ] Set a valid DATABASE_URL in .env.local (e.g., from Neon or local PostgreSQL).
-- [ ] Test the application to ensure TRPC queries work correctly.
-- [ ] If using Neon, verify the database is active and accessible.
+**Updated:** Fixed video reactions to show individual spinners (like comments). Only clicked icon spins.
 
-## Notes:
-- The application uses Neon for the database. Ensure DATABASE_URL points to a valid Neon database instance.
-- If DATABASE_URL is not set, the app will now throw a clear error instead of failing silently.
+**Final Status:** Both comments and videos now have individual icon spinners.
