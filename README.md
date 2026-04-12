@@ -1,4 +1,8 @@
+#  ⚒️ The app is under development 🛠️⚒️
+---
+
 # YouTube V2 - Full-Stack YouTube Clone
+
 
 ## Overview
 Modern YouTube clone with T3 stack (Next.js 16 App Router, tRPC, TypeScript, Tailwind, Drizzle ORM on PostgreSQL/Neon). Features: Clerk auth, Mux video upload/streaming/processing, creator studio, home feed with categories/sidebar/infinite scroll, comments/reactions/views/subscriptions, AI workflows (title/desc/thumbnail gen via OpenRouter/Google GenAI), Shadcn UI, responsive design. Scalable, typesafe end-to-end.
