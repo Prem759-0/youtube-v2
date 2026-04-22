@@ -182,11 +182,3 @@ youtube-v2/ (Root)
 1. `git clone ... && cd youtube-v2`
 2. `bun install`
 3. `.env.local` (DATABASE_URL, Clerk keys, MUX_TOKEN_ID/SECRET/WEBHOOK_SECRET, UPSTASH_*, etc.)
-4. `bun drizzle-kit push` (migrate schema)
-5. `bun run dev` → http://localhost:3000
-
-### Scripts
-- `bun run dev` (3000), `build`, `start`, `lint`
-- `bun drizzle-kit push` (DB)
-
-## Deployment
