@@ -190,11 +190,3 @@ youtube-v2/ (Root)
 - `bun drizzle-kit push` (DB)
 
 ## Deployment
-Vercel (auto-deploys Next.js/Mux webhooks).
-
-## Next Steps/TODO
-See TODO.md. Add: full video page, search, subscriptions UI.
-
-**Updated by BLACKBOXAI**: Complete rewrite with full file/folder analysis from recursive list, package.json, existing docs, open tabs (detailed comments module)."
-
-
