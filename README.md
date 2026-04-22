@@ -113,25 +113,7 @@ youtube-v2/ (Root)
 │   │   ├── redis.ts            # Upstash Redis client
 │   │   ├── uploadthing.ts      # Uploadthing config (Mux direct uploads)
 │   │   ├── utils.ts            # cn() class merger, etc.
-│   │   └── workflow.ts         # Upstash workflow utils (AI tasks)
-
-│   ├── modules/                # Feature modules (domain-driven: server/ui split)
-│   │   ├── auth/ui/components/auth-button.tsx  # Clerk sign-in/up btns
-│   │   ├── categories/server/procedures.ts     # TRPC cat CRUD
-│   │   ├── comment-reactions copy/server/procedures.ts  # Copy? Reactions procs
-│   │   ├── comments/                                   # Comments module (open tabs focus)
-│   │   │   ├── types.ts
-│   │   │   ├── server/procedures.ts    # TRPC: create/read/update/delete comments/reactions
-│   │   │   └── ui/components/
-│   │   │       ├── comment-form.tsx    # Comment input/post form (open/visible)
-│   │   │       └── comment-item.tsx    # Single comment render w/ reactions (open)
-│   │   ├── home/ui/                  # Home feed
-│   │   │   ├── components/home-navbar/ (input/index)
-│   │   │   ├── components/home-sidebar/ (index/main/personal)
-│   │   │   ├── layouts/home-layouts.tsx
-│   │   │   ├── sections/categories-section.tsx
-│   │   │   └── views/home-view.tsx
-│   │   ├── studio/                   # Creator dashboard
+│   │   └── workflow.ts         # Upstash workflow utils (AI tasks           # Creator dashboard
 │   │   │   ├── server/procedures.ts   # Studio video CRUD
 │   │   │   ├── ui/components/
 │   │   │   │   ├── studio-upload-modal.tsx
