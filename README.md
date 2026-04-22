@@ -111,23 +111,7 @@ youtube-v2/ (Root)
 │   │   ├── mux.ts              # Mux client/token gen
 │   │   ├── ratelimit.ts        # Upstash rate limit
 │   │   ├── redis.ts            # Upstash Redis client
-│   │   ├── uploadthing.ts      # Uploadthing config (Mux direct uploads)
-│   │   ├── utils.ts            # cn() class merger, etc.
-│   │   └── workflow.ts         # Upstash workflow utils (AI tasks           # Creator dashboard
-│   │   │   ├── server/procedures.ts   # Studio video CRUD
-│   │   │   ├── ui/components/
-│   │   │   │   ├── studio-upload-modal.tsx
-│   │   │   │   ├── studio-uploader.tsx (Mux/Uploadthing)
-│   │   │   │   ├── thumbnail-generate-modal.tsx (AI workflow)
-│   │   │   │   ├── studio-navbar/
-│   │   │   │   └── Studio-sidebar/ (header/index)
-│   │   │   ├── layouts/
-│   │   │   ├── sections/ (form/videos)
-│   │   │   └── views/ (studio/video)
-│   │   ├── subscriptions/
-│   │   │   ├── hooks/use-subscription.ts
-│   │   │   ├── server/procedures.ts
-│   │   │   └── ui/components/
+│   │   ├── uploadthing.ts      # 
 │   │   ├── users/ui/components/       # User profiles/avatars
 │   │   ├── video-reactions/server/procedures.ts
 │   │   ├── video-views/server/procedures.ts
