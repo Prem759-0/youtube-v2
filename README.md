@@ -136,15 +136,6 @@ youtube-v2/ (Root)
 - **Auth**: Clerk sign-in/up, protected routes.
 - **Home Feed**: Infinite video grid, categories filter/sidebar, search navbar.
 - **Studio**: Upload videos (Mux direct), manage list w/ pagination, edit metadata, AI title/desc/thumbnail via workflows.
-- **Videos**: Player (Mux/YT-style), views/reactions/comments tracking.
-- **Comments**: Full module UI (form for post/reply, item renderer w/ nested?), server procs for CRUD/reactions.
-- **More**: Subscriptions, categories, responsive mobile/desktop.
-
-## Getting Started
-### Prerequisites
-- Node/Bun v20+, Clerk/Neon/Mux/Upstash/OpenRouter accounts.
-
-### Installation
-1. `git clone ... && cd youtube-v2`
+ && cd youtube-v2`
 2. `bun install`
 3. `.env.local` (DATABASE_URL, Clerk keys, MUX_TOKEN_ID/SECRET/WEBHOOK_SECRET, UPSTASH_*, etc.)
