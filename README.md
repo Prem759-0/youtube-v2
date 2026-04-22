@@ -89,39 +89,4 @@ youtube-v2/ (Root)
 │   │       ├── checkbox.tsx, collapsible.tsx, command.tsx
 │   │       ├── context-menu.tsx, dialog.tsx, drawer.tsx (Vaul), dropdown-menu.tsx
 │   │       ├── empty.tsx, field.tsx, form.tsx (React Hook Form + Zod)
-│   │       ├── hover-card.tsx, input-group.tsx, input-otp.tsx, input.tsx
-│   │       ├── item.tsx, kbd.tsx, label.tsx, menubar.tsx
-│   │       ├── navigation-menu.tsx, pagination.tsx, popover.tsx
-│   │       ├── progress.tsx, radio-group.tsx, resizable.tsx (panels)
-│   │       ├── scroll-area.tsx, select.tsx, separator.tsx
-│   │       ├── sheet.tsx, sidebar.tsx, skeleton.tsx, slider.tsx
-│   │       ├── sonner.tsx (toasts), spinner.tsx, switch.tsx
-│   │       ├── table.tsx, tabs.tsx, textarea.tsx
-│   │       ├── toggle-group.tsx, toggle.tsx, tooltip.tsx
-
-│   ├── db/                     # Drizzle ORM
-│   │   ├── index.ts            # DB client (Neon serverless)
-│   │   └── schema.ts           # Schema (users, videos, comments?, categories, etc.)
-
-│   ├── hooks/                  # Custom React hooks
-│   │   ├── use-intersection-observer.ts  # Virtuoso/infinite scroll observer
-│   │   └── use-mobile.ts       # Mobile detection (responsive)
-
-│   ├── lib/                    # Shared utils
-│   │   ├── mux.ts              # Mux client/token gen
-│   │   ├── ratelimit.ts        # Upstash rate limit
-│   │   ├── redis.ts            # Upstash Redis client
-│   │   ├── uploadthing.ts      # 
-│   │   ├── users/ui/components/       # User profiles/avatars
-│   │   ├── video-reactions/server/procedures.ts
-│   │   ├── video-views/server/procedures.ts
-│   │   └── videos/                   # Core video module
-│   │       ├── constants.ts
-│   │       ├── types.ts
-│   │       ├── server/procedures.tsx # TRPC video ops (upload/search/feed)
-│   │       ├── ui/components/ (player/thumbnail)
-│   │       └── ui/sections/views/
-
-│   ├── scripts/seed-categories.ts     # DB seeder script
-
-│   └── trpc/                         # tRPC 
+│   │       ├── hover-card.tsx,                          # tRPC 
