@@ -71,22 +71,4 @@ youtube-v2/ (Root)
 │   │       └── uploadthing/route.ts               # Uploadthing handler
 │   │       ├── users/webhook/route.ts             # Clerk user webhook
 │   │       └── videos/
-│   │           ├── webhook/route.ts               # Mux video webhook (processing)
-│   │           └── workflows/                     # AI workflows (Upstash)
-│   │               ├── description/route.ts       # AI video desc gen
-│   │               ├── thumbnail/route.ts         # AI thumbnail gen
-│   │               └── title/route.ts             # AI title gen
-
-│   ├── components/             # Reusable UI (custom + Shadcn)
-│   │   ├── filter-carousel.tsx # Category filter carousel (Embla)
-│   │   ├── infinite-scroll.tsx # Infinite/paginated scroll
-│   │   ├── responsive-dialog.tsx
-│   │   └── user-avatar.tsx
-│   │   └── ui/                 # Shadcn/Radix primitives (50+ files)
-│   │       ├── accordion.tsx, alert-dialog.tsx, alert.tsx, aspect-ratio.tsx, avatar.tsx
-│   │       ├── badge.tsx, breadcrumb.tsx, button-group.tsx, button.tsx
-│   │       ├── calendar.tsx, card.tsx, carousel.tsx, chart.tsx (Recharts)
-│   │       ├── checkbox.tsx, collapsible.tsx, command.tsx
-│   │       ├── context-menu.tsx, dialog.tsx, drawer.tsx (Vaul), dropdown-menu.tsx
-│   │       ├── empty.tsx, field.tsx, form.tsx (React Hook Form + Zod)
-│   │       ├── hover-card.tsx,                          # tRPC 
+│   │           ├── webhook/
