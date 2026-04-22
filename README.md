@@ -124,18 +124,4 @@ youtube-v2/ (Root)
 
 │   ├── scripts/seed-categories.ts     # DB seeder script
 
-│   └── trpc/                         # tRPC core
-│       ├── client.tsx
-│       ├── init.ts
-│       ├── query-client.ts (TanStack)
-│       ├── server.tsx
-│       └── routers/_app.ts           # Root router (composes modules)
-```
-
-## Features (Detailed Analysis)
-- **Auth**: Clerk sign-in/up, protected routes.
-- **Home Feed**: Infinite video grid, categories filter/sidebar, search navbar.
-- **Studio**: Upload videos (Mux direct), manage list w/ pagination, edit metadata, AI title/desc/thumbnail via workflows.
- && cd youtube-v2`
-2. `bun install`
-3. `.env.local` (DATABASE_URL, Clerk keys, MUX_TOKEN_ID/SECRET/WEBHOOK_SECRET, UPSTASH_*, etc.)
+│   └── trpc/                         # tRPC 
