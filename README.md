@@ -57,18 +57,3 @@ youtube-v2/ (Root)
 │   ├── proxy.ts                # Proxy config?
 │   └── README.md               # Brief src overview
 
-│   ├── app/                    # Next.js App Router (route groups: (auth)/(home)/(studio))
-│   │   ├── globals.css         # Tailwind global styles
-│   │   └── layout.tsx          # Root layout (providers: TRPC/Clerk/Theme/Query)
-│   │
-│   │   ├── (auth)/             # Auth routes group
-│   │   ├── (home)/             # Home/protected routes
-│   │   └── (studio)/           # Studio/creator routes
-│   │
-│   │   └── api/                # API routes (serverless functions)
-│   │       ├── trpc/[trpc]/route.ts               # Main TRPC handler (_app router)
-│   │       ├── uploadthing/core.ts                # Uploadthing config
-│   │       └── uploadthing/route.ts               # Uploadthing handler
-│   │       ├── users/webhook/route.ts             # Clerk user webhook
-│   │       └── videos/
-│   │           ├── webhook/
