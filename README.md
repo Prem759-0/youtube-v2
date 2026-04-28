@@ -1,4 +1,8 @@
+#  ⚒️ The app is under development 🛠️⚒️
+---
+
 # YouTube V2 - Full-Stack YouTube Clone
+
 
 ## Overview
 Modern YouTube clone with T3 stack (Next.js 16 App Router, tRPC, TypeScript, Tailwind, Drizzle ORM on PostgreSQL/Neon). Features: Clerk auth, Mux video upload/streaming/processing, creator studio, home feed with categories/sidebar/infinite scroll, comments/reactions/views/subscriptions, AI workflows (title/desc/thumbnail gen via OpenRouter/Google GenAI), Shadcn UI, responsive design. Scalable, typesafe end-to-end.
@@ -191,4 +195,5 @@ Vercel (auto-deploys Next.js/Mux webhooks).
 See TODO.md. Add: full video page, search, subscriptions UI.
 
 **Updated by BLACKBOXAI**: Complete rewrite with full file/folder analysis from recursive list, package.json, existing docs, open tabs (detailed comments module)."
+
 
