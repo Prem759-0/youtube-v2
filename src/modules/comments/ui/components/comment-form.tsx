@@ -14,11 +14,17 @@ import { Loader2Icon } from "lucide-react";
 
 interface CommentFormProps {
     videoId: string;
-    onSuccess?:()=>void
+    parentId?: string;
+    onSuccess?:()=>void;
+    onCancel?:()=>void;
+    variant?: "comment" | "reply",
 }
 
 export const CommentForm = ({
     videoId, 
+    parentId, 
+    variant = "comment", 
+    onCancel,
     onSuccess
 }: CommentFormProps) => {
   const clerk = useClerk();
@@ -46,6 +52,7 @@ export const CommentForm = ({
     const form  = useForm<FormValues>({
        resolver: zodResolver(formSchema),
        defaultValues:{
+        parentId:parentId,
         videoId:videoId,
         value: "",
        },
@@ -58,6 +65,11 @@ export const CommentForm = ({
       }
 
       create.mutate(values);
+    }
+
+    const handleCancel = () => {
+      form.reset();
+      onCancel?.();
     }
   
     return(
@@ -80,18 +92,33 @@ export const CommentForm = ({
               <div className="relative">
                 <Textarea
                   {...field}
-                  placeholder="Add a comment..."
+                  placeholder={
+                    variant === "reply"
+                    ? "Reply to this comment..."
+                    : "Add a comment..."
+                  }
                   className="resize-none bg-transparent overflow-x-hidden overflow-y-auto pb-10 max-h-[128px] min-h-0 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 />
                 {(!!field.value.trim() || create.isPending) && (
-                  <Button 
-                    disabled={create.isPending} 
-                    type="submit" 
-                    size="sm"
-                    className="absolute bottom-1.5 right-1.5 rounded-full"
-                  >
-                    {create.isPending ? <Loader2Icon className="animate-spin" /> : "Comment"}
-                  </Button>
+                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-2">
+                    {variant === "reply" && (
+                      <Button variant="ghost" size="sm" type="button" onClick={handleCancel} className="rounded-full">
+                        Cancel
+                      </Button>
+                    )}
+                    <Button 
+                      disabled={create.isPending} 
+                      type="submit" 
+                      size="sm"
+                      className="rounded-full"
+                    >
+                      {create.isPending ? (
+                        <Loader2Icon className="animate-spin" />
+                      ) : (
+                        <>{variant === "reply" ? "Reply" : "Comment"}</>
+                      )}
+                    </Button>
+                  </div>
                 )}
               </div>
             </FormControl>
