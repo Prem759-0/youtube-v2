@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { db } from "@/db";
-import { videos, videoUpdateSchema } from "@/db/schema";
+import { videos, videoViews, videoReactions, videoUpdateSchema, users } from "@/db/schema";
 import { createTRPCRouter, baseProcedure } from "@/trpc/init";
-import { and, desc, eq, lt, or } from "drizzle-orm";
+import { and, desc, eq, getTableColumns, lt, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
 export const suggestionsRouter = createTRPCRouter({
@@ -32,11 +32,31 @@ export const suggestionsRouter = createTRPCRouter({
        }
 
       const data = await db
-        .select()
+        .select({
+          ...getTableColumns(videos),
+          user:users,
+          viewCount: db.$count(videoViews, eq(videoViews.videoId, videos.id)),
+          likeCount: db.$count(videoReactions, 
+            and(
+              eq(videoReactions.videoId, videos.id), 
+              eq(videoReactions.type, "like"),
+            )
+          ),
+          dislikeCount: db.$count(videoReactions, 
+            and(
+              eq(videoReactions.videoId, videos.id), 
+              eq(videoReactions.type, "dislike"),
+            )
+          ),
+
+        })
         .from(videos)
+        .innerJoin(users, eq(videos.userId, users.id))
         .where(
           and(
-            eq(videos.userId, userId),
+            existingVideo.categoryId
+            ? eq(videos.categoryId, existingVideo.categoryId)
+            : undefined,
             cursor
               ? or(
                 lt(videos.updatedAt, cursor.updatedAt),
@@ -66,64 +86,5 @@ export const suggestionsRouter = createTRPCRouter({
         items,
         nextCursor,
       };
-    }),
-
-  // ✅ THIS IS THE FIX (SAVE BUTTON WORKS NOW)
-  update: protectedProcedure
-    .input(
-      videoUpdateSchema.extend({
-        id: z.string().uuid(),
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { id, ...data } = input;
-      const { id: userId } = ctx.user;
-
-      const result = await db
-        .update(videos)
-        .set({
-          ...data,
-          updatedAt: new Date(),
-        })
-        .where(
-          and(
-            eq(videos.id, id),
-            eq(videos.userId, userId)
-          )
-        )
-        .returning();
-
-      if (!result.length) {
-        throw new TRPCError({ code: "NOT_FOUND" });
-      }
-
-      return result[0];
-    }),
-
-  delete: protectedProcedure
-    .input(
-      z.object({
-        id: z.string().uuid(),
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { id } = input;
-      const { id: userId } = ctx.user;
-
-      const result = await db
-        .delete(videos)
-        .where(
-          and(
-            eq(videos.id, id),
-            eq(videos.userId, userId)
-          )
-        )
-        .returning();
-
-      if (!result.length) {
-        throw new TRPCError({ code: "NOT_FOUND" });
-      }
-
-      return result[0];
     }),
 });

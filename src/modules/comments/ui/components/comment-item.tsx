@@ -17,6 +17,7 @@ import {
 import {
   ChevronDownIcon,
   ChevronUpIcon,
+  HeartIcon,
   MessageSquareIcon,
   MoreVerticalIcon,
   ThumbsDownIcon,
@@ -104,7 +105,12 @@ export const CommentItem = ({
           {/* Name + Time */}
           <Link href={`/users/${comment.userId}`}>
             <div className="flex items-center gap-2 mb-0.5">
-              <span className="font-medium text-sm pb-0.5">
+              <span
+                className={cn(
+                  "font-medium text-sm pb-0.5",
+                  comment.user.id === comment.videoOwner.id && "bg-black text-white px-2 py-0.5 rounded-full text-xs dark:bg-white dark:text-black"
+                )}
+              >
                 {comment.user.name}
               </span>
               <span className="text-xs text-muted-foreground">
@@ -194,6 +200,21 @@ export const CommentItem = ({
               <span className="text-xs text-muted-foreground">
                 {comment.dislikeCount}
               </span>
+
+              {/* Uploader Heart */}
+              {comment.uploaderReaction === "like" && (
+                <div className="relative ml-2 w-6 h-6">
+                  <UserAvatar
+                    size="xs"
+                    imageUrl={comment.videoOwner.imageUrl}
+                    name={comment.videoOwner.name}
+                    className="absolute inset-0 w-6 h-6"
+                  />
+                  <div className="absolute -bottom-1 -right-1 bg-white dark:bg-black rounded-full p-[1px]">
+                    <HeartIcon className="size-3 text-red-500 fill-red-500" />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Reply */}
