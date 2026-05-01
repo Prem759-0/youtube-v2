@@ -212,31 +212,33 @@ export const CommentItem = ({
 
         {/* Menu */}
        
-        <DropdownMenu modal={false}>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8">
-              <MoreVerticalIcon />
-            </Button>
-          </DropdownMenuTrigger>
+        {(variant === "comment" || comment.user.clerkId === userId) && (
+          <DropdownMenu modal={false}>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="size-8">
+                <MoreVerticalIcon />
+              </Button>
+            </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end">
-            
-            <DropdownMenuItem onClick={() => setIsReplyOpen(true)}>
-              <MessageSquareIcon className="size-4 mr-2" />
-              Reply
-            </DropdownMenuItem>
-           
+            <DropdownMenuContent align="end">
+              {variant === "comment" && (
+                <DropdownMenuItem onClick={() => setIsReplyOpen(true)}>
+                  <MessageSquareIcon className="size-4 mr-2" />
+                  Reply
+                </DropdownMenuItem>
+              )}
 
-            {comment.user.clerkId === userId && (
-              <DropdownMenuItem
-                onClick={() => remove.mutate({ id: comment.id })}
-              >
-                <Trash2Icon className="size-4 mr-2" />
-                Delete
-              </DropdownMenuItem>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
+              {comment.user.clerkId === userId && (
+                <DropdownMenuItem
+                  onClick={() => remove.mutate({ id: comment.id })}
+                >
+                  <Trash2Icon className="size-4 mr-2" />
+                  Delete
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
      
       </div>
       {isReplyOpen &&  variant === "comment" && (
