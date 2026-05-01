@@ -92,7 +92,7 @@ export const CommentItem = ({
         {/* Avatar */}
         <Link href={`/users/${comment.userId}`}>
           <UserAvatar
-            size="lg"
+            size={variant === "comment" ? "lg" : "sm"}
             imageUrl={comment.user.imageUrl}
             name={comment.user.name}
           />
@@ -211,6 +211,7 @@ export const CommentItem = ({
         </div>
 
         {/* Menu */}
+       
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="size-8">
@@ -219,12 +220,12 @@ export const CommentItem = ({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end">
-            {variant === "comment" && (
+            
             <DropdownMenuItem onClick={() => setIsReplyOpen(true)}>
               <MessageSquareIcon className="size-4 mr-2" />
               Reply
             </DropdownMenuItem>
-            )}
+           
 
             {comment.user.clerkId === userId && (
               <DropdownMenuItem
@@ -236,8 +237,8 @@ export const CommentItem = ({
             )}
           </DropdownMenuContent>
         </DropdownMenu>
+     
       </div>
-
       {isReplyOpen &&  variant === "comment" && (
         <div className="mt-4 pl-14">
             <CommentForm
