@@ -1,7 +1,7 @@
 # ⚒️ The app is under development 🛠️⚒️
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Television.png" alt="Television" width="120" height="120" />
+  <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube Logo" width="120" height="120" />
   
   <h1 align="center">📺 YouTube v2</h1>
 
