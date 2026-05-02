@@ -1,199 +1,233 @@
-#  ⚒️ The app is under development 🛠️⚒️
+# ⚒️ The app is under development 🛠️⚒️
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Television.png" alt="Television" width="120" height="120" />
+  
+  <h1 align="center">📺 YouTube v2</h1>
+
+  <p align="center">
+    <strong>A highly scalable, modern Full-Stack Video Sharing Platform built with the latest web technologies.</strong>
+  </p>
+
+  <!-- Animated Typing Text -->
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=1000&color=FF0000&center=true&vCenter=true&width=600&lines=Next.js+App+Router;tRPC+%2B+React+Query;Drizzle+ORM+%2B+PostgreSQL;Mux+Video+Processing;Clerk+Authentication" alt="Typing SVG" />
+
+  <br />
+
+  <!-- Badges -->
+  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
+
+  <hr />
+</div>
+
+## 📖 Welcome for Beginners!
+If you are new to full-stack development, **Welcome!** 
+
+This project is a fully-featured clone of YouTube. It was designed not just to look like YouTube, but to operate like it under the hood. It uses an incredibly modern and powerful "tech stack" (the combination of tools used to build the app). 
+
+By analyzing this project, you will learn how a frontend (what the user sees) communicates safely and efficiently with a backend (the server and database), how videos are uploaded and processed into different qualities, and how complex data like nested comments and user relationships are stored.
+
 ---
 
-# YouTube V2 - Full-Stack YouTube Clone
+## ✨ Features (What can this app do?)
 
+<details>
+<summary><b>🎬 Video Management & Playback</b></summary>
 
-## Overview
-Modern YouTube clone with T3 stack (Next.js 16 App Router, tRPC, TypeScript, Tailwind, Drizzle ORM on PostgreSQL/Neon). Features: Clerk auth, Mux video upload/streaming/processing, creator studio, home feed with categories/sidebar/infinite scroll, comments/reactions/views/subscriptions, AI workflows (title/desc/thumbnail gen via OpenRouter/Google GenAI), Shadcn UI, responsive design. Scalable, typesafe end-to-end.
+* **Video Uploads:** Securely upload large video files using UploadThing.
+* **Video Processing:** Uses **Mux** behind the scenes to transcode videos, meaning it generates different resolutions (1080p, 720p, etc.) and provides a smooth, buffer-free streaming experience using HLS (HTTP Live Streaming).
+* **Thumbnails & Previews:** Automatically generate and select thumbnails, or upload custom ones. Animated GIF previews are supported when hovering over videos.
+* **Views Tracking:** Tracks every unique view natively.
+</details>
 
-**Key Modules**: auth, categories, comments (form/item UI, server procs), home (feed/navbar/sidebar), studio (upload/edit/dashboard), subscriptions, users, video-reactions/views, videos (upload/edit/categories/player/thumbnail).
+<details>
+<summary><b>👤 Authentication & Users</b></summary>
 
-## Tech Stack (from package.json)
-- **Framework**: Next.js 16.1.1, React 19.2.3
-- **Styling/UI**: Tailwind CSS 4, Shadcn/Radix-UI (50+ components), Lucide icons, clsx/cva/tailwind-merge
-- **API/Data**: tRPC 11-rc.730 (react-query), Drizzle ORM 0.39/Neon serverless, Zod validation
-- **Auth**: Clerk 6.10.3 (webhooks)
-- **Video/Media**: Mux (player/uploader/node/sdk), Uploadthing 7.7.4
-- **AI/Workflows**: @google/generative-ai 0.24.1, OpenRouter SDK 0.9.11, Upstash Workflow 0.2.6
-- **Cache/DB Utils**: Upstash Redis/Ratelimit 1.34.3/2.0.5
-- **Other**: React Hook Form, Sonner toasts, Recharts, Embla carousel, Vaul drawer, Superjson, Svix webhooks
-- **Dev**: Bun, Drizzle-kit 0.30.3, ESLint 9, tsx 4.19.2
+* **Secure Login/Signup:** Powered by **Clerk**. Supports Social Logins (Google, GitHub) and passwordless email links.
+* **User Profiles:** Every user has their own unique profile page showcasing their uploaded videos.
+* **Subscriptions:** Users can subscribe and unsubscribe to other creators. The home feed can filter videos purely by subscribed channels.
+</details>
 
-## Full Detailed Project Structure
-Detailed tree with every file/folder (from recursive scan). Descriptions based on names/conventions (e.g., procedures.ts = TRPC server procedures).
+<details>
+<summary><b>💬 Social Interactions</b></summary>
 
-```
-youtube-v2/ (Root)
-├── .gitignore                  # Git ignores
-├── bun.lock                    # Bun dependency lock
-├── components.json             # Shadcn UI config
-├── drizzle.config.ts           # Drizzle migrations/config
-├── eslint.config.mjs           # ESLint 9 flat config
-├── next-env.d.ts               # Next.js types
-├── next.config.ts              # Next.js config (e.g., images/Mux)
-├── package-lock.json           # NPM lock (fallback)
-├── package.json                # Deps/scripts (dev: bun run dev -p 3000)
-├── postcss.config.mjs          # PostCSS/Tailwind
-├── README.md                   # This doc
-├── TODO.md                     # Task tracker
-├── tsconfig.json               # TS config
+* **Comments & Replies:** A fully nested commenting system. Users can comment on videos and reply to other comments.
+* **Likes & Dislikes:** Users can like or dislike videos and individual comments.
+* **Creator Hearts:** Just like the real YouTube, if the creator of a video likes your comment or reply, a special "Creator Heart" with their avatar appears on it!
+</details>
 
-├── public/                     # Static assets
-│   ├── favicon.png
-│   ├── file.svg
-│   ├── globe.svg
-│   ├── logo.svg
-│   ├── placeholder.svg
-│   ├── user-placeholder.svg
-│   ├── user.jpg                # Sample user img (open in tabs)
-│   ├── window.svg
-│   ├── Y_logo.ico
-│   └── Y_logo.png
+<details>
+<summary><b>🎛️ Studio Dashboard</b></summary>
 
-├── src/                        # All source code
-│   ├── constants.ts            # App constants (e.g., video limits)
-│   ├── proxy.ts                # Proxy config?
-│   └── README.md               # Brief src overview
+* **Creator Studio:** A dedicated `/studio` area where creators can manage their uploads.
+* **Video Visibility:** Toggle videos between `Public` and `Private`.
+* **Metadata Editing:** Edit video titles, descriptions, and categories.
+</details>
 
-│   ├── app/                    # Next.js App Router (route groups: (auth)/(home)/(studio))
-│   │   ├── globals.css         # Tailwind global styles
-│   │   └── layout.tsx          # Root layout (providers: TRPC/Clerk/Theme/Query)
-│   │
-│   │   ├── (auth)/             # Auth routes group
-│   │   ├── (home)/             # Home/protected routes
-│   │   └── (studio)/           # Studio/creator routes
-│   │
-│   │   └── api/                # API routes (serverless functions)
-│   │       ├── trpc/[trpc]/route.ts               # Main TRPC handler (_app router)
-│   │       ├── uploadthing/core.ts                # Uploadthing config
-│   │       └── uploadthing/route.ts               # Uploadthing handler
-│   │       ├── users/webhook/route.ts             # Clerk user webhook
-│   │       └── videos/
-│   │           ├── webhook/route.ts               # Mux video webhook (processing)
-│   │           └── workflows/                     # AI workflows (Upstash)
-│   │               ├── description/route.ts       # AI video desc gen
-│   │               ├── thumbnail/route.ts         # AI thumbnail gen
-│   │               └── title/route.ts             # AI title gen
+<details>
+<summary><b>🎨 UI / UX Excellence</b></summary>
 
-│   ├── components/             # Reusable UI (custom + Shadcn)
-│   │   ├── filter-carousel.tsx # Category filter carousel (Embla)
-│   │   ├── infinite-scroll.tsx # Infinite/paginated scroll
-│   │   ├── responsive-dialog.tsx
-│   │   └── user-avatar.tsx
-│   │   └── ui/                 # Shadcn/Radix primitives (50+ files)
-│   │       ├── accordion.tsx, alert-dialog.tsx, alert.tsx, aspect-ratio.tsx, avatar.tsx
-│   │       ├── badge.tsx, breadcrumb.tsx, button-group.tsx, button.tsx
-│   │       ├── calendar.tsx, card.tsx, carousel.tsx, chart.tsx (Recharts)
-│   │       ├── checkbox.tsx, collapsible.tsx, command.tsx
-│   │       ├── context-menu.tsx, dialog.tsx, drawer.tsx (Vaul), dropdown-menu.tsx
-│   │       ├── empty.tsx, field.tsx, form.tsx (React Hook Form + Zod)
-│   │       ├── hover-card.tsx, input-group.tsx, input-otp.tsx, input.tsx
-│   │       ├── item.tsx, kbd.tsx, label.tsx, menubar.tsx
-│   │       ├── navigation-menu.tsx, pagination.tsx, popover.tsx
-│   │       ├── progress.tsx, radio-group.tsx, resizable.tsx (panels)
-│   │       ├── scroll-area.tsx, select.tsx, separator.tsx
-│   │       ├── sheet.tsx, sidebar.tsx, skeleton.tsx, slider.tsx
-│   │       ├── sonner.tsx (toasts), spinner.tsx, switch.tsx
-│   │       ├── table.tsx, tabs.tsx, textarea.tsx
-│   │       ├── toggle-group.tsx, toggle.tsx, tooltip.tsx
+* **Responsive Design:** Looks great on 4K Desktop monitors down to mobile screens.
+* **Dark / Light Mode:** Fully supports system and user-toggled theme preferences.
+* **Infinite Scrolling:** The homepage and comment sections load more items seamlessly as you scroll down.
+* **Skeleton Loaders:** Beautiful animated loading states so the user never stares at a blank screen.
+</details>
 
-│   ├── db/                     # Drizzle ORM
-│   │   ├── index.ts            # DB client (Neon serverless)
-│   │   └── schema.ts           # Schema (users, videos, comments?, categories, etc.)
+---
 
-│   ├── hooks/                  # Custom React hooks
-│   │   ├── use-intersection-observer.ts  # Virtuoso/infinite scroll observer
-│   │   └── use-mobile.ts       # Mobile detection (responsive)
+## 🛠️ The Tech Stack (What is it built with?)
 
-│   ├── lib/                    # Shared utils
-│   │   ├── mux.ts              # Mux client/token gen
-│   │   ├── ratelimit.ts        # Upstash rate limit
-│   │   ├── redis.ts            # Upstash Redis client
-│   │   ├── uploadthing.ts      # Uploadthing config (Mux direct uploads)
-│   │   ├── utils.ts            # cn() class merger, etc.
-│   │   └── workflow.ts         # Upstash workflow utils (AI tasks)
+Here is a simple breakdown of the core technologies running this project:
 
-│   ├── modules/                # Feature modules (domain-driven: server/ui split)
-│   │   ├── auth/ui/components/auth-button.tsx  # Clerk sign-in/up btns
-│   │   ├── categories/server/procedures.ts     # TRPC cat CRUD
-│   │   ├── comment-reactions copy/server/procedures.ts  # Copy? Reactions procs
-│   │   ├── comments/                                   # Comments module (open tabs focus)
-│   │   │   ├── types.ts
-│   │   │   ├── server/procedures.ts    # TRPC: create/read/update/delete comments/reactions
-│   │   │   └── ui/components/
-│   │   │       ├── comment-form.tsx    # Comment input/post form (open/visible)
-│   │   │       └── comment-item.tsx    # Single comment render w/ reactions (open)
-│   │   ├── home/ui/                  # Home feed
-│   │   │   ├── components/home-navbar/ (input/index)
-│   │   │   ├── components/home-sidebar/ (index/main/personal)
-│   │   │   ├── layouts/home-layouts.tsx
-│   │   │   ├── sections/categories-section.tsx
-│   │   │   └── views/home-view.tsx
-│   │   ├── studio/                   # Creator dashboard
-│   │   │   ├── server/procedures.ts   # Studio video CRUD
-│   │   │   ├── ui/components/
-│   │   │   │   ├── studio-upload-modal.tsx
-│   │   │   │   ├── studio-uploader.tsx (Mux/Uploadthing)
-│   │   │   │   ├── thumbnail-generate-modal.tsx (AI workflow)
-│   │   │   │   ├── studio-navbar/
-│   │   │   │   └── Studio-sidebar/ (header/index)
-│   │   │   ├── layouts/
-│   │   │   ├── sections/ (form/videos)
-│   │   │   └── views/ (studio/video)
-│   │   ├── subscriptions/
-│   │   │   ├── hooks/use-subscription.ts
-│   │   │   ├── server/procedures.ts
-│   │   │   └── ui/components/
-│   │   ├── users/ui/components/       # User profiles/avatars
-│   │   ├── video-reactions/server/procedures.ts
-│   │   ├── video-views/server/procedures.ts
-│   │   └── videos/                   # Core video module
-│   │       ├── constants.ts
-│   │       ├── types.ts
-│   │       ├── server/procedures.tsx # TRPC video ops (upload/search/feed)
-│   │       ├── ui/components/ (player/thumbnail)
-│   │       └── ui/sections/views/
+| Technology | Role in Project | Beginner Explanation |
+| :--- | :--- | :--- |
+| **Next.js (React)** | Frontend & Backend Framework | The core engine. It renders the UI (React) and also handles our server-side API routes. |
+| **TypeScript** | Language | JavaScript with "Types". It catches errors before we even run the code. |
+| **Tailwind CSS** | Styling | A utility-first CSS framework. We style elements directly in our HTML/JSX files using class names like `flex`, `text-center`. |
+| **Shadcn UI** | UI Components | Pre-built, accessible UI components (Buttons, Dialogs, Dropdowns) that we own and can customize. |
+| **Drizzle ORM** | Database Communicator | Allows us to write TypeScript code to interact with our SQL Database instead of raw SQL queries. |
+| **PostgreSQL** | Database | The workhorse database where we store Users, Videos data, Comments, and Likes. |
+| **tRPC** | API / Data Fetching | "TypeScript Remote Procedure Call". It allows our frontend to ask the backend for data securely, sharing the exact same TypeScript types. |
+| **Clerk** | Authentication | Handles all User Logins, Signups, and Sessions securely. |
+| **Mux** | Video Infrastructure | The magical service that takes an uploaded `.mp4` and turns it into a scalable, streamable video player. |
+| **UploadThing** | File Storage | Securely handles users uploading files (videos, images) directly to the cloud. |
 
-│   ├── scripts/seed-categories.ts     # DB seeder script
+---
 
-│   └── trpc/                         # tRPC core
-│       ├── client.tsx
-│       ├── init.ts
-│       ├── query-client.ts (TanStack)
-│       ├── server.tsx
-│       └── routers/_app.ts           # Root router (composes modules)
+## 📂 Detailed Folder Structure
+
+To help you navigate, here is the complete map of the codebase and what every folder does.
+
+```mermaid
+graph TD;
+    Project_Root-->public;
+    Project_Root-->src;
+    src-->app;
+    src-->components;
+    src-->db;
+    src-->hooks;
+    src-->lib;
+    src-->modules;
+    src-->scripts;
+    src-->trpc;
 ```
 
-## Features (Detailed Analysis)
-- **Auth**: Clerk sign-in/up, protected routes.
-- **Home Feed**: Infinite video grid, categories filter/sidebar, search navbar.
-- **Studio**: Upload videos (Mux direct), manage list w/ pagination, edit metadata, AI title/desc/thumbnail via workflows.
-- **Videos**: Player (Mux/YT-style), views/reactions/comments tracking.
-- **Comments**: Full module UI (form for post/reply, item renderer w/ nested?), server procs for CRUD/reactions.
-- **More**: Subscriptions, categories, responsive mobile/desktop.
+### 1. `public/`
+Contains static assets that are served directly to the browser.
+* `favicon.png`, `logo.svg`, `user-placeholder.svg`: Static images and icons used globally across the app.
 
-## Getting Started
+### 2. `src/app/`
+This is the heart of **Next.js App Router**. The folder structure here dictates the URLs of the website.
+* `globals.css`: The main CSS file holding Tailwind directives and global CSS variables.
+* `layout.tsx`: The root wrapper of the entire application. Every page renders inside this.
+* `(auth)/`: The parentheses mean this is a "Route Group". It doesn't add to the URL. Contains `/sign-in` and `/sign-up` pages handled by Clerk.
+* `(home)/`: The main viewing area of the app (the feed, viewing a video).
+  * `page.tsx`: The actual Homepage (`/`).
+  * `videos/[videoId]/`: The dynamic route for watching a specific video (e.g., `/videos/12345`).
+* `(studio)/`: The Creator Studio dashboard for managing videos.
+* `api/`: Backend server routes that handle raw HTTP requests.
+  * `trpc/[trpc]/`: The single endpoint that handles ALL tRPC data requests.
+  * `uploadthing/`: Endpoints to handle secure file uploads.
+  * `users/webhook/` & `videos/webhook/`: Webhooks are listeners. When Clerk creates a new user, or Mux finishes processing a video, they send an HTTP ping to these files so our database can update itself automatically.
+
+### 3. `src/components/`
+Reusable UI building blocks used across the application.
+* `ui/`: Contains all **Shadcn UI** components. These are low-level building blocks like `button.tsx`, `dialog.tsx`, `input.tsx`, `skeleton.tsx`. 
+* `user-avatar.tsx`: A shared component to display user profile pictures.
+* `infinite-scroll.tsx`: A logic component that detects when a user scrolls to the bottom of the page to load more data.
+
+### 4. `src/db/`
+Everything related to the Database.
+* `index.ts`: Establishes the live connection to our PostgreSQL database using Drizzle.
+* `schema.ts`: **Highly Important File.** This defines the structure of our database tables (e.g., `users`, `videos`, `comments`, `commentReactions`). If you want to know what data a Video holds, look here.
+
+### 5. `src/hooks/`
+Custom React Hooks (reusable logic).
+* `use-mobile.ts`: Detects if the current user is on a mobile device based on screen width.
+* `use-intersection-observer.ts`: Detects when an element becomes visible on the screen (used for infinite scrolling).
+
+### 6. `src/lib/`
+Utility functions and SDK initializers.
+* `utils.ts`: Helper functions (like `cn` which elegantly merges Tailwind classes together).
+* `mux.ts`, `redis.ts`, `uploadthing.ts`: Initialization files for our third-party services.
+
+### 7. `src/modules/`
+**The Core Architecture.** Instead of putting all logic in giant files, this project groups code by "Features" (Domain-Driven Design). Every folder inside here represents a specific feature of the app.
+* **Folders:** `auth`, `categories`, `comments`, `home`, `studio`, `subscriptions`, `users`, `videos`.
+* Inside a typical module (e.g., `comments/`):
+  * `server/procedures.ts`: The backend tRPC code. This is where the database queries happen (e.g., fetching comments, deleting a comment).
+  * `ui/components/`: Frontend React components specifically tied to this feature (e.g., `comment-item.tsx`, `comment-form.tsx`).
+  * `types.ts`: TypeScript definitions for this feature.
+
+### 8. `src/scripts/`
+Standalone node scripts meant to be run from the terminal, usually for maintenance.
+* `seed-categories.ts`: A script to populate the database with default YouTube categories (Gaming, Music, Tech, etc.) if it's empty.
+
+### 9. `src/trpc/`
+The configuration for tRPC (connecting the frontend to the backend).
+* `init.ts`: Sets up the tRPC server and defines "Middlewares" (e.g., `protectedProcedure` ensures a user is logged in before they can run a function).
+* `routers/_app.ts`: The root router that combines all the individual module routers (videos, comments, users) into one giant API tree.
+* `client.tsx` & `server.tsx`: Helpers that allow us to fetch data from either the Browser (client) or the Next.js Server securely.
+
+---
+
+## 🚀 How to Run the Project Locally
+
+If you want to run this application on your own machine, follow these steps:
+
 ### Prerequisites
-- Node/Bun v20+, Clerk/Neon/Mux/Upstash/OpenRouter accounts.
+1. Ensure you have **Node.js** installed (v18 or higher recommended).
+2. Install **Bun** or use **npm** (The project uses `bun.lock`, so Bun is preferred).
+3. A PostgreSQL database (You can get a free one on [Neon.tech](https://neon.tech/)).
 
-### Installation
-1. `git clone ... && cd youtube-v2`
-2. `bun install`
-3. `.env.local` (DATABASE_URL, Clerk keys, MUX_TOKEN_ID/SECRET/WEBHOOK_SECRET, UPSTASH_*, etc.)
-4. `bun drizzle-kit push` (migrate schema)
-5. `bun run dev` → http://localhost:3000
+### Step-by-step Setup
+1. **Install Dependencies:**
+   Open your terminal in the project folder and run:
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
 
-### Scripts
-- `bun run dev` (3000), `build`, `start`, `lint`
-- `bun drizzle-kit push` (DB)
+2. **Setup Environment Variables:**
+   Create a file named `.env` in the root folder. You will need to fill in various API keys. *Ask the project owner for these keys or set up your own accounts for Clerk, Mux, UploadThing, and your Database.*
+   ```env
+   # Example .env structure
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   CLERK_SECRET_KEY=sk_test_...
+   DATABASE_URL=postgresql://user:password@host/dbname
+   UPLOADTHING_SECRET=sk_live_...
+   MUX_TOKEN_ID=...
+   MUX_TOKEN_SECRET=...
+   ```
 
-## Deployment
-Vercel (auto-deploys Next.js/Mux webhooks).
+3. **Push the Database Schema:**
+   Before running the app, you need to build the database tables.
+   ```bash
+   npm run db:push
+   # or
+   npx drizzle-kit push
+   ```
 
-## Next Steps/TODO
-See TODO.md. Add: full video page, search, subscriptions UI.
+4. **Start the Development Server:**
+   ```bash
+   npm run dev
+   # or
+   bun dev
+   ```
+   *Your app is now running on `http://localhost:3000`!*
 
-**Updated by BLACKBOXAI**: Complete rewrite with full file/folder analysis from recursive list, package.json, existing docs, open tabs (detailed comments module)."
+---
 
-
+<div align="center">
+  <br/>
+  <h3>Built with ❤️ and Modern Web Technologies.</h3>
+  <p>Feel free to explore the code, break things, and learn how a real-world, production-ready full-stack application operates.</p>
+  
+  <!-- Cool animated CSS gradient line -->
+  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4520-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
+</div>
