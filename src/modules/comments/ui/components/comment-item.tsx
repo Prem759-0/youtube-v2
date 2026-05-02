@@ -283,8 +283,21 @@ export const CommentItem = ({
             size="sm"
             onClick={() => setIsRepliesOpen((current) => !current)}
           >
-            {isRepliesOpen ? <ChevronUpIcon/> : <ChevronDownIcon/>}
-            {comment.replyCount} reply
+            {isRepliesOpen ? <ChevronUpIcon className="mr-1 size-4" /> : <ChevronDownIcon className="mr-1 size-4" />}
+            {!!comment.uploaderLikedRepliesId && (
+              <div className="relative mr-1.5 w-5 h-5 flex items-center justify-center">
+                <UserAvatar
+                  size="xs"
+                  imageUrl={comment.videoOwner.imageUrl}
+                  name={comment.videoOwner.name}
+                  className="w-5 h-5"
+                />
+                <div className="absolute -bottom-1 -right-1 bg-white dark:bg-black rounded-full p-[1px]">
+                  <HeartIcon className="size-2.5 text-red-500 fill-red-500" />
+                </div>
+              </div>
+            )}
+            {comment.replyCount} {comment.replyCount === 1 ? "reply" : "replies"}
           </Button>
         </div>
       )}

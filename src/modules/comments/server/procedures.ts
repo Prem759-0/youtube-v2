@@ -128,6 +128,21 @@ export const commentsRouter = createTRPCRouter({
       .groupBy(comments.parentId),
     );
 
+    const uploaderLikedReplies = db.$with("uploader_liked_replies").as(
+      db
+        .select({
+          parentId: comments.parentId,
+        })
+        .from(comments)
+        .innerJoin(commentReactions, and(
+          eq(commentReactions.commentId, comments.id),
+          eq(commentReactions.userId, videoOwner.id),
+          eq(commentReactions.type, "like")
+        ))
+        .where(isNotNull(comments.parentId))
+        .groupBy(comments.parentId)
+    );
+
     const [totalData, data] = await Promise.all([
        db
      .select({
@@ -139,13 +154,14 @@ export const commentsRouter = createTRPCRouter({
       //isNull(comments.parentId),
     )),
       db
-      .with(viewerReactions, replies, uploaderReactions)
+      .with(viewerReactions, replies, uploaderReactions, uploaderLikedReplies)
       .select({
         ...getTableColumns(comments),
         user: users,
         viewerReaction: viewerReactions.type,
         uploaderReaction: uploaderReactions.type,
         replyCount: replies.count,
+        uploaderLikedRepliesId: uploaderLikedReplies.parentId,
         likeCount: db.$count(
              commentReactions,
              and(
@@ -181,6 +197,7 @@ export const commentsRouter = createTRPCRouter({
       .leftJoin(viewerReactions, eq(viewerReactions.commentId, comments.id))
       .leftJoin(uploaderReactions, eq(uploaderReactions.commentId, comments.id))
       .leftJoin(replies, eq(comments.id, replies.parentId))
+      .leftJoin(uploaderLikedReplies, eq(comments.id, uploaderLikedReplies.parentId))
       .orderBy(desc(comments.updatedAt), desc(comments.id)) 
       .limit(limit + 1)
     ])
