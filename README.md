@@ -1,6 +1,13 @@
 # ⚒️ The app is under development 🛠️⚒️
 
 <div align="center">
+
+  <img src="./public/logo.svg" alt="YouTube Logo" width="120" height="120" />
+  
+  <h1 align="center">
+    YouTube v2
+  </h1>
+
   <svg id="Youtube--Streamline-Openmoji" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="120" width="120">
     <desc>
       Youtube Streamline Emoji: https://streamlinehq.com
@@ -55,6 +62,7 @@
     <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="0.8889" d="m12.899333333333331 20.50782222222222 7.923955555555556 -4.507599999999999 -7.923955555555556 -4.508044444444445Z"></path>
   </g>
 </svg> YouTube v2</h1>
+>>>>>>> 7686db3141bed852c52407904b5f1bbe8c932d14
 
 
   <p align="center">
@@ -283,3 +291,22 @@ If you want to run this application on your own machine, follow these steps:
   <!-- Cool animated CSS gradient line -->
   <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4520-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
 </div>
+
+---
+
+## 💅 CSS & Styling Strategy
+
+This application relies on a modern, highly maintainable approach to CSS:
+* **Tailwind CSS:** Most of the layout, spacing, and typography are handled via utility classes, allowing for rapid iterations and a smaller overall CSS footprint.
+* **CSS Variables:** The `globals.css` defines root CSS variables for theme colors. This powers the clean, instantaneous Dark / Light mode toggling.
+* **Component-Scoped Logic:** Tools like `cn` (clsx + tailwind-merge) dynamically combine utility classes based on React state (e.g., highlighting an active filter or displaying an error state).
+
+---
+
+## 🔮 Future Roadmap
+
+We are constantly improving! Here are a few features planned for future updates:
+- [ ] **Playlists:** Allow users to curate and save multiple videos into distinct playlists.
+- [ ] **Live Streaming:** True real-time live broadcasting with live chat integration.
+- [ ] **Shorts:** A dedicated TikTok-style vertical scrolling feed for short-form content.
+- [ ] **Advanced Analytics:** A dashboard for creators with granular charts mapping views, audience retention, and watch times.
