@@ -56,6 +56,12 @@ export const VideoRowCard = ({
     size, 
     onRemove,
 }:VideoRowCardProps)=>{
+    const compactViews = useMemo(()=>{
+        return Intl.NumberFormat("en", {
+            notation: "compact"
+        }).format(data.viewCount),
+    })
+
     return(
         <div className={videoRowCardVariants({size})}>
            <Link href={`/videos/${data.id}`} className={thumbnailVariants({size})}>
@@ -81,7 +87,44 @@ export const VideoRowCard = ({
                         {data.viewCount} views • {data.likeCount} likes
                     </p>    
                   )}
+                  {size === "default" && (
+                    <>
+                      <div>
+                        <UserAvatar
+                           size="sm"
+                           imageUrl={data.user.imageUrl}
+                           name={data.user.name}
+                        />
+                        <UserInfo size="sm" name={data.user.name} />
+                      </div>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                           <p>  
+                            {data.description ?? "No description"}
+                           </p>
+                        </TooltipTrigger>
+                        <TooltipContent
+                         side="bottom"
+                         align="center"
+                         className="bg-black/70"
+                        >
+                            <p>From the video description</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </>
+                  )}
+                  {size === "compact" && (
+                    <UserInfo size="sm" name={data.user.name} />
+                  )}
+                  {size === "compact" && (
+                    <p className="text-xs text-muted-forground mt-1">
+                        {data.viewCount} views • {data.likeCount} likes
+                    </p>
+                  )}
                 </Link>
+                <div className="flex-none">
+                    <VideoMenu videoId={data.id} onRemove={onRemove} />
+                </div>
             </div>
            </div>
         </div>
