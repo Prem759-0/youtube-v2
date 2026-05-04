@@ -13,6 +13,7 @@ import {
  import { VideoThumbnail } from "./video-thumbnail"
  import { VideoGetManyOutput } from "../../types"
 import Link from "next/link"
+import { useMemo } from "react"
 
 const videoRowCardVariants = cva("group flex min-w-0", {
     variants:{
@@ -46,7 +47,7 @@ interface VideoRowCardProps extends VariantProps<typeof videoRowCardVariants> {
 export const VideoRowCardSkeleton = () => {
     return (
         <div>
-            Skeleton
+            <Skeleton/>
         </div>
     )
 }
@@ -59,8 +60,14 @@ export const VideoRowCard = ({
     const compactViews = useMemo(()=>{
         return Intl.NumberFormat("en", {
             notation: "compact"
-        }).format(data.viewCount),
-    })
+        }).format(data.viewCount);
+    }, [data.viewCount]);
+
+    const compactLikes = useMemo(()=>{
+        return Intl.NumberFormat("en", {
+            notation: "compact"
+        }).format(data.likeCount);
+    }, [data.likeCount]);
 
     return(
         <div className={videoRowCardVariants({size})}>
@@ -84,7 +91,7 @@ export const VideoRowCard = ({
                   </h3>
                   {size === "default" && (
                     <p className="text-xs text-muted-foreground mt-1">
-                        {data.viewCount} views • {data.likeCount} likes
+                        {compactViews} views • {compactLikes} likes
                     </p>    
                   )}
                   {size === "default" && (
@@ -118,7 +125,7 @@ export const VideoRowCard = ({
                   )}
                   {size === "compact" && (
                     <p className="text-xs text-muted-forground mt-1">
-                        {data.viewCount} views • {data.likeCount} likes
+                        {compactViews} views • {compactLikes} likes
                     </p>
                   )}
                 </Link>
