@@ -3,6 +3,7 @@
 import { DEFAULT_LIMIT } from "@/constants";
 import { trpc } from "@/trpc/client";
 import { VideoRowCard } from "../components/video-row-card";
+import { VideoGridCard } from "../components/video-grid-card";
 
 interface SuggestionsSectionProps {
     videoId: string;
@@ -29,7 +30,7 @@ export const SuggestionsSection = ({
 
         <div className="block md:hidden space-y-10">
             {suggestions.pages.flatMap((page)=>page.items).map((video)=>(
-                <VideoGridCard key={video.id} data={video} size="compact" />
+                <VideoGridCard key={video.id} data={video}  />
             ))}
         </div>
         </>
