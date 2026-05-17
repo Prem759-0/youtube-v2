@@ -229,6 +229,16 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         toast.error("Something went wrong, please try again later ❌"),
     });
 
+    const revalidate = trpc.videos.revalidate.useMutation({
+      onSuccess: () => {
+        utils.studio.getMany.invalidate();
+        utils.studio.getOne.invalidate({id:videoId});
+        toast.success("Video revalidated successfully ✅");
+      },
+      onError: () =>
+        toast.error("Something went wrong, please try again later ❌"),
+    });
+
   const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
     if (!data.categoryId || data.categoryId.trim() === "") {
       toast.error("Please select a category before saving");
@@ -288,6 +298,14 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  
+                  onClick={() => revalidate.mutate({id: videoId})}
+                >
+                  <RotateCcwIcon className="size-4 mr-2" />
+                  Revalidate
+                </DropdownMenuItem>
+
                 <DropdownMenuItem
                   className="text-destructive"
                   onClick={() => setIsDeleteDialogOpen(true)}
