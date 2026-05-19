@@ -233,7 +233,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       onSuccess: () => {
         utils.studio.getMany.invalidate();
         utils.studio.getOne.invalidate({id:videoId});
+         utils.videos.getOne.invalidate({id:videoId});
         toast.success("Video revalidated successfully ✅");
+        window.location.reload();
       },
       onError: () =>
         toast.error("Something went wrong, please try again later ❌"),
@@ -293,16 +295,24 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreVerticalIcon className="size-5" />
+                <Button variant="ghost" size="icon" disabled={revalidate.isPending}>
+                  {revalidate.isPending ? (
+                     <Loader2Icon className="size-5 animate-spin" />
+                  ) : (
+                    <MoreVerticalIcon className="size-5" />
+                  )}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                  
+                  disabled={revalidate.isPending}
                   onClick={() => revalidate.mutate({id: videoId})}
                 >
-                  <RotateCcwIcon className="size-4 mr-2" />
+                  {revalidate.isPending ? (
+                    <Loader2Icon className="size-4 mr-2 animate-spin" />
+                  ) : (
+                    <RotateCcwIcon className="size-4 mr-2" />
+                  )}
                   Revalidate
                 </DropdownMenuItem>
 
