@@ -2,8 +2,8 @@
 
 import { DEFAULT_LIMIT } from "@/constants";
 import { trpc } from "@/trpc/client";
-import { VideoRowCard } from "../components/video-row-card";
-import { VideoGridCard } from "../components/video-grid-card";
+import { VideoRowCard, VideoRowCardSkeleton } from "../components/video-row-card";
+import { VideoGridCard, VideoGridCardSkeleton } from "../components/video-grid-card";
 import { InfiniteScroll } from "@/components/infinite-scroll";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -29,9 +29,19 @@ export const SuggestionsSection = ({
 
 const SuggestionsSectionSkeleton = () => {
     return (
-        <div className="mt-6 flex justify-center items-center">
-            <Loader2Icon className="size-7 animate-spin text-muted-foreground" />
+        <>
+        
+        <div className="hidden md:block space-y-3">
+            {Array.from({length: 6}).map((_, index) => (
+                <VideoRowCardSkeleton key={index} size="compact" />
+            ))}
         </div>
+        <div className="hidden md:block space-y-3">
+            {Array.from({length: 6}).map((_, index) => (
+                <VideoGridCardSkeleton key={index}  />
+            ))}
+        </div>
+        </>
     )
 }
 
