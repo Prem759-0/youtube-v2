@@ -170,6 +170,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
 
   const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
     onSuccess: () => {
@@ -235,6 +236,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         utils.studio.getOne.invalidate({id:videoId});
          utils.videos.getOne.invalidate({id:videoId});
         toast.success("Video revalidated successfully ✅");
+        setIsReloading(true);
         window.location.reload();
       },
       onError: () =>
@@ -267,6 +269,16 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   return (
     <> 
+     {(revalidate.isPending || isReloading) && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-2">
+            <Loader2Icon className="size-10 animate-spin text-white" />
+            <p className="text-white text-sm font-medium">
+              {isReloading ? "Reloading page..." : "Revalidating..."}
+            </p>
+          </div>
+        </div>
+      )}
      <ThumbnailGenerateModal
        open={thumbnailGenerateModalOpen}
        onOpenChange={setThumbnailGenerateModalOpen}

@@ -5,6 +5,9 @@ import { trpc } from "@/trpc/client";
 import { VideoRowCard } from "../components/video-row-card";
 import { VideoGridCard } from "../components/video-grid-card";
 import { InfiniteScroll } from "@/components/infinite-scroll";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { Loader2Icon, AlertTriangleIcon } from "lucide-react";
 
 interface SuggestionsSectionProps {
     videoId: string;
@@ -12,6 +15,36 @@ interface SuggestionsSectionProps {
 }
 
 export const SuggestionsSection = ({
+     videoId,
+    isManual,
+}: SuggestionsSectionProps) => {
+     return (
+        <Suspense fallback={<SuggestionsSectionSkeleton />}>
+          <ErrorBoundary fallback={<SuggestionsSectionError />}>
+            <SuggestionsSectionSuspense videoId={videoId} isManual={isManual} />
+          </ErrorBoundary>
+        </Suspense>
+     )
+}
+
+const SuggestionsSectionSkeleton = () => {
+    return (
+        <div className="mt-6 flex justify-center items-center">
+            <Loader2Icon className="size-7 animate-spin text-muted-foreground" />
+        </div>
+    )
+}
+
+const SuggestionsSectionError = () => {
+    return (
+        <div className="mt-6 flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-destructive/10">
+            <AlertTriangleIcon className="size-6 text-destructive" />
+            <p className="text-sm text-destructive font-medium">Failed to load suggestions</p>
+        </div>
+    )
+}
+
+const SuggestionsSectionSuspense = ({
     videoId,
     isManual,
 }: SuggestionsSectionProps) => {
