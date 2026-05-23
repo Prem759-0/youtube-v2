@@ -1,24 +1,33 @@
-import {SidebarProvider} from "@/components/ui/sidebar"
-import {HomeNavbar} from "../components/home-navbar";
-import {HomeSidebar} from "../components/home-sidebar";
+"use client";
 
-interface HomeLayoutProps{
+import { SidebarProvider } from "@/components/ui/sidebar"
+import { HomeNavbar } from "../components/home-navbar";
+import { HomeSidebar } from "../components/home-sidebar";
+import { usePathname } from "next/navigation";
+import { SidebarStateWatcher } from "./sidebar-state-watcher";
+
+interface HomeLayoutProps {
     children: React.ReactNode;
 };
 
-export const HomeLayout = ({children}: HomeLayoutProps) => {
-    return(
-        <SidebarProvider>
+export const HomeLayout = ({ children }: HomeLayoutProps) => {
+    const pathname = usePathname();
+    const isVideoPage = pathname?.includes("/videos/");
+
+    return (
+        <SidebarProvider defaultOpen={!isVideoPage}>
+            <SidebarStateWatcher />
             <div className="w-full">
-                <HomeNavbar/>
+                <HomeNavbar />
                 <div className="flex min-h-screen pt-[4rem]">
-                    <HomeSidebar/>
+                    <HomeSidebar />
                     <main className="flex-1 overflow-y-auto">
-                    {children}
+                        {children}
                     </main>
                 </div>
             </div>
         </SidebarProvider>
     )
 }
+
 
