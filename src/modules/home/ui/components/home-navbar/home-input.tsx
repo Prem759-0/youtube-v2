@@ -2,13 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { APP_URL } from "@/constants";
-import { SearchIcon, XIcon } from "lucide-react"
+import { Loader2, SearchIcon, XIcon } from "lucide-react"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 export const SearchInput = () => {
     const router = useRouter();
     const [value, setValue] = useState("");
+    const [isPending, startTransition] = useTransition();
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -23,7 +24,9 @@ export const SearchInput = () => {
         }
 
         setValue(newQuery);
-        router.push(url.toString());
+        startTransition(() => {
+            router.push(url.toString());
+        });
     }
     return(
         <form className="flex w-full max-w-[600px]" onSubmit={handleSearch}>
@@ -48,11 +51,15 @@ export const SearchInput = () => {
                 )}
             </div>
             <button
-              disabled={!value.trim()}
+              disabled={!value.trim() || isPending}
               type="submit"
               className="px-5 py-2.5 bg-gray-100 border border-l-0 rounded-r-full hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-               <SearchIcon className="size-5"/>
+               {isPending ? (
+                   <Loader2 className="size-5 animate-spin"/>
+               ) : (
+                   <SearchIcon className="size-5"/>
+               )}
             </button>
 
         </form>  

@@ -5,6 +5,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { trpc } from "@/trpc/client";
 import { VideoRowCard, VideoRowCardSkeleton } from "@/modules/videos/ui/components/video-row-card";
 import { VideoGridCard, VideoGridCardSkeleton } from "@/modules/videos/ui/components/video-grid-card";
+import { InfiniteScroll } from "@/components/infinite-scroll";
 
 interface ResultsSectionProps {
     query: string | undefined;
@@ -16,7 +17,7 @@ export const ResultsSection = ({
     categoryId,
 }: ResultsSectionProps) => {
     const isMobile = useIsMobile();
-    const [results, resultQuery] = trpc.search.getMany.useSuspenseInfiniteQuery(
+    const [results, resultsQuery] = trpc.search.getMany.useSuspenseInfiniteQuery(
         {
             query,
             categoryId,
@@ -43,11 +44,16 @@ export const ResultsSection = ({
                   {results.pages
                 .flatMap((page)=> page.items)
                 .map((video) => (
-                  <VideoRowCard key={video.id} data={video} />
+                  <VideoRowCard key={video.id} data={video}  />
                 ))
               }
             </div>
           )}
+          <InfiniteScroll
+            hasNextPage={resultsQuery.hasNextPage}
+            isFetchingNextPage={resultsQuery.isFetchingNextPage}
+            fetchNextPage={resultsQuery.fetchNextPage}
+          />
        </>
     )
 }

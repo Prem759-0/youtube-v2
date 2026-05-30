@@ -15,7 +15,7 @@ export const HomeLayout = ({ children }: HomeLayoutProps) => {
     const isVideoPage = pathname?.includes("/videos/");
 
     return (
-        <SidebarProvider defaultOpen={!isVideoPage}>
+        <SidebarProvider defaultOpen={false}>
             <SidebarStateWatcher />
             <div className="w-full">
                 <HomeNavbar />
