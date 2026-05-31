@@ -257,7 +257,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     setIsDeleteDialogOpen(false);
   };
 
-  const fullUrl = `${APP_URL ?? "http://localhost:3000"
+  const fullUrl = `${APP_URL 
     }/videos/${videoId}`;
 
   const [isCopied, setIsCopied] = useState(false);

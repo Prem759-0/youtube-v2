@@ -19,7 +19,7 @@ import { formatDistanceToNow } from "date-fns"
 const videoRowCardVariants = cva("group flex min-w-0", {
     variants:{
         size:{
-            default: "gap-4",
+            default: "gap-4 md:gap-6",
             compact: "gap-2"
         },
     },
@@ -31,7 +31,7 @@ const videoRowCardVariants = cva("group flex min-w-0", {
 const thumbnailVariants = cva("relative flex-none", {
     variants:{
         size:{
-            default: "w-[38%]",
+            default: "w-[38%] max-w-[360px] min-w-[250px]",
             compact: "w-[168px]",
         },
     },
@@ -116,7 +116,7 @@ export const VideoRowCard = ({
                 <Link href={`/videos/${data.id}`} className="flex-1 min-w-0">
                   <h3 className={cn(
                     "font-medium line-clamp-2",
-                    size === "compact" ? "text-sm" : "text-base",
+                    size === "compact" ? "text-sm" : "text-base md:text-lg",
                   )}>
                     {data.title}
                   </h3>
@@ -127,12 +127,15 @@ export const VideoRowCard = ({
                   )}
                   {size === "default" && (
                     <>
-                      <div className="flex items-center gap-2 my-3">
+                      <div className="flex items-center gap-2 my-3 hidden md:flex">
                         <UserAvatar
                            size="sm"
                            imageUrl={data.user.imageUrl}
                            name={data.user.name}
                         />
+                        <UserInfo size="sm" name={data.user.name} />
+                      </div>
+                      <div className="flex items-center gap-2 my-3 md:hidden">
                         <UserInfo size="sm" name={data.user.name} />
                       </div>
                       <Tooltip>
