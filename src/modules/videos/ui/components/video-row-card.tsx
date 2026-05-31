@@ -14,6 +14,7 @@ import {
  import { VideoGetManyOutput } from "../../types"
 import Link from "next/link"
 import { useMemo } from "react"
+import { formatDistanceToNow } from "date-fns"
 
 const videoRowCardVariants = cva("group flex min-w-0", {
     variants:{
@@ -95,6 +96,10 @@ export const VideoRowCard = ({
         }).format(data.likeCount);
     }, [data.likeCount]);
 
+    const compactDate = useMemo(() => {
+        return formatDistanceToNow(data.createdAt, { addSuffix: true });
+    }, [data.createdAt]);
+
     return(
         <div className={videoRowCardVariants({size})}>
            <Link href={`/videos/${data.id}`} className={thumbnailVariants({size})}>
@@ -117,12 +122,12 @@ export const VideoRowCard = ({
                   </h3>
                   {size === "default" && (
                     <p className="text-xs text-muted-foreground mt-1">
-                        {compactViews} views • {compactLikes} likes
+                        {compactViews} views • {compactDate}
                     </p>    
                   )}
                   {size === "default" && (
                     <>
-                      <div>
+                      <div className="flex items-center gap-2 my-3">
                         <UserAvatar
                            size="sm"
                            imageUrl={data.user.imageUrl}
@@ -132,7 +137,7 @@ export const VideoRowCard = ({
                       </div>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                           <p>  
+                           <p className="text-xs text-muted-foreground line-clamp-2">  
                             {data.description ?? "No description"}
                            </p>
                         </TooltipTrigger>
@@ -150,8 +155,8 @@ export const VideoRowCard = ({
                     <UserInfo size="sm" name={data.user.name} />
                   )}
                   {size === "compact" && (
-                    <p className="text-xs text-muted-forground mt-1">
-                        {compactViews} views • {compactLikes} likes
+                    <p className="text-xs text-muted-foreground mt-1">
+                        {compactViews} views • {compactDate}
                     </p>
                   )}
                 </Link>
