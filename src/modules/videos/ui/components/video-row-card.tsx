@@ -141,7 +141,7 @@ export const VideoRowCard = ({
                       <Tooltip>
                         <TooltipTrigger asChild>
                            <p className="text-xs text-muted-foreground line-clamp-2">  
-                            {data.description ?? "No description"}
+                            {data.description || "No description"}
                            </p>
                         </TooltipTrigger>
                         <TooltipContent
@@ -163,7 +163,7 @@ export const VideoRowCard = ({
                     </p>
                   )}
                 </Link>
-                <div className="flex-none">
+                <div className="flex-none ">
                     <VideoMenu videoId={data.id} onRemove={onRemove} />
                 </div>
             </div>
