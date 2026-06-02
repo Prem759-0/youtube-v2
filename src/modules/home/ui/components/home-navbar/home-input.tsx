@@ -3,13 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { APP_URL } from "@/constants";
 import { Loader2, SearchIcon, XIcon } from "lucide-react"
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 
 export const SearchInput = () => {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [value, setValue] = useState("");
     const [isPending, startTransition] = useTransition();
+    const categoryId = searchParams.get("categoryId") || "" ;
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -18,6 +20,10 @@ export const SearchInput = () => {
         const newQuery = value.trim();
 
         url.searchParams.set("query", encodeURIComponent(newQuery));
+
+        if (categoryId){
+            url.searchParams.set("categoryId", categoryId);
+        }
 
         if (newQuery === ""){
             url.searchParams.delete("query")
