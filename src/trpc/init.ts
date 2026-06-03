@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import {cache} from "react";
 import { db } from '@/db';
-import { auth } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import superjson from "superjson";
 import { users } from '@/db/schema';
 import { eq } from 'drizzle-orm';
@@ -42,11 +42,17 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(opts){
     // Webhook timing/race: Clerk may have the user session before `users` row exists in DB.
     // Create a minimal placeholder user so protected actions don't fail with 401.
     if (!user){
+        const clerkUser = await currentUser();
+        let name = clerkUser ? `${clerkUser.firstName ?? ""} ${clerkUser.lastName ?? ""}`.trim() : "";
+        if (name === "") {
+            name = "User"; // Fallback name
+        }
+
         await db.insert(users)
         .values({
             clerkId: ctx.clerkUserId,
-            name: "",
-            imageUrl: "/placeholder.svg",
+            name,
+            imageUrl: clerkUser?.imageUrl ?? "/placeholder.svg",
         })
         .onConflictDoNothing();
 

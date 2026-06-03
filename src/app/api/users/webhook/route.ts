@@ -25,8 +25,13 @@ export async function POST(req: Request) {
     return new Response("Error: Missing Svix headers", { status: 400 });
   }
 
-  const payload = await req.json();
-  const body = JSON.stringify(payload);
+  const body = await req.text();
+  let payload;
+  try {
+    payload = JSON.parse(body);
+  } catch (err) {
+    return new Response("Error: Invalid JSON body", { status: 400 });
+  }
 
   let evt: WebhookEvent;
 
@@ -48,11 +53,19 @@ export async function POST(req: Request) {
   if (evt.type === "user.created") {
     const { data } = evt;
     const imageUrl = data.image_url ?? "/placeholder.svg";
+    let name = `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim();
+    if (name === "") name = "User";
 
     await db.insert(users).values({
       clerkId: data.id,
-      name: `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim(),
+      name,
       imageUrl,
+    }).onConflictDoUpdate({
+      target: [users.clerkId],
+      set: {
+        name,
+        imageUrl,
+      }
     });
   }
 
@@ -75,10 +88,13 @@ export async function POST(req: Request) {
     }
 
     const imageUrl = data.image_url ?? "/placeholder.svg";
+    let name = `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim();
+    if (name === "") name = "User";
+
     await db
       .update(users)
       .set({
-        name: `${data.first_name ?? ""} ${data.last_name ?? ""}`.trim(),
+        name,
         imageUrl,
       })
       .where(eq(users.clerkId, clerkId));
