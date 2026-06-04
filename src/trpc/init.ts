@@ -54,7 +54,14 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(opts){
             name,
             imageUrl: clerkUser?.imageUrl ?? "/placeholder.svg",
         })
-        .onConflictDoNothing();
+        .onConflictDoUpdate({
+            target: [users.clerkId],
+            set: {
+                name,
+                imageUrl: clerkUser?.imageUrl ?? "/placeholder.svg",
+                updatedAt: new Date(),
+            }
+        });
 
         const [freshUser] = await db
         .select()

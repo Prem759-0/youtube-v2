@@ -8,7 +8,7 @@ export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 30 * 1000, // 30 seconds
+          staleTime: 15 * 1000, // 15 seconds - faster cache refresh for real-time feel
       },
       dehydrate: {
         // serialize data on the server

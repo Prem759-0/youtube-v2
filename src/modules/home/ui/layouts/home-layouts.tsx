@@ -5,6 +5,7 @@ import { HomeNavbar } from "../components/home-navbar";
 import { HomeSidebar } from "../components/home-sidebar";
 import { usePathname } from "next/navigation";
 import { SidebarStateWatcher } from "./sidebar-state-watcher";
+import { UserProfileSyncWrapper } from "@/components/user-profile-sync-wrapper";
 
 interface HomeLayoutProps {
     children: React.ReactNode;
@@ -15,8 +16,9 @@ export const HomeLayout = ({ children }: HomeLayoutProps) => {
     const isVideoPage = pathname?.includes("/videos/");
 
     return (
-        <SidebarProvider defaultOpen={false}>
-            <SidebarStateWatcher />
+        <UserProfileSyncWrapper>
+            <SidebarProvider defaultOpen={false}>
+                <SidebarStateWatcher />
             <div className="w-full">
                 <HomeNavbar />
                 <div className="flex min-h-screen pt-[4rem]">
@@ -27,6 +29,7 @@ export const HomeLayout = ({ children }: HomeLayoutProps) => {
                 </div>
             </div>
         </SidebarProvider>
+        </UserProfileSyncWrapper>
     )
 }
 

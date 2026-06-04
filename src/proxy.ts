@@ -8,6 +8,7 @@ const isPublicRoute = createRouteMatcher([
   "/api/trpc(.*)",
   "/api/videos/webhook(.*)",
   "/api/users/webhook(.*)",
+  "/api/users/sync-profile(.*)",
   "/api/uploadthing(.*)",
   "/api/videos/workflows(.*)",
   "/api/studio/workflows(.*)"
