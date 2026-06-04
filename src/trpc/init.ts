@@ -52,13 +52,13 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(opts){
         .values({
             clerkId: ctx.clerkUserId,
             name,
-            imageUrl: clerkUser?.imageUrl ?? "/placeholder.svg",
+            imageUrl: clerkUser?.imageUrl ?? "/user.jpg",
         })
         .onConflictDoUpdate({
             target: [users.clerkId],
             set: {
                 name,
-                imageUrl: clerkUser?.imageUrl ?? "/placeholder.svg",
+                imageUrl: clerkUser?.imageUrl ?? "/user.jpg",
                 updatedAt: new Date(),
             }
         });
