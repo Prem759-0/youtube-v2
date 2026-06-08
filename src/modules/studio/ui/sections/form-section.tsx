@@ -18,6 +18,7 @@ import {
   ImagePlusIcon,
   SparklesIcon,
   RotateCcwIcon,
+  RefreshCwIcon,
   Loader2Icon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -70,6 +71,7 @@ import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
 import { ThumbnailGenerateModal } from "../components/thumbnail-generate-modal";
 import { Skeleton } from "@/components/ui/skeleton";
 import { APP_URL } from "@/constants";
+
 
 interface FormSectionProps {
   videoId: string;
@@ -211,6 +213,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       description: video.description ?? "",
       categoryId: video.categoryId ?? "",
       visibility: video.visibility ?? "public",
+
     },
   });
 
@@ -245,12 +248,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     });
 
   const onSubmit = (data: z.infer<typeof videoUpdateSchema>) => {
-    if (!data.categoryId || data.categoryId.trim() === "") {
-      toast.error("Please select a category before saving");
-      return;
-    }
     update({ id: video.id, ...data });
   };
+
+
 
   const onDelete = () => {
     deleteVideo({ id: video.id });
@@ -271,13 +272,38 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   return (
     <> 
      {(revalidate.isPending || isReloading) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-2">
-            <Loader2Icon className="size-10 animate-spin text-white" />
-            <p className="text-white text-sm font-medium">
-              {isReloading ? "Reloading page..." : "Revalidating..."}
-            </p>
-          </div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300">
+           {/* Top Loading Bar */}
+           <div className="absolute top-0 left-0 right-0 h-1 bg-red-600/20 overflow-hidden">
+             <div 
+                className="h-full bg-red-600 w-1/3" 
+                style={{ animation: "yt-progress 1.5s infinite linear", transform: "translateX(-100%)" }}
+             />
+             <style dangerouslySetInnerHTML={{__html: `
+                @keyframes yt-progress {
+                  0% { transform: translateX(-100%); }
+                  100% { transform: translateX(300%); }
+                }
+             `}} />
+           </div>
+
+           {/* Center Content */}
+           <div className="flex flex-col items-center justify-center gap-5">
+              {/* YouTube Red Spinner */}
+              <div className="relative size-12">
+                 <svg className="animate-spin size-full text-red-600" viewBox="0 0 50 50">
+                   <circle cx="25" cy="25" r="20" fill="none" strokeWidth="4" stroke="currentColor" strokeLinecap="round" strokeDasharray="90, 150" strokeDashoffset="-10" />
+                 </svg>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <h3 className="text-white text-xl font-medium tracking-tight drop-shadow-md">
+                  {isReloading ? "Reloading..." : "Revalidating video..."}
+                </h3>
+                <p className="text-white/70 text-sm drop-shadow-md">
+                  Please wait while we sync your changes.
+                </p>
+              </div>
+           </div>
         </div>
       )}
      <ThumbnailGenerateModal
@@ -292,6 +318,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
      />
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
         {/* HEADER */}
         <div className="flex items-center justify-between">
           <div>
@@ -307,28 +334,22 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </Button>
 
             <DropdownMenu>
+              <Button
+                type="button"
+                variant="secondary"
+                className="bg-secondary hover:bg-secondary/80"
+                size="icon"
+                disabled={revalidate.isPending || isReloading}
+                onClick={() => revalidate.mutate({id: videoId})}
+              >
+                <RefreshCwIcon className={`size-5 ${revalidate.isPending || isReloading ? "animate-spin" : ""}`} />
+              </Button>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" disabled={revalidate.isPending}>
-                  {revalidate.isPending ? (
-                     <Loader2Icon className="size-5 animate-spin" />
-                  ) : (
-                    <MoreVerticalIcon className="size-5" />
-                  )}
+                <Button variant="ghost" size="icon">
+                  <MoreVerticalIcon className="size-5" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem
-                  disabled={revalidate.isPending}
-                  onClick={() => revalidate.mutate({id: videoId})}
-                >
-                  {revalidate.isPending ? (
-                    <Loader2Icon className="size-4 mr-2 animate-spin" />
-                  ) : (
-                    <RotateCcwIcon className="size-4 mr-2" />
-                  )}
-                  Revalidate
-                </DropdownMenuItem>
-
                 <DropdownMenuItem
                   className="text-destructive"
                   onClick={() => setIsDeleteDialogOpen(true)}
@@ -522,6 +543,13 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 </FormItem>
               )}
             />
+
+
+
+
+
+
+
           </div>
 
           {/* RIGHT */}

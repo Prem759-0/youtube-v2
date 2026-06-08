@@ -41,16 +41,21 @@ export const VideoDescription = ({
        >
          {description || "No description"}
        </p>
-       <div className="flex items-center gap-1 mt-4 text-sm font-medium">
-        {isExpanded ? (
-            <>
-             show less <ChevronUpIcon className="size-4" />
-            </>
-        ):(
-            <>
-             Show more <ChevronDownIcon className="size-4" /> 
-            </>
-        )}
+       <div className="mt-4">
+         <button onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded((current)=>!current);
+         }} className="justify-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-9 px-4 py-2 hover:bg-neutral-500/20 hover:text-accent-foreground flex items-center gap-1 rounded-full text-sm font-medium -ml-2">
+          {isExpanded ? (
+              <>
+               Show less <ChevronUpIcon className="size-4" />
+              </>
+          ):(
+              <>
+               Show more <ChevronDownIcon className="size-4" /> 
+              </>
+          )}
+         </button>
        </div>
      </div>
     </div>
