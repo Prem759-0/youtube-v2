@@ -7,21 +7,18 @@ import { trpc } from "@/trpc/client";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-interface HomeVideosSectionProps {
-    categoryId?: string;
-}
 
-export const HomeVideosSection = (props: HomeVideosSectionProps)=> {
+export const TrendingVideosSection = ()=> {
      return (
-        <Suspense key={props.categoryId} fallback={<HomeVideosSectionSkeleton />}>
+        <Suspense fallback={<TrendingVideosSectionSkeleton />}>
             <ErrorBoundary fallback={<p>Error...</p>}>
-                <HomeVideosSectionSuspense {...props} />
+                <TrendingVideosSectionSuspense />
             </ErrorBoundary>
         </Suspense>
      )
 }
 
-const HomeVideosSectionSkeleton = () => {
+const TrendingVideosSectionSkeleton = () => {
 	return (
 		<div className='grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 [@media(min-width:1920px)]:grid-cols-4 [@media(min-width:2200px)]:grid-cols-5'>
 			{Array.from({ length: 18 }).map((_, i) => (
@@ -31,9 +28,9 @@ const HomeVideosSectionSkeleton = () => {
 	);
 };
 
-const HomeVideosSectionSuspense = ({categoryId}: HomeVideosSectionProps) => {
-    const [videos, query] = trpc.videos.getMany.useSuspenseInfiniteQuery(
-        {categoryId, limit: DEFAULT_LIMIT},
+const TrendingVideosSectionSuspense = () => {
+    const [videos, query] = trpc.videos.getManyTrending.useSuspenseInfiniteQuery(
+        {limit: DEFAULT_LIMIT},
          {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
          }
