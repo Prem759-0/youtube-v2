@@ -5,22 +5,6 @@
 <div align="cen
 
   <hr />
-</div>
-
-## 📖 Welcome for Beginners!
-If you are new to full-stack development, **Welcome!** 
-
-This project is a fully-featured clone of YouTube. It was designed not just to look like YouTube, but to operate like it under the hood. It uses an incredibly modern and powerful "tech stack" (the combination of tools used to build the app). 
-
-By analyzing this project, you will learn how a frontend (what the user sees) communicates safely and efficiently with a backend (the server and database), how videos are uploaded and processed into different qualities, and how complex data like nested comments and user relationships are stored.
-
----
-
-## ✨ Features (What can this app do?)
-
-<details>
-<summary><b>🎬 Video Management & Playback</b></summary>
-
 * **Video Uploads:** Securely upload large video files using UploadThing.
 * **Video Processing:** Uses **Mux** behind the scenes to transcode videos, meaning it generates different resolutions (1080p, 720p, etc.) and provides a smooth, buffer-free streaming experience using HLS (HTTP Live Streaming).
 * **Thumbnails & Previews:** Automatically generate and select thumbnails, or upload custom ones. Animated GIF previews are supported when hovering over videos.
