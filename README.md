@@ -2,31 +2,7 @@
 
 # ⚒️ The app is under development 🛠️⚒️
 
-<div align="center">
-
-  <img src="./public/logo.svg" alt="YouTube Logo" width="120" height="120" />
-  
-  <h1 align="center">
-    YouTube v2
-  </h1>
-
-
-
-  <p align="center">
-    <strong>A highly scalable, modern Full-Stack Video Sharing Platform built with the latest web technologies.</strong>
-  </p>
-
-  <!-- Animated Typing Text -->
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=1000&color=FF0000&center=true&vCenter=true&width=600&lines=Next.js+App+Router;tRPC+%2B+React+Query;Drizzle+ORM+%2B+PostgreSQL;Mux+Video+Processing;Clerk+Authentication" alt="Typing SVG" />
-
-  <br />
-
-  <!-- Badges -->
-  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
+<div align="cen
 
   <hr />
 </div>
