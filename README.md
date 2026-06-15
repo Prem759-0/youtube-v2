@@ -2,19 +2,6 @@
 
 # ⚒️ The app is under development 🛠️⚒️
 
-<div align="cen
-
-  <hr />
-* **Video Uploads:** Securely upload large video files using UploadThing.
-* **Video Processing:** Uses **Mux** behind the scenes to transcode videos, meaning it generates different resolutions (1080p, 720p, etc.) and provides a smooth, buffer-free streaming experience using HLS (HTTP Live Streaming).
-* **Thumbnails & Previews:** Automatically generate and select thumbnails, or upload custom ones. Animated GIF previews are supported when hovering over videos.
-* **Views Tracking:** Tracks every unique view natively.
-</details>
-
-<details>
-<summary><b>👤 Authentication & Users</b></summary>
-
-* **Secure Login/Signup:** Powered by **Clerk**. Supports Social Logins (Google, GitHub) and passwordless email links.
 * **User Profiles:** Every user has their own unique profile page showcasing their uploaded videos.
 * **Subscriptions:** Users can subscribe and unsubscribe to other creators. The home feed can filter videos purely by subscribed channels.
 </details>
