@@ -1,7 +1,59 @@
 
-
 # ⚒️ The app is under development 🛠️⚒️
 
+<div align="center">
+
+  <img src="./public/logo.svg" alt="YouTube Logo" width="120" height="120" />
+  
+  <h1 align="center">
+    YouTube v2
+  </h1>
+
+
+
+  <p align="center">
+    <strong>A highly scalable, modern Full-Stack Video Sharing Platform built with the latest web technologies.</strong>
+  </p>
+
+  <!-- Animated Typing Text -->
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=1000&color=FF0000&center=true&vCenter=true&width=600&lines=Next.js+App+Router;tRPC+%2B+React+Query;Drizzle+ORM+%2B+PostgreSQL;Mux+Video+Processing;Clerk+Authentication" alt="Typing SVG" />
+
+  <br />
+
+  <!-- Badges -->
+  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
+
+  <hr />
+</div>
+
+## 📖 Welcome for Beginners!
+If you are new to full-stack development, **Welcome!** 
+
+This project is a fully-featured clone of YouTube. It was designed not just to look like YouTube, but to operate like it under the hood. It uses an incredibly modern and powerful "tech stack" (the combination of tools used to build the app). 
+
+By analyzing this project, you will learn how a frontend (what the user sees) communicates safely and efficiently with a backend (the server and database), how videos are uploaded and processed into different qualities, and how complex data like nested comments and user relationships are stored.
+
+---
+
+## ✨ Features (What can this app do?)
+
+<details>
+<summary><b>🎬 Video Management & Playback</b></summary>
+
+* **Video Uploads:** Securely upload large video files using UploadThing.
+* **Video Processing:** Uses **Mux** behind the scenes to transcode videos, meaning it generates different resolutions (1080p, 720p, etc.) and provides a smooth, buffer-free streaming experience using HLS (HTTP Live Streaming).
+* **Thumbnails & Previews:** Automatically generate and select thumbnails, or upload custom ones. Animated GIF previews are supported when hovering over videos.
+* **Views Tracking:** Tracks every unique view natively.
+</details>
+
+<details>
+<summary><b>👤 Authentication & Users</b></summary>
+
+* **Secure Login/Signup:** Powered by **Clerk**. Supports Social Logins (Google, GitHub) and passwordless email links.
 * **User Profiles:** Every user has their own unique profile page showcasing their uploaded videos.
 * **Subscriptions:** Users can subscribe and unsubscribe to other creators. The home feed can filter videos purely by subscribed channels.
 </details>
