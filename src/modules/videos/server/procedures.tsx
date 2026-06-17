@@ -10,12 +10,10 @@ import { workflow } from "@/lib/workflow";
 
 export const videosRouter = createTRPCRouter({
 
-  
-   getManySubscribed: baseProcedure
+  getManySubscribed: protectedProcedure
     .input(
       z.object({
        
-        categoryId: z.string().uuid().nullish(),
         cursor: z
           .object({
             id: z.string().uuid(),
@@ -25,10 +23,22 @@ export const videosRouter = createTRPCRouter({
         limit: z.number().min(1).max(100),
       })
     )
-    .query(async ({  input }) => {
-      const { cursor, limit, categoryId } = input;
+    .query(async ({  input, ctx }) => {
+      const {id: userId} = ctx.user;
+      const { cursor, limit } = input;
+
+      const viewerSubscriptions = db.$with("viewer_subscriptions").as(
+        db 
+        .select({
+          userId: subscriptions.creatorId,
+
+        })
+        .from(subscriptions)
+        .where(eq(subscriptions.viewerId, userId))
+      )
 
       const data = await db
+        .with(viewerSubscriptions)
         .select({
            ...getTableColumns(videos),
            user: users,
@@ -48,10 +58,13 @@ export const videosRouter = createTRPCRouter({
         })
         .from(videos)
         .innerJoin(users, eq(videos.userId, users.id))
+        .innerJoin(
+          viewerSubscriptions,
+          eq(viewerSubscriptions.userId, users.id)
+        )
         .where(
           and(
             eq(videos.visibility, "public"),
-            categoryId ? eq(videos.categoryId, categoryId) : undefined,
             cursor
               ? or(
                 lt(videos.updatedAt, cursor.updatedAt),
@@ -82,6 +95,7 @@ export const videosRouter = createTRPCRouter({
         nextCursor,
       };
     }),
+
 
    getManyTrending: baseProcedure
     .input(
