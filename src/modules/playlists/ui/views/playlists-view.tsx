@@ -24,7 +24,7 @@ import { PlaylistsSection } from "../sections/playlists-section";
              <Button
               variant="outline"
               size="icon"
-              className="rounded-full"
+className="rounded-full transition-transform duration-200 hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-pink-500"
               onClick={() => setCreateModalOpen(true)}
              >
                <PlusIcon/>

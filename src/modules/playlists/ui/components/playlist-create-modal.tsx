@@ -12,8 +12,11 @@ import {
   FormItem
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import z from "zod";
 import { Input } from "@/components/ui/input";
+import { Loader2Icon } from "lucide-react";
+
 
 interface PlaylistCreateModalProps {
     open: boolean;
@@ -28,6 +31,7 @@ export const PlaylistCreateModal = ({
     open,
     onOpenChange,
 }: PlaylistCreateModalProps) => {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,11 +41,15 @@ export const PlaylistCreateModal = ({
 
     
 
+      const utils = trpc.useUtils();
+
       const create = trpc.playlists.create.useMutation({
-    onSuccess: () => {
+onSuccess: () => {
       toast.success("Playlist created 🎉 ");
-      form.reset()
-      onOpenChange(false)
+      form.reset();
+      onOpenChange(false);
+      utils.playlists.getMany.invalidate();
+      router.refresh();
     },
     onError:()=>{
       toast.error("Something went wrong ❌")
@@ -67,7 +75,7 @@ export const PlaylistCreateModal = ({
                     name="name"
                     render={({field})=>(
                         <FormItem>
-                            <FormLabel>name</FormLabel>
+                            <FormLabel>Name</FormLabel>
                             <FormControl>
                                 <Input
                                     {...field}
@@ -82,8 +90,13 @@ export const PlaylistCreateModal = ({
                         <Button
                         disabled={create.isPending}
                           type="submit"
+                          className="rounded-full"
                         >
-                            Create
+                            {create.isPending ? (
+                              <Loader2Icon className="animate-spin" />
+                            ) : (
+                              <>Create</>
+                            )}
                         </Button>
                      </div>
                     
