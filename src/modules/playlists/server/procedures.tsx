@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { db } from "@/db";
 import { and, desc, eq, getTableColumns,  lt, or } from "drizzle-orm"
-import {users, videos,  videoViews,videoReactions,  } from "@/db/schema";
+import {users, videos,  videoReactions } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 
 export const playlistsRouter = createTRPCRouter({
@@ -13,7 +13,7 @@ export const playlistsRouter = createTRPCRouter({
         cursor: z
           .object({
             id: z.string().uuid(),
-            viewedAt: z.date(),
+            likedAt: z.date(),
           })
           .nullish(),
         limit: z.number().min(1).max(100),
@@ -23,23 +23,26 @@ export const playlistsRouter = createTRPCRouter({
       const {id: userId} = ctx.user;
       const { cursor, limit} = input;
 
-      const viewerVideoViews = db.$with("viewer_video_views").as(
+      const viewerVideoReactions = db.$with("viewer_video_reactions").as(
         db
         .select({
-          videoId: videoViews.videoId,
-          viewedAt: videoViews.updatedAt,
+          videoId: videoReactions.videoId,
+          likedAt: videoReactions.updatedAt,
         })
-        .from(videoViews)
-        .where(eq(videoViews.userId, userId))
-      )
+        .from(videoReactions)
+        .where(and(
+          eq(videoReactions.userId, userId),
+          eq(videoReactions.type, "like"),
+        ))
+      );
 
       const data = await db
-      .with(viewerVideoViews)
+      .with(viewerVideoReactions)
         .select({
            ...getTableColumns(videos),
            user: users,
-           viewedAt: viewerVideoViews.viewedAt,
-            viewCount: db.$count(videoViews, eq(videoViews.videoId, videos.id)),
+           likedAt: viewerVideoReactions.likedAt,
+            viewCount: db.$count(videoReactions, eq(videoReactions.videoId, videos.id)),
           likeCount: db.$count(videoReactions, 
             and(
               eq(videoReactions.videoId, videos.id), 
@@ -55,22 +58,22 @@ export const playlistsRouter = createTRPCRouter({
         })
         .from(videos)
         .innerJoin(users, eq(videos.userId, users.id))
-        .innerJoin(viewerVideoViews, eq(videos.id, viewerVideoViews.videoId))
+        .innerJoin(viewerVideoReactions, eq(videos.id, viewerVideoReactions.videoId))
         .where(
           and(
             eq(videos.visibility, "public"),
             cursor
               ? or(
-                lt(viewerVideoViews.viewedAt, cursor.viewedAt),
+                lt(viewerVideoReactions.likedAt, cursor.likedAt),
                 and(
-                  eq(viewerVideoViews.viewedAt, cursor.viewedAt),
+                  eq(viewerVideoReactions.likedAt, cursor.likedAt),
                   lt(videos.id, cursor.id)
                 )
               )
               : undefined
           )
         )
-        .orderBy(desc(viewerVideoViews.viewedAt), desc(videos.id))
+        .orderBy(desc(viewerVideoReactions.likedAt), desc(videos.id))
         .limit(limit + 1);
 
       const hasMore = data.length > limit;
@@ -80,7 +83,7 @@ export const playlistsRouter = createTRPCRouter({
       const nextCursor = hasMore
         ? {
           id: lastItem.id,
-          viewedAt: lastItem.viewedAt,
+          likedAt: lastItem.likedAt,
         }
         : null;
 
@@ -98,7 +101,7 @@ export const playlistsRouter = createTRPCRouter({
         cursor: z
           .object({
             id: z.string().uuid(),
-            viewedAt: z.date(),
+            likedAt: z.date(),
           })
           .nullish(),
         limit: z.number().min(1).max(100),
@@ -108,23 +111,23 @@ export const playlistsRouter = createTRPCRouter({
       const {id: userId} = ctx.user;
       const { cursor, limit} = input;
 
-      const viewerVideoViews = db.$with("viewer_video_views").as(
+      const viewerVideoReactions = db.$with("viewer_video_views").as(
         db
         .select({
-          videoId: videoViews.videoId,
-          viewedAt: videoViews.updatedAt,
+          videoId: videoReactions.videoId,
+          likedAt: videoReactions.updatedAt,
         })
-        .from(videoViews)
-        .where(eq(videoViews.userId, userId))
+        .from(videoReactions)
+        .where(eq(videoReactions.userId, userId))
       )
 
       const data = await db
-      .with(viewerVideoViews)
+      .with(viewerVideoReactions)
         .select({
            ...getTableColumns(videos),
            user: users,
-           viewedAt: viewerVideoViews.viewedAt,
-            viewCount: db.$count(videoViews, eq(videoViews.videoId, videos.id)),
+           likedAt: viewerVideoReactions.likedAt,
+            viewCount: db.$count(videoReactions, eq(videoReactions.videoId, videos.id)),
           likeCount: db.$count(videoReactions, 
             and(
               eq(videoReactions.videoId, videos.id), 
@@ -140,22 +143,22 @@ export const playlistsRouter = createTRPCRouter({
         })
         .from(videos)
         .innerJoin(users, eq(videos.userId, users.id))
-        .innerJoin(viewerVideoViews, eq(videos.id, viewerVideoViews.videoId))
+        .innerJoin(viewerVideoReactions, eq(videos.id, viewerVideoReactions.videoId))
         .where(
           and(
             eq(videos.visibility, "public"),
             cursor
               ? or(
-                lt(viewerVideoViews.viewedAt, cursor.viewedAt),
+                lt(viewerVideoReactions.likedAt, cursor.likedAt),
                 and(
-                  eq(viewerVideoViews.viewedAt, cursor.viewedAt),
+                  eq(viewerVideoReactions.likedAt, cursor.likedAt),
                   lt(videos.id, cursor.id)
                 )
               )
               : undefined
           )
         )
-        .orderBy(desc(viewerVideoViews.viewedAt), desc(videos.id))
+        .orderBy(desc(viewerVideoReactions.likedAt), desc(videos.id))
         .limit(limit + 1);
 
       const hasMore = data.length > limit;
@@ -165,7 +168,7 @@ export const playlistsRouter = createTRPCRouter({
       const nextCursor = hasMore
         ? {
           id: lastItem.id,
-          viewedAt: lastItem.viewedAt,
+          likedAt: lastItem.likedAt,
         }
         : null;
 

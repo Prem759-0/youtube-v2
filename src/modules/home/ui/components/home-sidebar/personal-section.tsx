@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import {
     SidebarGroup, 
     SidebarGroupContent, 
@@ -31,7 +32,7 @@ const items = [
     },
     {
         title: "All playlists",
-        url: "/feed/trending",
+        url: "/playlists",
         icon: ListVideoIcon,
          auth: true,
     },
@@ -41,6 +42,7 @@ export const PersonalSection = () => {
  
     const clerk = useClerk();
      const {isSignedIn} = useAuth();
+     const pathname = usePathname();
 
     return (
         <SidebarGroup>
@@ -52,7 +54,7 @@ export const PersonalSection = () => {
                             <SidebarMenuButton
                               tooltip={item.title}
                               asChild
-                              isActive={false}
+                              isActive={pathname === item.url}
                               onClick={(e)=>{
                                 if (!isSignedIn && item.auth){
                                     e.preventDefault();

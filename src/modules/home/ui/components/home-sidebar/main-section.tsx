@@ -1,6 +1,7 @@
 "use client";
 
 
+import { usePathname } from "next/navigation";
 import {
     SidebarGroup, 
     SidebarGroupContent, 
@@ -38,6 +39,7 @@ const items = [
 export const MainSection = () => {
     const clerk = useClerk();
     const {isSignedIn} = useAuth();
+    const pathname = usePathname();
 
 
     return (
@@ -49,7 +51,7 @@ export const MainSection = () => {
                             <SidebarMenuButton
                               tooltip={item.title}
                               asChild
-                              isActive={false}
+                              isActive={pathname === item.url}
                               onClick={(e)=>{
                                 if (!isSignedIn && item.auth){
                                     e.preventDefault();
