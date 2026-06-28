@@ -5,12 +5,13 @@ import { Suspense } from 'react';
 import { TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { VideoGridCard, VideoGridCardSkeleton } from '@/modules/videos/ui/components/video-grid-card';
-import { VideoRowCard, VideoRowCardSkeleton } from '@/modules/videos/ui/components/video-row-card';
+import {  VideoGridCardSkeleton } from '@/modules/videos/ui/components/video-grid-card';
+import {  VideoRowCardSkeleton } from '@/modules/videos/ui/components/video-row-card';
 
 import { InfiniteScroll } from '@/components/infinite-scroll';
 import { DEFAULT_LIMIT } from '@/constants';
 import { trpc } from '@/trpc/client';
+import { PlaylistGridCard } from '../components/playlist-grid-card';
 
 export const PlaylistsSection = () => {
 	return (
@@ -59,7 +60,15 @@ const PlaylistsSectionSuspense = () => {
 	return (
 		<>
 			<div className='flex flex-col gap-x-4 gap-y-10 '>
-				{JSON.stringify(playlists)}
+				{playlists.pages
+				   .flatMap((page) => page.items)
+				   .map((playlist) => (
+					<PlaylistGridCard
+					  key={playlist.id}
+					  data={playlist}
+					/>
+				   ))
+				}
 			</div>
 
 		
