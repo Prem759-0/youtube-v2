@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 
 import { THUMBNAIL_FALLBACK } from '@/modules/videos/constants';

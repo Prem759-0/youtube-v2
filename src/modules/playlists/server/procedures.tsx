@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { db } from "@/db";
-import { and, desc, eq, getTableColumns,  inArray,  lt, or, sql } from "drizzle-orm"
-import {users, videos,  videoReactions, playlists, playlistVideos, videoViews, videoVisibility, reactionType ,ReactionType} from "@/db/schema";
+import { and, desc, eq, getTableColumns, inArray, lt, or, sql } from "drizzle-orm"
+import { users, videos, videoReactions, playlists, playlistVideos, videoViews, ReactionType } from "@/db/schema";
 import { baseProcedure, createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import { playlistCreateSchema } from "../schemas/playlist-create-schema";
@@ -76,7 +76,7 @@ export const playlistsRouter = createTRPCRouter({
 					),
 					likeCount: db.$count(
 						videoReactions,
-						and(eq(videoReactions.videoId, videos.id), eq(videoReactions.type, reactionType.LIKE))
+						and(eq(videoReactions.videoId, videos.id), eq(videoReactions.type, ReactionType.LIKE))
 					),
 					user: users,
 					viewCount: db.$count(videoViews, eq(videoViews.videoId, videos.id)),
@@ -87,7 +87,7 @@ export const playlistsRouter = createTRPCRouter({
 				.where(
 					and(
 						or(
-							eq(videos.visibility, videoVisibility.PUBLIC), 
+							eq(videos.visibility, 'public'),
 							currentUserId ? eq(videos.userId, currentUserId) : undefined
 						),
 						cursor
@@ -323,10 +323,6 @@ export const playlistsRouter = createTRPCRouter({
         })
         .from(playlists)
         .innerJoin(users, eq(playlists.userId, users.id))
-        .leftJoin(
-          playlistVideos,
-          eq(playlistVideos.playlistId, playlists.id)
-        )
         .where(
           and(
             eq(playlists.userId, userId),
@@ -362,27 +358,6 @@ export const playlistsRouter = createTRPCRouter({
       };
     }),
 
-
-  create: protectedProcedure
-  .input(z.object({name:z.string().min(1)}))
-  .mutation(async ({input, ctx}) => {
-    const {name} = input;
-    const {id: userId} = ctx.user;
-
-    const [createdPlaylist] = await db
-      .insert(playlists)
-      .values({
-        userId,
-        name,
-      })
-      .returning()
-
-      if(!createdPlaylist){
-        throw new TRPCError({code: "BAD_REQUEST"})
-      }
-
-    return createdPlaylist;
-  }),
 
   getLiked: protectedProcedure
     .input(

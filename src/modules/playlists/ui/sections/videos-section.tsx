@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import { TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { VideoGridCard, VideoGridCardSkeleton } from '@/modules/videos/ui/components/video-grid-card';
 import { VideoRowCard, VideoRowCardSkeleton } from '@/modules/videos/ui/components/video-row-card';

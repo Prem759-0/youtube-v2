@@ -1,5 +1,7 @@
 import { Loader2Icon } from 'lucide-react';
+import { useState } from 'react';
 
+import { Button } from '@/components/ui/button';
 import { InfiniteScroll } from '@/components/infinite-scroll';
 import { DEFAULT_LIMIT } from '@/constants';
 import { trpc } from '@/trpc/client';
@@ -14,6 +16,7 @@ interface PlaylistAddModalProps {
 }
 
 export const PlaylistAddModal = ({ onOpenChange, open, videoId }: PlaylistAddModalProps) => {
+	const [hasSelectedPlaylist, setHasSelectedPlaylist] = useState(false);
 	const utils = trpc.useUtils();
 
 	const {
@@ -65,7 +68,18 @@ export const PlaylistAddModal = ({ onOpenChange, open, videoId }: PlaylistAddMod
 				{!isLoading &&
 					playlists?.pages
 						.flatMap((page) => page.items)
-						.map((playlist) => <PlaylistAddButton key={playlist.id} playlist={playlist} videoId={videoId} />)}
+						.map((playlist) => (
+							<PlaylistAddButton
+								key={playlist.id}
+								playlist={{
+									id: String(playlist.id),
+									name: String(playlist.name),
+									containsVideo: Boolean(playlist.containsVideo),
+								}}
+								videoId={videoId}
+								onSelectionChange={() => setHasSelectedPlaylist(true)}
+							/>
+						))}
 
 				{!isLoading && (
 					<InfiniteScroll
@@ -74,6 +88,14 @@ export const PlaylistAddModal = ({ onOpenChange, open, videoId }: PlaylistAddMod
 						fetchNextPage={fetchNextPage}
 						isManual
 					/>
+				)}
+
+				{hasSelectedPlaylist && (
+					<div className='mt-4 flex justify-end'>
+						<Button className='rounded-full px-6' onClick={() => onOpenChange(false)}>
+							Done
+						</Button>
+					</div>
 				)}
 			</div>
 		</ResponsiveModal>

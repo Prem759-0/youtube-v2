@@ -23,6 +23,12 @@ export const playlistVideos = pgTable("playlist_videos", {
     }),
 ]);
 
+export enum ReactionType {
+	LIKE = 'like',
+	DISLIKE = 'dislike',
+}
+
+
 export const playlistVideosRelations = relations(playlistVideos,({one})=>({
     playlist: one(playlists, {
         fields: [playlistVideos.playlistId],

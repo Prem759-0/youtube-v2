@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, type JSX } from 'react';
+import { useState } from 'react';
 
-import { ResponsiveModal } from '@/components/responsive-modal';
 import { Button, type ButtonProps } from '@/components/ui/button';
+import { ResponsiveModal } from '@/components/responsive-dialog';
 
 interface UseConfirmProps {
 	title: string;
@@ -15,13 +15,13 @@ export const useConfirm = ({
 	title,
 	message,
 	variant = 'destructive',
-}: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
+}: UseConfirmProps): [() => React.JSX.Element, () => Promise<boolean>] => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [resolver, setResolver] = useState<(value: boolean) => void>();
+	const [resolver, setResolver] = useState<((value: boolean) => void) | null>(null);
 
 	const confirm = () => {
 		setIsOpen(true);
-		return new Promise((resolve) => {
+		return new Promise<boolean>((resolve) => {
 			setResolver(() => resolve);
 		});
 	};
@@ -29,15 +29,21 @@ export const useConfirm = ({
 	const handleClose = () => {
 		setIsOpen(false);
 		resolver?.(false);
+		setResolver(null);
 	};
 
 	const handleConfirm = () => {
 		setIsOpen(false);
 		resolver?.(true);
+		setResolver(null);
 	};
 
 	const ConfirmationDialog = () => (
-		<ResponsiveModal title={title} description={message} open={isOpen} onOpenChange={handleClose}>
+		<ResponsiveModal
+			title={title}
+			open={isOpen}
+			onOpenChange={handleClose}
+		>
 			<div className='flex flex-col gap-2'>
 				<p className='text-sm text-muted-foreground'>{message}</p>
 
@@ -56,3 +62,4 @@ export const useConfirm = ({
 
 	return [ConfirmationDialog, confirm];
 };
+

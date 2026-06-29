@@ -1,19 +1,22 @@
 'use client';
 
 import { Loader2Icon, SquareCheckIcon, SquareIcon } from 'lucide-react';
-import toast from 'react-hot-toast';
-
-import type { PlaylistGetManyForVideoOuput } from '@/modules/playlists/types';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/trpc/client';
 
 interface PlaylistAddButtonProps {
-	playlist: PlaylistGetManyForVideoOuput['items'][number];
+	playlist: {
+		id: string;
+		name: string;
+		containsVideo?: any;
+	};
 	videoId: string;
+	onSelectionChange?: () => void;
 }
 
-export const PlaylistAddButton = ({ playlist, videoId }: PlaylistAddButtonProps) => {
+export const PlaylistAddButton = ({ playlist, videoId, onSelectionChange }: PlaylistAddButtonProps) => {
 	const utils = trpc.useUtils();
 
 	const addVideo = trpc.playlists.addVideo.useMutation({
@@ -48,6 +51,8 @@ export const PlaylistAddButton = ({ playlist, videoId }: PlaylistAddButtonProps)
 		} else {
 			addVideo.mutate({ playlistId: playlist.id, videoId });
 		}
+
+		onSelectionChange?.();
 	};
 
 	return (

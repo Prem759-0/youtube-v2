@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
 import { ShareIcon, Trash2Icon, TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -57,10 +57,10 @@ const PlaylistHeaderSectionSuspense = ({ playlistId }: PlaylistHeaderSectionProp
 
 	const remove = trpc.playlists.remove.useMutation({
 		onError: (error) => {
-			toast.error(error.message || 'Failed to remove playlist!');
+			toast.error(error.message || 'Failed to delete playlist!');
 		},
 		onSuccess: () => {
-			toast.success('Playlist removed!');
+			toast.success('Playlist deleted!');
 
 			utils.playlists.getMany.invalidate();
 
@@ -82,9 +82,9 @@ const PlaylistHeaderSectionSuspense = ({ playlistId }: PlaylistHeaderSectionProp
 		try {
 			await navigator.clipboard.writeText(fullUrl);
 
-			toast.success('Link copied to the copied!');
+			toast.success('Playlist link copied to clipboard!');
 		} catch (error) {
-			toast.error(error instanceof Error ? error.message : 'Failed to copy video url!');
+			toast.error(error instanceof Error ? error.message : 'Failed to copy playlist link!');
 		}
 	};
 

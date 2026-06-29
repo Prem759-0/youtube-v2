@@ -1,36 +1,32 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
+﻿import { z } from 'zod';
 
-export const env = createEnv({
-	client: {
-		NEXT_PUBLIC_APP_BASE_URL: z.url(),
-		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().trim().min(1),
-		NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().min(1).startsWith('/'),
-		NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().trim().min(1).startsWith('/'),
-		NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().min(1).startsWith('/'),
-		NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().trim().min(1).startsWith('/'),
-		NEXT_PUBLIC_MUX_IMAGE_BASE_URL: z.url(),
-		NEXT_PUBLIC_MUX_STREAM_BASE_URL: z.url(),
-	},
-	emptyStringAsUndefined: true,
-	isServer: typeof window === undefined,
-	onInvalidAccess: (variable: string) => {
-		console.error('❌ Attempted to access a server-side environment variable on the client: ', variable);
-		throw new Error('❌ Attempted to access a server-side environment variable on the client');
-	},
-	onValidationError: (issues) => {
-		console.error('❌ Invalid environment variables:', issues);
+const clientEnvSchema = z.object({
+	NEXT_PUBLIC_APP_BASE_URL: z.string().url().optional(),
+	NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().trim().min(1).optional(),
+	NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().trim().min(1).regex(/^\//).optional(),
+	NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().trim().min(1).regex(/^\//).optional(),
+	NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().trim().min(1).regex(/^\//).optional(),
+	NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().trim().min(1).regex(/^\//).optional(),
+	NEXT_PUBLIC_MUX_IMAGE_BASE_URL: z.string().url().optional(),
+	NEXT_PUBLIC_MUX_STREAM_BASE_URL: z.string().url().optional(),
+}).partial();
 
-		throw new Error('❌ Invalid environment variables');
-	},
-	runtimeEnv: {
-		NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
-		NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
-		NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
-		NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
-		NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL,
-		NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-		NEXT_PUBLIC_MUX_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_MUX_IMAGE_BASE_URL,
-		NEXT_PUBLIC_MUX_STREAM_BASE_URL: process.env.NEXT_PUBLIC_MUX_STREAM_BASE_URL,
-	},
+const parsedEnv = clientEnvSchema.safeParse({
+	NEXT_PUBLIC_APP_BASE_URL: process.env.NEXT_PUBLIC_APP_BASE_URL,
+	NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+	NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL:
+		process.env.NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
+	NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
+	NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL:
+		process.env.NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL,
+	NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+	NEXT_PUBLIC_MUX_IMAGE_BASE_URL: process.env.NEXT_PUBLIC_MUX_IMAGE_BASE_URL,
+	NEXT_PUBLIC_MUX_STREAM_BASE_URL: process.env.NEXT_PUBLIC_MUX_STREAM_BASE_URL,
 });
+
+if (!parsedEnv.success) {
+	console.error('❌ Invalid client environment variables:', parsedEnv.error.format());
+	throw new Error('❌ Invalid client environment variables');
+}
+
+export const env = parsedEnv.data;
