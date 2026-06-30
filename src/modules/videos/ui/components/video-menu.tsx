@@ -82,8 +82,13 @@ export const VideoMenu = ({
                     Add to playlist
                 </DropdownMenuItem>
                 {onRemove && (
-                <DropdownMenuItem onClick={()=>{}} >
-                    <Trash2Icon  className="mr-2 size-4"  />
+                <DropdownMenuItem
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        void handleRemove();
+                    }}
+                >
+                    <Trash2Icon className="mr-2 size-4" />
                     Remove
                 </DropdownMenuItem>
                 )}
