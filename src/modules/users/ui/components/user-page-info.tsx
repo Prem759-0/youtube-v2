@@ -91,7 +91,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 						<h1 className='text-xl font-bold'>{user.name}</h1>
 						<div className='mt-1 flex items-center gap-1 text-xs text-muted-foreground'>
 							<span>
-								{compactSubscriberCount} subscriber{user.subscriberCount === 1 ? '' : 's'}
+								{compactSubscriberCount} subscriber{subscriberCount === 1 ? '' : 's'}
 							</span>
 							<span>&bull;</span>
 							<span>
