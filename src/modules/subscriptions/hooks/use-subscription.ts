@@ -27,6 +27,8 @@ export const useSubscription = ({
             toast.success("Subscribed 🎉");
             setIsSubscribedState(true);
             setSubscriberCountState((count) => count + 1);
+            utils.subscriptions.getMany.invalidate();
+            utils.videos.getManySubscribed.invalidate();
 
             utils.users.getOne.invalidate({ id: userId });
             if (fromVideoId) {
@@ -46,6 +48,7 @@ export const useSubscription = ({
             toast.success("Unsubscribed 🎉");
             setIsSubscribedState(false);
             setSubscriberCountState((count) => Math.max(0, count - 1));
+            utils.subscriptions.getMany.invalidate();
             utils.videos.getManySubscribed.invalidate();
             utils.users.getOne.invalidate({ id: userId });
 
