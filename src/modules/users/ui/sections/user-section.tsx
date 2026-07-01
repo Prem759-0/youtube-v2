@@ -5,11 +5,11 @@ import { Suspense } from 'react';
 import { TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { UserPageBanner, UserPageBannerSkeleton } from '@/modules/users/ui/components/user-page-banner';
-import { UserPageInfo, UserPageInfoSkeleton } from '@/modules/users/ui/components/user-page-info';
 
 import { Separator } from '@/components/ui/separator';
 import { trpc } from '@/trpc/client';
+import { UserPageBanner, UserPageBannerSkeleton } from '../components/user-page-banner';
+import { UserPageInfo, UserPageInfoSkeleton } from '../components/user-page-info';
 
 interface UserSectionProps {
 	userId: string;
