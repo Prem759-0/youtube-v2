@@ -1,17 +1,16 @@
 'use client';
 
 import { Suspense } from 'react';
+import Link from 'next/link';
 
 import { TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
+
+import { SubscriptionItem, SubscriptionItemSkeleton } from '@/modules/subscriptions/ui/components/subscription-item';
 
 import { InfiniteScroll } from '@/components/infinite-scroll';
 import { DEFAULT_LIMIT } from '@/constants';
-import {
-	SubscriptionItem,
-	SubscriptionItemSkeleton,
-} from '@/modules/subscriptions/ui/components/subscription-list-item';
 import { trpc } from '@/trpc/client';
 
 export const SubscriptionsSection = () => {
@@ -32,7 +31,7 @@ export const SubscriptionsSection = () => {
 
 const SubscriptionsSectionSkeleton = () => {
 	return (
-		<div className='flex flex-col'>
+		<div className='flex flex-col gap-4'>
 			{Array.from({ length: 8 }).map((_, i) => (
 				<SubscriptionItemSkeleton key={i} />
 			))}
@@ -57,35 +56,30 @@ const SubscriptionsSectionSuspense = () => {
 			toast.error(error.message || 'Failed to unsubscribe this user!');
 		},
 		onSuccess: (data) => {
-			toast.success('Unsubscribed');
 			utils.videos.getManySubscribed.invalidate();
 			utils.subscriptions.getMany.invalidate();
 			utils.users.getOne.invalidate({ id: data.creatorId });
 		},
 	});
 
-	const items = subscriptions.pages.flatMap((page) => page.items);
-
-	if (items.length === 0) {
-		return <p className='text-sm text-muted-foreground'>You have not subscribed to any channels yet.</p>;
-	}
-
 	return (
 		<>
-			<div className='flex flex-col'>
-				{items.map((subscription) => (
-					<SubscriptionItem
-						key={subscription.creatorId}
-						name={subscription.user.name}
-						imageUrl={subscription.user.imageUrl}
-						subscriberCount={subscription.user.subscriberCount}
-						userId={subscription.user.id}
-						onUnsubscribe={() => {
-							unsubscribe.mutate({ userId: subscription.creatorId });
-						}}
-						isLoading={unsubscribe.isPending}
-					/>
-				))}
+			<div className='flex flex-col gap-4'>
+				{subscriptions.pages
+					.flatMap((page) => page.items)
+					.map((subscription) => (
+						<Link prefetch key={subscription.creatorId} href={`/users/${subscription.user.id}`}>
+							<SubscriptionItem
+								name={subscription.user.name}
+								imageUrl={subscription.user.imageUrl}
+								subscriberCount={subscription.user.subscriberCount}
+								onUnsubscribe={() => {
+									unsubscribe.mutate({ userId: subscription.creatorId });
+								}}
+								isLoading={unsubscribe.isPending}
+							/>
+						</Link>
+					))}
 			</div>
 
 			<InfiniteScroll
