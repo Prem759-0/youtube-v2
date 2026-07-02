@@ -42,8 +42,8 @@ export const CommentItem = ({
   const clerk = useClerk();
   const { userId } = useAuth();
 
-   const [isReplyOpen, setIsReplyOpen] = useState(false);
-   const [isRepliesOpen, setIsRepliesOpen] = useState(false);
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [isRepliesOpen, setIsRepliesOpen] = useState(false);
 
   const [expanded, setExpanded] = useState(false);
 
@@ -89,9 +89,9 @@ export const CommentItem = ({
   return (
     <div>
       <div className="flex gap-4">
-        
+
         {/* Avatar */}
-        <Link href={`/users/${comment.userId}`}>
+        <Link prefetch href={`/users/${comment.userId}`}>
           <UserAvatar
             size={variant === "comment" ? "lg" : "sm"}
             imageUrl={comment.user.imageUrl}
@@ -101,9 +101,9 @@ export const CommentItem = ({
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          
+
           {/* Name + Time */}
-          <Link href={`/users/${comment.userId}`}>
+          <Link prefetch href={`/users/${comment.userId}`}>
             <div className="flex items-center gap-2 mb-0.5">
               <span
                 className={cn(
@@ -146,7 +146,7 @@ export const CommentItem = ({
           {/* Actions */}
           <div className="flex items-center gap-2 mt-1">
             <div className="flex items-center gap-1.5">
-              
+
               {/* Like */}
               <Button
                 disabled={like.isPending}
@@ -159,7 +159,7 @@ export const CommentItem = ({
                   <ThumbsUpIcon
                     className={cn(
                       comment.viewerReaction === "like" &&
-                        "fill-black dark:fill-white"
+                      "fill-black dark:fill-white"
                     )}
                   />
                   {like.isPending && (
@@ -186,7 +186,7 @@ export const CommentItem = ({
                   <ThumbsDownIcon
                     className={cn(
                       comment.viewerReaction === "dislike" &&
-                        "fill-black dark:fill-white"
+                      "fill-black dark:fill-white"
                     )}
                   />
                   {dislike.isPending && (
@@ -232,7 +232,7 @@ export const CommentItem = ({
         </div>
 
         {/* Menu */}
-       
+
         {(variant === "comment" || comment.user.clerkId === userId) && (
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
@@ -260,20 +260,20 @@ export const CommentItem = ({
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-     
+
       </div>
-      {isReplyOpen &&  variant === "comment" && (
+      {isReplyOpen && variant === "comment" && (
         <div className="mt-4 pl-14">
-            <CommentForm
-              variant="reply"
-              parentId={comment.id}
-              videoId={comment.videoId}
-              onCancel={() => setIsReplyOpen(false)}
-              onSuccess={()=>{
-                setIsReplyOpen(false);
-                setIsRepliesOpen(true);
-              }}
-            />
+          <CommentForm
+            variant="reply"
+            parentId={comment.id}
+            videoId={comment.videoId}
+            onCancel={() => setIsReplyOpen(false)}
+            onSuccess={() => {
+              setIsReplyOpen(false);
+              setIsRepliesOpen(true);
+            }}
+          />
         </div>
       )}
       {comment.replyCount > 0 && variant === "comment" && (

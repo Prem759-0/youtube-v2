@@ -102,7 +102,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 				</div>
 
 				{clerkUser && user.clerkId === clerkUser.id ? (
-					<Link
+					<Link prefetch
 						prefetch
 						href='/studio'
 						className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 w-full rounded-full')}
@@ -127,8 +127,8 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 					name={user.name}
 					className={cn(
 						clerkUser &&
-							user.clerkId === clerkUser.id &&
-							'cursor-pointer transition-opacity duration-300 hover:opacity-80'
+						user.clerkId === clerkUser.id &&
+						'cursor-pointer transition-opacity duration-300 hover:opacity-80'
 					)}
 					onClick={() => {
 						if (loaded && clerkUser && user.clerkId === clerkUser.id) {
@@ -150,7 +150,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 					</div>
 
 					{clerkUser && user.clerkId === clerkUser.id ? (
-						<Link prefetch href='/studio' className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 rounded-full')}>
+						<Link prefetch prefetch href='/studio' className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 rounded-full')}>
 							Go to studio
 						</Link>
 					) : (

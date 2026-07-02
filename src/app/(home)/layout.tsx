@@ -11,5 +11,5 @@ const Layout = ({children}: LayoutProps) => {
         </HomeLayout>
     )
 }
-
+ 
 export default Layout;
