@@ -37,6 +37,52 @@ This project is ideal for learning full-stack architecture, real-time-like media
 
 ## ✨ Advanced Features Included
 
+### 💬 Chat Flow / Creator Workflow
+This project is designed around a smooth and modern creator experience, including an AI-assisted content pipeline that feels close to a real production platform.
+
+#### 1. Upload & Prepare Content
+- A creator uploads a video from the studio area
+- The file is securely handled through UploadThing
+- The video is processed and prepared for playback using Mux
+
+#### 2. AI-Assisted Metadata Generation
+Once the video is ready, the creator can:
+- generate a title with AI
+- generate a description with AI
+- generate a thumbnail with AI
+- review the output and edit it manually if needed
+
+#### 3. First-Time AI Guidance
+To make the flow beginner-friendly, the studio includes a guided onboarding experience:
+- a first-time info panel appears for each AI generator
+- the user sees how long generation may take
+- the UI explains when to use the revalidate/refresh action
+- the guide appears only once per generator for a smoother experience
+
+#### 4. Revalidate & Publish Workflow
+After AI generation finishes:
+- the creator can click the refresh/revalidate button
+- the latest title, description, and thumbnail are synced
+- the video details are updated in the studio preview
+
+#### 5. Social Interaction Flow
+After publishing, users can:
+- watch the video
+- leave comments and replies
+- like or dislike the video
+- interact with creators through subscriptions and profiles
+
+#### 6. Advanced Creator Experience
+The studio experience is built to feel like a professional platform with:
+- a polished dashboard interface
+- clean metadata editing flow
+- fast content management
+- smooth onboarding for new creators
+
+> This flow makes the app feel much more like a real YouTube-style creator platform rather than a simple upload demo.
+
+---
+
 ### 🎬 Video Experience
 - secure video uploads
 - video transcoding and streaming through Mux
