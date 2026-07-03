@@ -19,28 +19,18 @@
 </div>
 
 <p align="center">
-<<<<<<< HEAD
-  <a href="https://github.com/sanidhyy" title="Ask Me Anything!" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/blob/main/LICENSE" title="GitHub license" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits/main" title="Maintenance" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/branches" title="GitHub branches" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
+
+  <a href="https://github.com/Prem759-0" title="Ask Me Anything!" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/blob/main/LICENSE" title="GitHub license" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/license/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/commits/main" title="Maintenance" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/branches" title="GitHub branches" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/branches/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
   <a href="https://newtube-clone.vercel.app" title="Vercel status" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
-=======
-  <a href="https://github.com/sanidhyy" title="Ask Me Anything!"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/blob/main/LICENSE" title="GitHub license"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits/main" title="Maintenance"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/branches" title="GitHub branches"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits" title="Github commits"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/issues" title="GitHub issues"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/pulls" title="GitHub pull requests"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
-  <a href="https://newtube-clone.vercel.app" title="Vercel status"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone" title="Views"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsanidhyy%2Fyt-clone&count_bg=%2300A3FF&title_bg=%23000000&icon=github&icon_color=%23FFFFFF&title=views&edge_flat=true" alt="Views" /></a>
->>>>>>> f56fb50bef9bf4ba1d73eda1221b27a0cf2d6cd6
+  <a href="https://github.com/Prem759-0/youtube-v2" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
+  <a href="https://github.com/Prem759-0/youtube-v2" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
+
 </p>
 
 ---
@@ -64,7 +54,7 @@ A polished, modern content pipeline powers the studio experience from upload to 
 
 ```mermaid
 flowchart LR
-<<<<<<< HEAD
+
     A[📤 Upload video] --> B[⚡ Secure processing]
     B --> C[🤖 AI title]
     B --> D[📝 AI description]
@@ -80,9 +70,13 @@ flowchart LR
     I --> L[📈 Community growth]
     J --> L
     K --> L
+
 ```
 
 This flow is designed to feel closer to a real creator platform than a simple demo, with guided onboarding, fast iteration, and a smooth publishing loop.
+
+
+
 
 ### 🌈 Experience highlights
 - cinematic creator-first onboarding flow
@@ -90,18 +84,6 @@ This flow is designed to feel closer to a real creator platform than a simple de
 - polished revalidation and preview experience
 - strong community interaction loop after publish
 - premium, modern UI details throughout the studio
-=======
-    A[Upload video] --> B[Secure processing]
-    B --> C[AI title + description]
-    B --> D[AI thumbnail generation]
-    C --> E[Review and edit metadata]
-    D --> E
-    E --> F[Revalidate and publish]
-    F --> G[Watch, comment, react, subscribe]
-```
-
-This flow is designed to feel closer to a real creator platform than a simple demo, with guided onboarding, fast iteration, and a smooth publishing loop.
->>>>>>> f56fb50bef9bf4ba1d73eda1221b27a0cf2d6cd6
 
 ---
 
