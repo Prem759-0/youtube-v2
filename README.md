@@ -19,7 +19,7 @@
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask me anything" />
+  <img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" (https://github.com/sanidhyy) alt="Ask me anything" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
   <img src="https://img.shields.io/badge/Maintained-Yes-brightgreen.svg" alt="Maintained" />
   <img src="https://img.shields.io/badge/Branches-main-blue.svg" alt="Branches" />
