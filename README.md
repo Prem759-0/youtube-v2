@@ -18,6 +18,22 @@
   <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
 </div>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" alt="Ask me anything" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
+  <img src="https://img.shields.io/badge/Maintained-Yes-brightgreen.svg" alt="Maintained" />
+  <img src="https://img.shields.io/badge/Branches-main-blue.svg" alt="Branches" />
+  <img src="https://img.shields.io/badge/Commits-100%2B-blue.svg" alt="Commits" />
+  <img src="https://img.shields.io/badge/Issues-Open-ff69b4.svg" alt="Issues" />
+  <img src="https://img.shields.io/badge/PRs-Welcome-9cf.svg" alt="PRs" />
+  <img src="https://img.shields.io/badge/Vercel-Live-000000?logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/Views-Coming%20soon-blue.svg" alt="Views" />
+</p>
+
+<p align="center">
+  <em>Update the Vercel badge and view counter with your live deployment URL and GitHub repo once published.</em>
+</p>
+
 ---
 
 ## 🌟 Overview
