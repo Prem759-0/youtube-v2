@@ -177,7 +177,7 @@ export const videosRouter = createTRPCRouter({
       z.object({
        
         categoryId: z.string().uuid().nullish(),
-        userId: z.string().uuid().nullish(),
+        userId: z.union([z.literal('current'), z.string().uuid()]).nullish(),
         cursor: z
           .object({
             id: z.string().uuid(),
@@ -187,8 +187,25 @@ export const videosRouter = createTRPCRouter({
         limit: z.number().min(1).max(100),
       })
     )
-    .query(async ({  input }) => {
-      const { cursor, limit, categoryId , userId} = input;
+    .query(async ({  input, ctx }) => {
+      const { cursor, limit, categoryId } = input;
+      let { userId } = input;
+
+      if (userId === 'current') {
+        const { clerkUserId } = ctx;
+        if (!clerkUserId) {
+            throw new TRPCError({ code: 'UNAUTHORIZED', message: 'You must be logged in to access this resource' });
+        }
+        const [user] = await db
+            .select({ id: users.id })
+            .from(users)
+            .where(eq(users.clerkId, clerkUserId));
+
+        if (!user) {
+            throw new TRPCError({ code: 'NOT_FOUND', message: 'User not found' });
+        }
+        userId = user.id;
+      }
 
       const data = await db
         .select({
