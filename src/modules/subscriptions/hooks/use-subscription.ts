@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { useClerk } from '@clerk/nextjs';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { trpc } from '@/trpc/client';
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { TRPCError } from '@trpc/server';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 
 import { UploadDropzone } from '@/lib/uploadthing';

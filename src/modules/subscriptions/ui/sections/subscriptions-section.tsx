@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { TriangleAlertIcon } from 'lucide-react';
 import { ErrorBoundary } from 'react-error-boundary';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 import { SubscriptionItem, SubscriptionItemSkeleton } from '@/modules/subscriptions/ui/components/subscription-item';
 
