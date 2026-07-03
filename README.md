@@ -1,258 +1,466 @@
-
-# ⚒️ The app is under development 🛠️⚒️
+# YouTube v2
 
 <div align="center">
-
   <img src="./public/logo.svg" alt="YouTube Logo" width="120" height="120" />
-  
-  <h1 align="center">
-    YouTube v2
-  </h1>
-
-
-
+  <h1 align="center">YouTube v2</h1>
   <p align="center">
-    <strong>A highly scalable, modern Full-Stack Video Sharing Platform built with the latest web technologies.</strong>
+    <strong>A modern, scalable full-stack video sharing platform inspired by YouTube, built with Next.js, tRPC, Drizzle, Clerk, Mux, and Tailwind CSS.</strong>
   </p>
 
-  <!-- Animated Typing Text -->
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=1000&color=FF0000&center=true&vCenter=true&width=600&lines=Next.js+App+Router;tRPC+%2B+React+Query;Drizzle+ORM+%2B+PostgreSQL;Mux+Video+Processing;Clerk+Authentication" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&pause=1000&color=FF0000&center=true&vCenter=true&width=700&lines=Next.js+App+Router;TypeScript+Full+Stack;tRPC+React+Query;Drizzle+PostgreSQL;Mux+UploadThing+AI" alt="Typing SVG" />
 
   <br />
 
-  <!-- Badges -->
-  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
-
-  <hr />
 </div>
 
-## 📖 Welcome for Beginners!
-If you are new to full-stack development, **Welcome!** 
-
-This project is a fully-featured clone of YouTube. It was designed not just to look like YouTube, but to operate like it under the hood. It uses an incredibly modern and powerful "tech stack" (the combination of tools used to build the app). 
-
-By analyzing this project, you will learn how a frontend (what the user sees) communicates safely and efficiently with a backend (the server and database), how videos are uploaded and processed into different qualities, and how complex data like nested comments and user relationships are stored.
-
----
-
-## ✨ Features (What can this app do?)
-
-<details>
-<summary><b>🎬 Video Management & Playback</b></summary>
-
-* **Video Uploads:** Securely upload large video files using UploadThing.
-* **Video Processing:** Uses **Mux** behind the scenes to transcode videos, meaning it generates different resolutions (1080p, 720p, etc.) and provides a smooth, buffer-free streaming experience using HLS (HTTP Live Streaming).
-* **Thumbnails & Previews:** Automatically generate and select thumbnails, or upload custom ones. Animated GIF previews are supported when hovering over videos.
-* **Views Tracking:** Tracks every unique view natively.
-</details>
-
-<details>
-<summary><b>👤 Authentication & Users</b></summary>
-
-* **Secure Login/Signup:** Powered by **Clerk**. Supports Social Logins (Google, GitHub) and passwordless email links.
-* **User Profiles:** Every user has their own unique profile page showcasing their uploaded videos.
-* **Subscriptions:** Users can subscribe and unsubscribe to other creators. The home feed can filter videos purely by subscribed channels.
-</details>
-
-<details>
-<summary><b>💬 Social Interactions</b></summary>
-
-* **Comments & Replies:** A fully nested commenting system. Users can comment on videos and reply to other comments.
-* **Likes & Dislikes:** Users can like or dislike videos and individual comments.
-* **Creator Hearts:** Just like the real YouTube, if the creator of a video likes your comment or reply, a special "Creator Heart" with their avatar appears on it!
-</details>
-
-<details>
-<summary><b>🎛️ Studio Dashboard</b></summary>
-
-* **Creator Studio:** A dedicated `/studio` area where creators can manage their uploads.
-* **Video Visibility:** Toggle videos between `Public` and `Private`.
-* **Metadata Editing:** Edit video titles, descriptions, and categories.
-</details>
-
-<details>
-<summary><b>🎨 UI / UX Excellence</b></summary>
-
-* **Responsive Design:** Looks great on 4K Desktop monitors down to mobile screens.
-* **Dark / Light Mode:** Fully supports system and user-toggled theme preferences.
-* **Infinite Scrolling:** The homepage and comment sections load more items seamlessly as you scroll down.
-* **Skeleton Loaders:** Beautiful animated loading states so the user never stares at a blank screen.
-</details>
+<p align="center">
+  <a href="https://github.com/sanidhyy" title="Ask Me Anything!" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/blob/main/LICENSE" title="GitHub license" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/commits/main" title="Maintenance" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/branches" title="GitHub branches" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
+  <a href="https://newtube-clone.vercel.app" title="Vercel status" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
+</p>
 
 ---
 
-## 🛠️ The Tech Stack (What is it built with?)
+## 🌟 Overview
 
-Here is a simple breakdown of the core technologies running this project:
+YouTube v2 is a polished full-stack clone of YouTube-style video experiences. It includes:
+- secure authentication with Clerk
+- video upload and processing with UploadThing + Mux
+- AI-powered title, description, and thumbnail generation
+- nested comments and reactions
+- subscriptions, playlists, and user profiles
+- a studio page for creators
+- responsive UI with modern motion and polished visuals
 
-| Technology | Role in Project | Beginner Explanation |
-| :--- | :--- | :--- |
-| **Next.js (React)** | Frontend & Backend Framework | The core engine. It renders the UI (React) and also handles our server-side API routes. |
-| **TypeScript** | Language | JavaScript with "Types". It catches errors before we even run the code. |
-| **Tailwind CSS** | Styling | A utility-first CSS framework. We style elements directly in our HTML/JSX files using class names like `flex`, `text-center`. |
-| **Shadcn UI** | UI Components | Pre-built, accessible UI components (Buttons, Dialogs, Dropdowns) that we own and can customize. |
-| **Drizzle ORM** | Database Communicator | Allows us to write TypeScript code to interact with our SQL Database instead of raw SQL queries. |
-| **PostgreSQL** | Database | The workhorse database where we store Users, Videos data, Comments, and Likes. |
-| **tRPC** | API / Data Fetching | "TypeScript Remote Procedure Call". It allows our frontend to ask the backend for data securely, sharing the exact same TypeScript types. |
-| **Clerk** | Authentication | Handles all User Logins, Signups, and Sessions securely. |
-| **Mux** | Video Infrastructure | The magical service that takes an uploaded `.mp4` and turns it into a scalable, streamable video player. |
-| **UploadThing** | File Storage | Securely handles users uploading files (videos, images) directly to the cloud. |
+This project is ideal for learning full-stack architecture, real-time-like media workflows, AI integrations, and modern React application design.
 
----
+## ✨ Premium Creator Experience
 
-## 📂 Detailed Folder Structure
-
-To help you navigate, here is the complete map of the codebase and what every folder does.
+A polished, modern content pipeline powers the studio experience from upload to social engagement.
 
 ```mermaid
-graph TD;
-    Project_Root-->public;
-    Project_Root-->src;
-    src-->app;
-    src-->components;
-    src-->db;
-    src-->hooks;
-    src-->lib;
-    src-->modules;
-    src-->scripts;
-    src-->trpc;
+flowchart LR
+    A[📤 Upload video] --> B[⚡ Secure processing]
+    B --> C[🤖 AI title]
+    B --> D[📝 AI description]
+    B --> E[🖼️ AI thumbnail]
+    C --> F[✨ Review & refine]
+    D --> F
+    E --> F
+    F --> G[🔄 Revalidate studio]
+    G --> H[🚀 Publish & share]
+    H --> I[💬 Comment]
+    H --> J[👍 React]
+    H --> K[👥 Subscribe]
+    I --> L[📈 Community growth]
+    J --> L
+    K --> L
 ```
 
-### 1. `public/`
-Contains static assets that are served directly to the browser.
-* `favicon.png`, `logo.svg`, `user-placeholder.svg`: Static images and icons used globally across the app.
+This flow is designed to feel closer to a real creator platform than a simple demo, with guided onboarding, fast iteration, and a smooth publishing loop.
 
-### 2. `src/app/`
-This is the heart of **Next.js App Router**. The folder structure here dictates the URLs of the website.
-* `globals.css`: The main CSS file holding Tailwind directives and global CSS variables.
-* `layout.tsx`: The root wrapper of the entire application. Every page renders inside this.
-* `(auth)/`: The parentheses mean this is a "Route Group". It doesn't add to the URL. Contains `/sign-in` and `/sign-up` pages handled by Clerk.
-* `(home)/`: The main viewing area of the app (the feed, viewing a video).
-  * `page.tsx`: The actual Homepage (`/`).
-  * `videos/[videoId]/`: The dynamic route for watching a specific video (e.g., `/videos/12345`).
-* `(studio)/`: The Creator Studio dashboard for managing videos.
-* `api/`: Backend server routes that handle raw HTTP requests.
-  * `trpc/[trpc]/`: The single endpoint that handles ALL tRPC data requests.
-  * `uploadthing/`: Endpoints to handle secure file uploads.
-  * `users/webhook/` & `videos/webhook/`: Webhooks are listeners. When Clerk creates a new user, or Mux finishes processing a video, they send an HTTP ping to these files so our database can update itself automatically.
-
-### 3. `src/components/`
-Reusable UI building blocks used across the application.
-* `ui/`: Contains all **Shadcn UI** components. These are low-level building blocks like `button.tsx`, `dialog.tsx`, `input.tsx`, `skeleton.tsx`. 
-* `user-avatar.tsx`: A shared component to display user profile pictures.
-* `infinite-scroll.tsx`: A logic component that detects when a user scrolls to the bottom of the page to load more data.
-
-### 4. `src/db/`
-Everything related to the Database.
-* `index.ts`: Establishes the live connection to our PostgreSQL database using Drizzle.
-* `schema.ts`: **Highly Important File.** This defines the structure of our database tables (e.g., `users`, `videos`, `comments`, `commentReactions`). If you want to know what data a Video holds, look here.
-
-### 5. `src/hooks/`
-Custom React Hooks (reusable logic).
-* `use-mobile.ts`: Detects if the current user is on a mobile device based on screen width.
-* `use-intersection-observer.ts`: Detects when an element becomes visible on the screen (used for infinite scrolling).
-
-### 6. `src/lib/`
-Utility functions and SDK initializers.
-* `utils.ts`: Helper functions (like `cn` which elegantly merges Tailwind classes together).
-* `mux.ts`, `redis.ts`, `uploadthing.ts`: Initialization files for our third-party services.
-
-### 7. `src/modules/`
-**The Core Architecture.** Instead of putting all logic in giant files, this project groups code by "Features" (Domain-Driven Design). Every folder inside here represents a specific feature of the app.
-* **Folders:** `auth`, `categories`, `comments`, `home`, `studio`, `subscriptions`, `users`, `videos`.
-* Inside a typical module (e.g., `comments/`):
-  * `server/procedures.ts`: The backend tRPC code. This is where the database queries happen (e.g., fetching comments, deleting a comment).
-  * `ui/components/`: Frontend React components specifically tied to this feature (e.g., `comment-item.tsx`, `comment-form.tsx`).
-  * `types.ts`: TypeScript definitions for this feature.
-
-### 8. `src/scripts/`
-Standalone node scripts meant to be run from the terminal, usually for maintenance.
-* `seed-categories.ts`: A script to populate the database with default YouTube categories (Gaming, Music, Tech, etc.) if it's empty.
-
-### 9. `src/trpc/`
-The configuration for tRPC (connecting the frontend to the backend).
-* `init.ts`: Sets up the tRPC server and defines "Middlewares" (e.g., `protectedProcedure` ensures a user is logged in before they can run a function).
-* `routers/_app.ts`: The root router that combines all the individual module routers (videos, comments, users) into one giant API tree.
-* `client.tsx` & `server.tsx`: Helpers that allow us to fetch data from either the Browser (client) or the Next.js Server securely.
+### 🌈 Experience highlights
+- cinematic creator-first onboarding flow
+- smarter AI-assisted publishing steps
+- polished revalidation and preview experience
+- strong community interaction loop after publish
+- premium, modern UI details throughout the studio
 
 ---
 
-## 🚀 How to Run the Project Locally
+## ✨ Advanced Features Included
 
-If you want to run this application on your own machine, follow these steps:
+### 💬 Chat Flow / Creator Workflow
+This project is designed around a smooth and modern creator experience, including an AI-assisted content pipeline that feels close to a real production platform.
 
-### Prerequisites
-1. Ensure you have **Node.js** installed (v18 or higher recommended).
-2. Install **Bun** or use **npm** (The project uses `bun.lock`, so Bun is preferred).
-3. A PostgreSQL database (You can get a free one on [Neon.tech](https://neon.tech/)).
+#### 1. Upload & Prepare Content
+- A creator uploads a video from the studio area
+- The file is securely handled through UploadThing
+- The video is processed and prepared for playback using Mux
 
-### Step-by-step Setup
-1. **Install Dependencies:**
-   Open your terminal in the project folder and run:
-   ```bash
-   npm install
-   # or
-   bun install
-   ```
+#### 2. AI-Assisted Metadata Generation
+Once the video is ready, the creator can:
+- generate a title with AI
+- generate a description with AI
+- generate a thumbnail with AI
+- review the output and edit it manually if needed
 
-2. **Setup Environment Variables:**
-   Create a file named `.env` in the root folder. You will need to fill in various API keys. *Ask the project owner for these keys or set up your own accounts for Clerk, Mux, UploadThing, and your Database.*
-   ```env
-   # Example .env structure
-   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-   CLERK_SECRET_KEY=sk_test_...
-   DATABASE_URL=postgresql://user:password@host/dbname
-   UPLOADTHING_SECRET=sk_live_...
-   MUX_TOKEN_ID=...
-   MUX_TOKEN_SECRET=...
-   ```
+#### 3. First-Time AI Guidance
+To make the flow beginner-friendly, the studio includes a guided onboarding experience:
+- a first-time info panel appears for each AI generator
+- the user sees how long generation may take
+- the UI explains when to use the revalidate/refresh action
+- the guide appears only once per generator for a smoother experience
 
-3. **Push the Database Schema:**
-   Before running the app, you need to build the database tables.
-   ```bash
-   npm run db:push
-   # or
-   npx drizzle-kit push
-   ```
+#### 4. Revalidate & Publish Workflow
+After AI generation finishes:
+- the creator can click the refresh/revalidate button
+- the latest title, description, and thumbnail are synced
+- the video details are updated in the studio preview
 
-4. **Start the Development Server:**
-   ```bash
-   npm run dev
-   # or
-   bun dev
-   ```
-   *Your app is now running on `http://localhost:3000`!*
+#### 5. Social Interaction Flow
+After publishing, users can:
+- watch the video
+- leave comments and replies
+- like or dislike the video
+- interact with creators through subscriptions and profiles
 
----
+#### 6. Advanced Creator Experience
+The studio experience is built to feel like a professional platform with:
+- a polished dashboard interface
+- clean metadata editing flow
+- fast content management
+- smooth onboarding for new creators
 
-<div align="center">
-  <br/>
-  <h3>Built with ❤️ and Modern Web Technologies.</h3>
-  <p>Feel free to explore the code, break things, and learn how a real-world, production-ready full-stack application operates.</p>
-  
-  <!-- Cool animated CSS gradient line -->
-  <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4520-a447-11eb-908a-139a6edaec5c.gif" width="100%" />
-</div>
+> This flow makes the app feel much more like a real YouTube-style creator platform rather than a simple upload demo.
 
 ---
 
-## 💅 CSS & Styling Strategy
+### 🎬 Video Experience
+- secure video uploads
+- video transcoding and streaming through Mux
+- thumbnail upload and AI thumbnail generation
+- video previews and responsive player UI
+- view tracking and video metadata management
 
-This application relies on a modern, highly maintainable approach to CSS:
-* **Tailwind CSS:** Most of the layout, spacing, and typography are handled via utility classes, allowing for rapid iterations and a smaller overall CSS footprint.
-* **CSS Variables:** The `globals.css` defines root CSS variables for theme colors. This powers the clean, instantaneous Dark / Light mode toggling.
-* **Component-Scoped Logic:** Tools like `cn` (clsx + tailwind-merge) dynamically combine utility classes based on React state (e.g., highlighting an active filter or displaying an error state).
+### 🤖 AI Studio Features
+- AI-generated title suggestions
+- AI-generated descriptions
+- AI-generated thumbnails
+- first-time guided AI onboarding for creators
+
+### 👤 Social & Creator Features
+- user authentication and profiles
+- subscriptions and channel-like follow system
+- comments and replies
+- like/dislike reactions
+- playlists and saved content
+- creator studio dashboard
+
+### 🎨 UI / UX
+- modern responsive layout
+- polished cards, dialogs, skeleton load states, and animations
+- dark/light theme-ready styling
+- advanced component architecture with reusable UI primitives
 
 ---
 
-## 🔮 Future Roadmap
+## 🧱 Tech Stack
 
-We are constantly improving! Here are a few features planned for future updates:
-- [ ] **Playlists:** Allow users to curate and save multiple videos into distinct playlists.
-- [ ] **Live Streaming:** True real-time live broadcasting with live chat integration.
-- [ ] **Shorts:** A dedicated TikTok-style vertical scrolling feed for short-form content.
-- [ ] **Advanced Analytics:** A dashboard for creators with granular charts mapping views, audience retention, and watch times.
+| Technology | Purpose |
+| :--- | :--- |
+| Next.js 16 | App Router, SSR, API routes |
+| TypeScript | type-safe app development |
+| Tailwind CSS | utility-first styling |
+| Shadcn UI | accessible UI primitives |
+| tRPC | typed API layer |
+| React Query | caching and data fetching |
+| Drizzle ORM | database access |
+| PostgreSQL | main relational database |
+| Clerk | authentication and user management |
+| Mux | video upload, transcoding, streaming |
+| UploadThing | secure file uploads |
+| OpenRouter | AI title and description generation |
+| Leonardo AI | AI thumbnail generation |
+| Upstash | workflow and Redis services |
+
+---
+
+## 📁 Project Structure
+
+```text
+src/
+  app/                # Next.js routes and layouts
+  components/         # reusable UI components
+  db/                 # database connection and schema
+  hooks/              # custom React hooks
+  lib/                # utilities and service clients
+  modules/            # feature-based modules
+  scripts/            # maintenance scripts
+  trpc/               # tRPC setup and routers
+```
+
+---
+
+## 🚀 Quick Start
+
+### 1) Install Node.js
+Use Node.js 20+.
+
+### 2) Install dependencies
+Choose one:
+
+```bash
+npm install
+```
+
+or
+
+```bash
+bun install
+```
+
+### 3) Create environment file
+Copy the demo environment file:
+
+```bash
+cp .env.example .env.local
+```
+
+Then fill in all required values.
+
+### 4) Setup PostgreSQL database
+You can use:
+- Neon
+- Supabase Postgres
+- Railway
+- Local Postgres
+
+Then set the connection string:
+
+```env
+DATABASE_URL=postgresql://user:password@host:5432/dbname
+```
+
+### 5) Push the database schema
+
+```bash
+npx drizzle-kit push
+```
+
+or
+
+```bash
+bunx drizzle-kit push
+```
+
+### 6) Run the app
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+bun dev
+```
+
+Open:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 🔐 Environment Variables
+
+A complete example file is included at [.env.example](.env.example).
+
+### Required Variables
+
+#### App
+- NEXT_PUBLIC_APP_URL
+- NEXT_PUBLIC_APP_BASE_URL
+- NEXT_PUBLIC_VERCEL_URL
+- NEXT_PUBLIC_VERCEL_ENV
+
+#### Clerk Authentication
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+- CLERK_SECRET_KEY
+- CLERK_SIGNING_SECRET
+- NEXT_PUBLIC_CLERK_SIGN_IN_URL
+- NEXT_PUBLIC_CLERK_SIGN_UP_URL
+- NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL
+- NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL
+
+#### Database
+- DATABASE_URL
+
+#### Video / Media
+- MUX_TOKEN_ID
+- MUX_TOKEN_SECRET
+- MUX_WEBHOOK_SECRET
+
+#### File Uploads
+- UPLOADTHING_SECRET
+- UPLOADTHING_APP_ID
+
+#### AI Services
+- OPENROUTER_API_KEY
+- LEONARDO_API_KEY
+
+#### Workflow / Queue / Redis
+- QSTASH_TOKEN
+- UPSTASH_WORKFLOW_URL
+- UPSTASH_REDIS_REST_URL
+- UPSTASH_REDIS_REST_TOKEN
+
+---
+
+## 🔧 How to Get Each API Key
+
+### 1. Clerk
+1. Go to https://clerk.com
+2. Create an account and a new app
+3. In the Clerk dashboard, copy:
+   - Publishable Key
+   - Secret Key
+4. Enable webhooks and copy the signing secret
+
+### 2. PostgreSQL Database
+Use one of these:
+- Neon: https://neon.tech
+- Supabase: https://supabase.com
+- Railway: https://railway.app
+
+After creating a database, copy the connection string into DATABASE_URL.
+
+### 3. Mux
+1. Sign up at https://www.mux.com
+2. Create a new project
+3. Copy:
+   - Token ID
+   - Token Secret
+   - Webhook Secret
+
+### 4. UploadThing
+1. Go to https://uploadthing.com
+2. Create an account
+3. Create a project and copy:
+   - Secret Key
+   - App ID
+
+### 5. OpenRouter
+1. Go to https://openrouter.ai
+2. Create an account
+3. Generate an API key for AI title and description generation
+
+### 6. Leonardo AI
+1. Go to https://leonardo.ai
+2. Create an account
+3. Generate an API key for AI thumbnail generation
+
+### 7. Upstash
+1. Go to https://upstash.com
+2. Create a Redis database
+3. Create QStash
+4. Copy:
+   - Redis REST URL
+   - Redis REST Token
+   - QStash token
+   - workflow URL
+
+---
+
+## 🧪 Local Development Tips
+
+### Recommended tools
+- Node.js 20+
+- Bun or npm
+- Docker optional for local Postgres
+- ngrok for testing webhooks locally
+
+### Install ngrok
+If you want to test webhooks locally:
+
+#### Windows
+```powershell
+winget install --id ngrok.ngrok
+```
+
+#### macOS
+```bash
+brew install ngrok/ngrok/ngrok
+```
+
+#### Linux
+```bash
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+```
+
+Then start a tunnel:
+
+```bash
+ngrok http 3000
+```
+
+Use the public HTTPS forwarding URL for webhook endpoints.
+
+---
+
+## 🗂️ Database Setup
+
+Run:
+
+```bash
+npx drizzle-kit push
+```
+
+If you use Bun:
+
+```bash
+bunx drizzle-kit push
+```
+
+If you need to reset locally, be careful because it can remove or recreate data depending on your setup.
+
+---
+
+## 🧠 Advanced Project Highlights
+
+This project is designed to feel like a modern production-grade YouTube clone with:
+- smooth creator workflow
+- AI-assisted content creation
+- scalable media pipeline
+- modern UI motion and interaction design
+- typed end-to-end features through tRPC
+
+Planned and evolving areas include:
+- advanced creator analytics
+- live streaming
+- Shorts-style experience
+- richer social notifications
+- more personalized recommendation systems
+
+---
+
+## 🛡️ Security
+
+Please review [SECURITY.md](SECURITY.md) for responsible disclosure and security expectations.
+
+Do not commit:
+- .env files
+- secrets
+- private API keys
+- webhook secrets
+- database connection strings
+
+---
+
+## 📣 Contribution
+
+Contributions are welcome. If you want to help improve the project:
+1. fork the repository
+2. create a new branch
+3. make your change
+4. open a pull request
+
+---
+
+## ✅ Summary
+
+This project is already a strong full-stack foundation for a YouTube-like product. With the right services configured, it can become a powerful media platform with AI-assisted content creation, scalable uploads, rich creator tools, and a polished user experience.
