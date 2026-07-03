@@ -175,5 +175,6 @@ export const { POST } = serve(async (context) => {
       .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
   });
 
-  return { success: true, thumbnailUrl: uploadedThumbnail.url };
+  // No return value: Upstash workflow route expects Promise<void>
 });
+

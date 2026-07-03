@@ -77,6 +77,29 @@ interface FormSectionProps {
   videoId: string;
 }
 
+type AIGeneratorType = "title" | "description" | "thumbnail";
+
+const aiGuideContent: Record<AIGeneratorType, { title: string; timing: string; hint: string; statusTitle: string }> = {
+  title: {
+    title: "Generate title",
+    timing: "about 1–3 minutes",
+    hint: "This will create an SEO-friendly title for your video based on the transcript.",
+    statusTitle: "Title generation started",
+  },
+  description: {
+    title: "Generate description",
+    timing: "about 1–3 minutes",
+    hint: "This will create a short summary and description for your video.",
+    statusTitle: "Description generation started",
+  },
+  thumbnail: {
+    title: "Generate thumbnail",
+    timing: "about 2–5 minutes",
+    hint: "This will create an AI thumbnail for your video. The process can take a little longer.",
+    statusTitle: "Thumbnail generation started",
+  },
+};
+
 export const FormSection = ({ videoId }: FormSectionProps) => {
   return (
     <Suspense fallback={<FormSectionSkeleton />}>
@@ -174,6 +197,8 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isReloading, setIsReloading] = useState(false);
+  const [activeGuide, setActiveGuide] = useState<AIGeneratorType | null>(null);
+  const [activeAiStatus, setActiveAiStatus] = useState<AIGeneratorType | null>(null);
 
   const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
     onSuccess: () => {
@@ -256,6 +281,56 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const onDelete = () => {
     deleteVideo({ id: video.id });
     setIsDeleteDialogOpen(false);
+  };
+
+  const getGuideStorageKey = (type: AIGeneratorType) => `studio_ai_guide_seen_${videoId}_${type}`;
+
+  const handleAIGeneratorClick = (type: AIGeneratorType, action: () => void) => {
+    if (typeof window === "undefined") {
+      action();
+      return;
+    }
+
+    const storageKey = getGuideStorageKey(type);
+    const hasSeenGuide = window.localStorage.getItem(storageKey) === "true";
+
+    if (!hasSeenGuide) {
+      setActiveGuide(type);
+      return;
+    }
+
+    action();
+  };
+
+  const handleGuideDismiss = (type: AIGeneratorType) => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(getGuideStorageKey(type), "true");
+    }
+
+    setActiveGuide(null);
+  };
+
+  const handleGuideConfirm = (type: AIGeneratorType) => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(getGuideStorageKey(type), "true");
+    }
+
+    setActiveGuide(null);
+
+    if (type === "title") {
+      setActiveAiStatus("title");
+      generateTitle.mutate({ id: videoId });
+      return;
+    }
+
+    if (type === "description") {
+      setActiveAiStatus("description");
+      generateDescription.mutate({ id: videoId });
+      return;
+    }
+
+    setActiveAiStatus("thumbnail");
+    setThumbnailGenerateModalOpen(true);
   };
 
   const fullUrl = `${APP_URL
@@ -381,7 +456,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                           variant="outline"
                           type="button"
                           className="rounded-full size-6 [&_svg]:size-3"
-                          onClick={() => generateTitle.mutate({ id: videoId })}
+                          onClick={() => handleAIGeneratorClick("title", () => generateTitle.mutate({ id: videoId }))}
                           disabled={generateTitle.isPending || !video.muxTrackId}
                         >
                           {generateTitle.isPending
@@ -398,6 +473,28 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         placeholder="Add a title to your video"
                       />
                     </FormControl>
+                    {activeGuide === "title" && (
+                      <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
+                        <div className="font-semibold">{aiGuideContent.title.title}</div>
+                        <p className="mt-1">{aiGuideContent.title.hint}</p>
+                        <p className="mt-1">Estimated time: {aiGuideContent.title.timing}.</p>
+                        <p className="mt-1">After it finishes, click the refresh button to revalidate and update the result.</p>
+                        <div className="mt-3 flex justify-end gap-2">
+                          <Button type="button" variant="ghost" size="sm" onClick={() => handleGuideDismiss("title")}>
+                            Later
+                          </Button>
+                          <Button type="button" size="sm" onClick={() => handleGuideConfirm("title")}>
+                            Got it
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    {activeAiStatus === "title" && (
+                      <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-300">
+                        <div className="font-semibold">{aiGuideContent.title.statusTitle}</div>
+                        <p className="mt-1">Your request is now running in the background. This usually takes {aiGuideContent.title.timing}. When it is done, use the refresh button at the top-right to revalidate.</p>
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -417,7 +514,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                           variant="outline"
                           type="button"
                           className="rounded-full size-6 [&_svg]:size-3"
-                          onClick={() => generateDescription.mutate({ id: videoId })}
+                          onClick={() => handleAIGeneratorClick("description", () => generateDescription.mutate({ id: videoId }))}
                           disabled={generateDescription.isPending || !video.muxTrackId}
                         >
                           {generateDescription.isPending
@@ -435,6 +532,28 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         placeholder="Add a description to your video"
                       />
                     </FormControl>
+                    {activeGuide === "description" && (
+                      <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
+                        <div className="font-semibold">{aiGuideContent.description.title}</div>
+                        <p className="mt-1">{aiGuideContent.description.hint}</p>
+                        <p className="mt-1">Estimated time: {aiGuideContent.description.timing}.</p>
+                        <p className="mt-1">After it finishes, click the refresh button to revalidate and update the result.</p>
+                        <div className="mt-3 flex justify-end gap-2">
+                          <Button type="button" variant="ghost" size="sm" onClick={() => handleGuideDismiss("description")}>
+                            Later
+                          </Button>
+                          <Button type="button" size="sm" onClick={() => handleGuideConfirm("description")}>
+                            Got it
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    {activeAiStatus === "description" && (
+                      <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-300">
+                        <div className="font-semibold">{aiGuideContent.description.statusTitle}</div>
+                        <p className="mt-1">Your request is now running in the background. This usually takes {aiGuideContent.description.timing}. When it is done, use the refresh button at the top-right to revalidate.</p>
+                      </div>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -498,7 +617,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                             </DropdownMenuItem>
 
                             <DropdownMenuItem
-                              onClick={() => setThumbnailGenerateModalOpen(true)}
+                              onClick={() => handleAIGeneratorClick("thumbnail", () => setThumbnailGenerateModalOpen(true))}
                             >
                               <SparklesIcon className="size-4 mr-1" />
                               AI-generated
@@ -512,6 +631,28 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         </DropdownMenu>
                       </div>
                     </FormControl>
+                    {activeGuide === "thumbnail" && (
+                      <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
+                        <div className="font-semibold">{aiGuideContent.thumbnail.title}</div>
+                        <p className="mt-1">{aiGuideContent.thumbnail.hint}</p>
+                        <p className="mt-1">Estimated time: {aiGuideContent.thumbnail.timing}.</p>
+                        <p className="mt-1">After it finishes, click the refresh button to revalidate and update the result.</p>
+                        <div className="mt-3 flex justify-end gap-2">
+                          <Button type="button" variant="ghost" size="sm" onClick={() => handleGuideDismiss("thumbnail")}>
+                            Later
+                          </Button>
+                          <Button type="button" size="sm" onClick={() => handleGuideConfirm("thumbnail")}>
+                            Got it
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    {activeAiStatus === "thumbnail" && (
+                      <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:text-amber-300">
+                        <div className="font-semibold">{aiGuideContent.thumbnail.statusTitle}</div>
+                        <p className="mt-1">Your request is now running in the background. This usually takes {aiGuideContent.thumbnail.timing}. When it is done, use the refresh button at the top-right to revalidate.</p>
+                      </div>
+                    )}
                   </FormItem>
                 )}
               />
@@ -569,7 +710,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                     <div className="flex flex-col gap-y-1">
                       <p className="text-muted-foreground text-xs">Video link</p>
                       <div className="flex items-center gap-x-2">
-                        <Link prefetch href={`/videos/${video.id}`}>
+                        <Link prefetch  href={`/videos/${video.id}`}>
                           <p className="line-clamp-1 text-sm text-blue-500">
                             {fullUrl}
                           </p>

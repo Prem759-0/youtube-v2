@@ -19,7 +19,7 @@ export const OtherItems = () => {
 					<SidebarMenu>
 						<SidebarMenuItem>
 							<SidebarMenuButton tooltip='Source Code' asChild>
-								<Link prefetch
+								<Link prefetch 
 									href={links.sourceCode}
 									target='_blank'
 									rel='noopener noreferrer'

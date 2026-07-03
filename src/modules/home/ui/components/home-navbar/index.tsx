@@ -1,11 +1,11 @@
 "use client";
 
+import { Suspense, useState } from "react";
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { SearchInput } from "./home-input"
 import { AuthButton } from "@/modules/auth/ui/components/auth-button"
 import Image from "next/image";
 import Link from "next/link"
-import { useState } from "react";
 import { SearchIcon, ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +27,9 @@ export const HomeNavbar = () => {
                             <ArrowLeftIcon />
                         </Button>
                         <div className="flex-1 max-w-[720px] mx-auto">
-                            <SearchInput />
+                            <Suspense fallback={<div className="h-12" />}>
+                                <SearchInput />
+                            </Suspense>
                         </div>
                     </div>
                 )}
@@ -37,7 +39,7 @@ export const HomeNavbar = () => {
                         {/* Menu and Logo */}
                         <div className="flex items-center flex-shrink-0">
                             <SidebarTrigger />
-                            <Link prefetch href="/">
+                            <Link prefetch  href="/">
                                 <div className="p-1 sm:p-4 flex items-center gap-1">
                                     <Image src="/logo.svg" height={32} width={32} alt="Logo" />
                                     <p className="text-xl font-semibold tracking-tight">YouTube</p>
@@ -47,7 +49,9 @@ export const HomeNavbar = () => {
 
                         {/* Search bar - hidden on small screens */}
                         <div className="hidden sm:flex flex-1 justify-center max-w-[720px] mx-auto">
-                            <SearchInput />
+                            <Suspense fallback={<div className="h-12" />}>
+                                <SearchInput />
+                            </Suspense>
                         </div>
 
                         {/* Actions (Search icon for mobile + Auth) */}

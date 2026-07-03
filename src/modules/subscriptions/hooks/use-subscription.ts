@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useClerk } from '@clerk/nextjs';
 import { toast } from 'react-hot-toast';
@@ -8,7 +8,7 @@ import { trpc } from '@/trpc/client';
 interface UseSubscriptionProps {
 	isSubscribed: boolean;
 	userId: string;
-	initialSubscriberCount: number;
+	initialSubscriberCount?: number;
 }
 
 export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }: UseSubscriptionProps) => {
@@ -19,21 +19,23 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 	const [optimisticState, setOptimisticState] = useState({
 		hasOptimisticUpdate: false,
 		isSubscribed: isSubscribed,
-		subscriberCount: initialSubscriberCount,
+		subscriberCount: initialSubscriberCount ?? 0,
 	});
 
-	useState(() => {
+	// Sync optimistic state when props change, but only when there is no optimistic update
+	useEffect(() => {
 		if (
 			!optimisticState.hasOptimisticUpdate &&
-			(optimisticState.isSubscribed !== isSubscribed || optimisticState.subscriberCount !== initialSubscriberCount)
+			(optimisticState.isSubscribed !== isSubscribed || optimisticState.subscriberCount !== (initialSubscriberCount ?? 0))
 		) {
 			setOptimisticState({
 				hasOptimisticUpdate: false,
 				isSubscribed: isSubscribed,
-				subscriberCount: initialSubscriberCount,
+				subscriberCount: initialSubscriberCount ?? 0,
 			});
 		}
-	});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSubscribed, initialSubscriberCount]);
 
 	const subscribe = trpc.subscriptions.create.useMutation({
 		onError: (error) => {
@@ -41,7 +43,7 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 			setOptimisticState({
 				hasOptimisticUpdate: false,
 				isSubscribed: isSubscribed,
-				subscriberCount: initialSubscriberCount,
+					subscriberCount: initialSubscriberCount ?? 0,
 			});
 			if (error.data?.code === 'UNAUTHORIZED') {
 				clerk.openSignIn();
@@ -61,7 +63,7 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 			setOptimisticState({
 				hasOptimisticUpdate: false,
 				isSubscribed: isSubscribed,
-				subscriberCount: initialSubscriberCount,
+					subscriberCount: initialSubscriberCount ?? 0,
 			});
 			if (error.data?.code === 'UNAUTHORIZED') {
 				clerk.openSignIn();
@@ -77,33 +79,34 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 
 	const onClick = () => {
 		setOptimisticState((prevState) => {
-			if (prevState.isSubscribed) {
-				// Optimistically unsubscribe
-				return {
-					hasOptimisticUpdate: true,
-					isSubscribed: false,
-					subscriberCount: prevState.subscriberCount - 1,
-				};
-			} else {
-				// Optimistically subscribe
-				return {
-					hasOptimisticUpdate: true,
-					isSubscribed: true,
-					subscriberCount: prevState.subscriberCount + 1,
-				};
-			}
-		});
+			const wasSubscribed = prevState.isSubscribed;
+			const newState = wasSubscribed
+				? {
+					  hasOptimisticUpdate: true,
+					  isSubscribed: false,
+					  subscriberCount: prevState.subscriberCount - 1,
+				  }
+				: {
+					  hasOptimisticUpdate: true,
+					  isSubscribed: true,
+					  subscriberCount: prevState.subscriberCount + 1,
+				  };
 
-		if (optimisticState.isSubscribed) {
-			unsubscribe.mutate({ userId });
-		} else {
-			subscribe.mutate({ userId });
-		}
+			// Trigger mutation based on previous state
+			if (wasSubscribed) {
+				unsubscribe.mutate({ userId });
+			} else {
+				subscribe.mutate({ userId });
+			}
+
+			return newState;
+		});
 	};
 
 	return {
 		isSubscribed: optimisticState.isSubscribed,
 		onClick,
 		subscriberCount: optimisticState.subscriberCount,
+		isPending: subscribe.isPending || unsubscribe.isPending,
 	};
 };

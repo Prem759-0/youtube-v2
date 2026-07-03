@@ -73,7 +73,7 @@ export const FilterCarousel = ({
           {!isLoading && (
 
             <CarouselItem
-              onClick={() => onSelect(null)}
+              onClick={() => onSelect?.(null)}
               className="pl-3 basis-auto"
             >
               <Badge
@@ -98,7 +98,7 @@ export const FilterCarousel = ({
             <CarouselItem
               key={item.value}
               className="pl-3 basis-auto"
-              onClick={() => onSelect(item.value)}
+onClick={() => onSelect?.(item.value)}
             >
               <Badge
                 variant={value === item.value ? "default" : "secondary"}

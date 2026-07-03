@@ -102,8 +102,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 				</div>
 
 				{clerkUser && user.clerkId === clerkUser.id ? (
-					<Link prefetch
-						prefetch
+					<Link prefetch 
 						href='/studio'
 						className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 w-full rounded-full')}
 					>
@@ -150,7 +149,7 @@ export const UserPageInfo = ({ user }: UserPageInfoProps) => {
 					</div>
 
 					{clerkUser && user.clerkId === clerkUser.id ? (
-						<Link prefetch prefetch href='/studio' className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 rounded-full')}>
+						<Link prefetch  href='/studio' className={cn(buttonVariants({ variant: 'secondary' }), 'mt-3 rounded-full')}>
 							Go to studio
 						</Link>
 					) : (
