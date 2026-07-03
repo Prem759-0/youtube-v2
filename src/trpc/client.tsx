@@ -22,20 +22,12 @@ function getQueryClient() {
   // Browser: use singleton pattern to keep the same query client
   return (clientQueryClientSingleton ??= makeQueryClient());
 }
-
 function getUrl() {
   const base = (() => {
     if (typeof window !== 'undefined') return '';
     if (APP_URL) return `https://${APP_URL}`;
     return APP_URL;
   })();
-  // If we're in a browser, use a relative path.
-  if (typeof window !== 'undefined') return '/api/trpc';
-
-  // On the server, use the canonical app URL from environment variables.
-  // This ensures server-side rendering uses the correct production or preview URL.
-  const base = process.env.NEXT_PUBLIC_APP_URL || `http://localhost:3000`;
-
   return `${base}/api/trpc`;
 }
 export function TRPCProvider(
@@ -52,7 +44,7 @@ export function TRPCProvider(
     trpc.createClient({
       links: [
         httpBatchLink({
-           transformer: superjson, 
+          transformer: superjson,
           url: getUrl(),
           async headers() {
             const headers = new Headers();
