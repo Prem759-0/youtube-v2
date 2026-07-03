@@ -19,16 +19,16 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/sanidhyy" title="Ask Me Anything!" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/blob/main/LICENSE" title="GitHub license" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits/main" title="Maintenance" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/branches" title="GitHub branches" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
+  <a href="https://github.com/Prem759-0" title="Ask Me Anything!" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/blob/main/LICENSE" title="GitHub license" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/commits/main" title="Maintenance" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/branches" title="GitHub branches" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
   <a href="https://newtube-clone.vercel.app" title="Vercel status" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
-  <a href="https://github.com/sanidhyy/yt-clone" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
+  <a href="https://github.com/Prem759-0/yt-clone" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
 </p>
 
 ---
