@@ -2,6 +2,11 @@
   "name": "youtube-v2",
   "version": "0.1.0",
   "private": true,
+  "overrides": {
+    "@clerk/nextjs": {
+      "next": "15.5.20"
+    }
+  },
   "scripts": {
     "dev": "next dev  -p 3000 ",
     "build": "next build",
