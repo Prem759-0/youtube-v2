@@ -19,19 +19,15 @@
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg" (https://github.com/sanidhyy) alt="Ask me anything" />
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
-  <img src="https://img.shields.io/badge/Maintained-Yes-brightgreen.svg" alt="Maintained" />
-  <img src="https://img.shields.io/badge/Branches-main-blue.svg" alt="Branches" />
-  <img src="https://img.shields.io/badge/Commits-100%2B-blue.svg" alt="Commits" />
-  <img src="https://img.shields.io/badge/Issues-Open-ff69b4.svg" alt="Issues" />
-  <img src="https://img.shields.io/badge/PRs-Welcome-9cf.svg" alt="PRs" />
-  <img src="https://img.shields.io/badge/Vercel-Live-000000?logo=vercel&logoColor=white" alt="Vercel" />
-  <img src="https://img.shields.io/badge/Views-Coming%20soon-blue.svg" alt="Views" />
-</p>
-
-<p align="center">
-  <em>Update the Vercel badge and view counter with your live deployment URL and GitHub repo once published.</em>
+  <a href="https://github.com/sanidhyy" title="Ask Me Anything!"><img src="https://flat.badgen.net/static/Ask%20me/anything?icon=github&color=black&scale=1.01" alt="Ask Me Anything!" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/blob/main/LICENSE" title="GitHub license"><img src="https://flat.badgen.net/github/license/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub license" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/commits/main" title="Maintenance"><img src="https://flat.badgen.net/static/Maintained/yes?icon=github&color=black&scale=1.01" alt="Maintenance" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/branches" title="GitHub branches"><img src="https://flat.badgen.net/github/branches/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub branches" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/commits" title="Github commits"><img src="https://flat.badgen.net/github/commits/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/issues" title="GitHub issues"><img src="https://flat.badgen.net/github/issues/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone/pulls" title="GitHub pull requests"><img src="https://flat.badgen.net/github/prs/sanidhyy/yt-clone?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
+  <a href="https://newtube-clone.vercel.app" title="Vercel status"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
+  <a href="https://github.com/sanidhyy/yt-clone" title="Views"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsanidhyy%2Fyt-clone&count_bg=%2300A3FF&title_bg=%23000000&icon=github&icon_color=%23FFFFFF&title=views&edge_flat=true" alt="Views" /></a>
 </p>
 
 ---
@@ -48,6 +44,23 @@ YouTube v2 is a polished full-stack clone of YouTube-style video experiences. It
 - responsive UI with modern motion and polished visuals
 
 This project is ideal for learning full-stack architecture, real-time-like media workflows, AI integrations, and modern React application design.
+
+## ✨ Premium Creator Experience
+
+A polished, modern content pipeline powers the studio experience from upload to social engagement.
+
+```mermaid
+flowchart LR
+    A[Upload video] --> B[Secure processing]
+    B --> C[AI title + description]
+    B --> D[AI thumbnail generation]
+    C --> E[Review and edit metadata]
+    D --> E
+    E --> F[Revalidate and publish]
+    F --> G[Watch, comment, react, subscribe]
+```
+
+This flow is designed to feel closer to a real creator platform than a simple demo, with guided onboarding, fast iteration, and a smooth publishing loop.
 
 ---
 
