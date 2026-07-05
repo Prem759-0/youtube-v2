@@ -1,5 +1,5 @@
 
-# YouTube v2
+
 
 <div align="center">
   <img src="./public/logo.svg" alt="YouTube Logo" width="120" height="120" />
