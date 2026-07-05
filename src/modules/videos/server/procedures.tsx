@@ -17,6 +17,7 @@ const getPublicPlaybackId = (
   return publicPlaybackId ?? playbackIds?.[0]?.id ?? null;
 };
 
+
 const getReadyTextTrack = (
   tracks?: Array<{
     id?: string | null;
@@ -32,6 +33,7 @@ const getReadyTextTrack = (
       (!track.text_type || track.text_type === "subtitles" || track.text_type === "captions")
   );
 };
+
 
 export const updateVideoFromMuxUpload = async (uploadId: string) => {
   const upload = await mux.video.uploads.retrieve(uploadId);
