@@ -248,6 +248,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
         setIsDeleteDialogOpen(false);
         toast.error(error.message || "Something went wrong, please try again later ❌");
       },
+      },
+      onError: (error) =>
+        toast.error(error.message || "Something went wrong, please try again later ❌"),
     });
 
   const revalidate = trpc.videos.revalidate.useMutation({
