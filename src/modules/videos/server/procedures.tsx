@@ -8,6 +8,78 @@ import { TRPCError } from "@trpc/server";
 import { UTApi } from "uploadthing/server";
 import { workflow } from "@/lib/workflow";
 
+const MUX_IMAGE_BASE_URL = "https://image.mux.com";
+
+const getPublicPlaybackId = (
+  playbackIds?: Array<{ id?: string | null; policy?: string | null }> | null
+) => {
+  const publicPlaybackId = playbackIds?.find((playbackId) => playbackId.policy === "public")?.id;
+  return publicPlaybackId ?? playbackIds?.[0]?.id ?? null;
+};
+
+export const updateVideoFromMuxUpload = async (uploadId: string) => {
+  const upload = await mux.video.uploads.retrieve(uploadId);
+
+  if (!upload?.asset_id) {
+    throw new TRPCError({
+      code: "BAD_REQUEST",
+      message: "Mux asset id not found for this upload.",
+    });
+  }
+
+  const asset = await mux.video.assets.retrieve(upload.asset_id);
+  const playbackId = getPublicPlaybackId(asset.playback_ids);
+  const duration = asset.duration ? Math.round(asset.duration * 1000) : 0;
+
+  let thumbnailKey: string | null | undefined;
+  let thumbnailUrl: string | null | undefined;
+  let previewKey: string | null | undefined;
+  let previewUrl: string | null | undefined;
+
+  if (playbackId) {
+    const utapi = new UTApi();
+    const [uploadedThumbnail, uploadedPreview] = await utapi.uploadFilesFromUrl([
+      `${MUX_IMAGE_BASE_URL}/${playbackId}/thumbnail.jpg`,
+      `${MUX_IMAGE_BASE_URL}/${playbackId}/animated.gif`,
+    ]);
+
+    if (uploadedThumbnail.data) {
+      thumbnailKey = uploadedThumbnail.data.key;
+      thumbnailUrl = uploadedThumbnail.data.ufsUrl;
+    }
+
+    if (uploadedPreview.data) {
+      previewKey = uploadedPreview.data.key;
+      previewUrl = uploadedPreview.data.ufsUrl;
+    }
+  }
+
+  const [updatedVideo] = await db
+    .update(videos)
+    .set({
+      muxAssetId: asset.id,
+      muxPlaybackId: playbackId,
+      muxStatus: asset.status,
+      thumbnailKey,
+      thumbnailUrl,
+      previewKey,
+      previewUrl,
+      duration,
+      updatedAt: new Date(),
+    })
+    .where(eq(videos.muxUploadId, uploadId))
+    .returning();
+
+  if (!updatedVideo) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Video not found for this Mux upload.",
+    });
+  }
+
+  return updatedVideo;
+};
+
 export const videosRouter = createTRPCRouter({
 
   getManySubscribed: protectedProcedure
@@ -187,8 +259,22 @@ export const videosRouter = createTRPCRouter({
         limit: z.number().min(1).max(100),
       })
     )
-    .query(async ({  input }) => {
+    .query(async ({  input, ctx }) => {
       const { cursor, limit, categoryId , userId} = input;
+      const { clerkUserId } = ctx;
+
+      let currentUserId: string | undefined;
+
+      const [currentUser] = await db
+        .select({ id: users.id })
+        .from(users)
+        .where(inArray(users.clerkId, clerkUserId ? [clerkUserId] : []));
+
+      if (currentUser) {
+        currentUserId = currentUser.id;
+      }
+
+      const isCurrentUser = !!userId && currentUserId === userId;
 
       const data = await db
         .select({
@@ -212,7 +298,7 @@ export const videosRouter = createTRPCRouter({
         .innerJoin(users, eq(videos.userId, users.id))
         .where(
           and(
-            eq(videos.visibility, "public"),
+            !isCurrentUser ? eq(videos.visibility, "public") : undefined,
             userId ? eq(videos.userId, userId) : undefined,
             categoryId ? eq(videos.categoryId, categoryId) : undefined,
             cursor
@@ -399,22 +485,7 @@ export const videosRouter = createTRPCRouter({
         throw new TRPCError({code: "BAD_REQUEST"});
       }
 
-      const playbackId = asset.playback_ids?.[0].id;
-      const duration = asset.duration ? Math.round(asset.duration * 1000) : 0;
-
-
-      const [updatedVideo] = await db
-      .update(videos)
-      .set({
-        muxStatus: asset.status,
-        muxPlaybackId: playbackId,
-        muxAssetId: asset.id,
-        duration,
-      })
-       .where(eq(videos.id, input.id))
-      .returning();
-
-      return updatedVideo;
+      return updateVideoFromMuxUpload(existingVideo.muxUploadId);
   }),
 
 
@@ -455,7 +526,7 @@ export const videosRouter = createTRPCRouter({
        }
        const utapi = new UTApi();
 
-       const tempThumbnailUrl = `https://image.mux.com/${existingVideo.muxPlaybackId}/thumbnail.jpg`;
+       const tempThumbnailUrl = `${MUX_IMAGE_BASE_URL}/${existingVideo.muxPlaybackId}/thumbnail.jpg`;
        const uploadedThumbnail = await utapi.uploadFilesFromUrl(tempThumbnailUrl);
 
        if (!uploadedThumbnail.data){

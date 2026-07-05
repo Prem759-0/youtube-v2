@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -176,18 +176,6 @@ const FormSectionSkeleton = () => {
 }
 
 const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const storageKey = `studio_video_reloaded_${videoId}`;
-    const hasReloaded = sessionStorage.getItem(storageKey);
-
-    if (!hasReloaded) {
-      sessionStorage.setItem(storageKey, "true");
-      window.location.reload();
-    }
-  }, [videoId]);
-
   const router = useRouter();
   const utils = trpc.useUtils();
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
@@ -196,7 +184,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [isReloading, setIsReloading] = useState(false);
   const [activeGuide, setActiveGuide] = useState<AIGeneratorType | null>(null);
   const [activeAiStatus, setActiveAiStatus] = useState<AIGeneratorType | null>(null);
 
@@ -265,8 +252,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
       utils.studio.getOne.invalidate({ id: videoId });
       utils.videos.getOne.invalidate({ id: videoId });
       toast.success("Video revalidated successfully ✅");
-      setIsReloading(true);
-      window.location.reload();
     },
     onError: () =>
       toast.error("Something went wrong, please try again later ❌"),
@@ -346,7 +331,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   return (
     <>
-      {(revalidate.isPending || isReloading) && (
+      {revalidate.isPending && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300">
           {/* Top Loading Bar */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-red-600/20 overflow-hidden">
@@ -373,7 +358,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </div>
             <div className="flex flex-col items-center gap-1">
               <h3 className="text-white text-xl font-medium tracking-tight drop-shadow-md">
-                {isReloading ? "Reloading..." : "Revalidating video..."}
+                Revalidating video...
               </h3>
               <p className="text-white/70 text-sm drop-shadow-md">
                 Please wait while we sync your changes.
@@ -415,10 +400,10 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   variant="secondary"
                   className="bg-secondary hover:bg-secondary/80"
                   size="icon"
-                  disabled={revalidate.isPending || isReloading}
+                  disabled={revalidate.isPending}
                   onClick={() => revalidate.mutate({ id: videoId })}
                 >
-                  <RefreshCwIcon className={`size-5 ${revalidate.isPending || isReloading ? "animate-spin" : ""}`} />
+                  <RefreshCwIcon className={`size-5 ${revalidate.isPending ? "animate-spin" : ""}`} />
                 </Button>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">

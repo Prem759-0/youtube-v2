@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { videos } from "@/db/schema";
 import { VideoAssetErroredWebhookEvent, VideoAssetTrackReadyWebhookEvent,  VideoAssetReadyWebhookEvent, VideoAssetCreatedWebhookEvent, VideoAssetDeletedWebhookEvent} from "@mux/mux-node/resources/webhooks.mjs";
 import { UTApi } from "uploadthing/server";
+import { updateVideoFromMuxUpload } from "@/modules/videos/server/procedures";
 
 const SIGNING_SECRET = process.env.MUX_WEBHOOK_SECRET!;
 
@@ -73,53 +74,7 @@ export const POST = async (request: Request) => {
         break;
       }
 
-      // ✅ FIX: find PUBLIC playback ID
-      const playback = data.playback_ids?.find(
-        (p: any) => p.policy === "public"
-      );
-
-      if (!playback?.id) {
-        console.log("No public playback ID found");
-        break;
-      }
-
-      const tempThumbnailUrl = `https://image.mux.com/${playback.id}/thumbnail.jpg`;
-      const tempPreviewUrl = `https://image.mux.com/${playback.id}/animated.gif`;
-      const duration = data.duration ? Math.round(data.duration * 1000) : 0;
-
-      const utapi = new UTApi();
-      const [
-        uploadedThumbnail,
-        uploadedPreview,
-      ] = await utapi.uploadFilesFromUrl([
-        tempThumbnailUrl,
-        tempPreviewUrl,
-      ]);
-
-      if (!uploadedThumbnail.data || !uploadedPreview.data) {
-        return new Response("Error uploading thumbnail or preview", {
-          status: 500,
-        })
-      }
-
-      const {key: thumbnailKey, ufsUrl: thumbnailUrl} = uploadedThumbnail.data;
-      const {key: previewKey, ufsUrl: previewUrl} = uploadedPreview.data;
-
-
-
-      await db
-        .update(videos)
-        .set({
-          muxAssetId: data.id,
-          muxPlaybackId: playback.id,
-          muxStatus: "ready",
-          thumbnailUrl,
-          thumbnailKey,
-          previewUrl,
-          previewKey,
-          duration,
-        })
-        .where(eq(videos.muxUploadId, data.upload_id));
+      await updateVideoFromMuxUpload(data.upload_id);
 
       console.log("Successfully updated video metadata and thumbnail");
       break;
@@ -143,7 +98,7 @@ export const POST = async (request: Request) => {
     }
 
     case "video.asset.deleted": {
-      const data = payload.data as VideoAssetDeletedWebhookEvent["data"];
+       const data = payload.data as VideoAssetDeletedWebhookEvent["data"];
 
        if (!data.upload_id){
         return new Response("Missing upload Id", {status: 400});
@@ -151,9 +106,20 @@ export const POST = async (request: Request) => {
 
        console.log("Deleting video:", {uploadId: data.upload_id});
 
-       await db
+       const [removedVideo] = await db
        .delete(videos)
-       .where(eq(videos.muxUploadId, data.upload_id));
+       .where(eq(videos.muxUploadId, data.upload_id))
+       .returning();
+
+       if (removedVideo?.thumbnailKey) {
+        const utapi = new UTApi();
+        await utapi.deleteFiles(removedVideo.thumbnailKey);
+       }
+
+       if (removedVideo?.previewKey) {
+        const utapi = new UTApi();
+        await utapi.deleteFiles(removedVideo.previewKey);
+       }
        break;
     }
 
