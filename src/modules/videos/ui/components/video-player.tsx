@@ -1,7 +1,8 @@
 "use client";
 
 import MuxPlayer from "@mux/mux-player-react";
-import { useState } from "react";
+import type MuxPlayerElement from "@mux/mux-player";
+import { useEffect, useRef, useState } from "react";
 import "@player.style/yt";
 
 interface VideoPlayerProps {
@@ -32,7 +33,28 @@ export const VideoPlayer = ({
   title,
 }: VideoPlayerProps) => {
   const effectiveMuted = autoPlay ? true : muted;
+  const playerRef = useRef<MuxPlayerElement>(null);
   const [isBuffering, setIsBuffering] = useState(false);
+
+  useEffect(() => {
+    let frameId = 0;
+
+    const applyAutohide = () => {
+      const mediaController = playerRef.current?.mediaController;
+
+      if (!mediaController) {
+        frameId = window.requestAnimationFrame(applyAutohide);
+        return;
+      }
+
+      mediaController.autohide = "1";
+      mediaController.autohideOverControls = true;
+    };
+
+    applyAutohide();
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
   return (
     <div
@@ -75,6 +97,7 @@ export const VideoPlayer = ({
       `}</style>
 
       <MuxPlayer
+        ref={playerRef}
         theme="yt"
         playbackId={playbackId || ""}
         poster={thumbnailUrl || "/placeholder.svg"}
