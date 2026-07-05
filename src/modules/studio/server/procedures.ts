@@ -2,7 +2,7 @@ import { z } from "zod";
 import { db } from "@/db";
 import { comments, commentReactions, playlistVideos, ReactionType, videoReactions, videos, videoUpdateSchema, videoViews } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
-import { and, desc, eq, getTableColumns, inArray, lt, or } from "drizzle-orm";
+import { and, desc, eq, getTableColumns, inArray, lt, or, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { UTApi } from "uploadthing/server";
 import { mux } from "@/lib/mux";
@@ -156,11 +156,21 @@ export const studioRouter = createTRPCRouter({
           throw new TRPCError({ code: "NOT_FOUND" });
         }
 
-        const videoComments = await tx
-          .select({ id: comments.id })
-          .from(comments)
-          .where(eq(comments.videoId, id));
-        const commentIds = videoComments.map((comment) => comment.id);
+        const commentRows = await tx.execute<{ id: string }>(sql`
+          WITH RECURSIVE comment_tree AS (
+            SELECT id
+            FROM comments
+            WHERE video_id = ${id}
+
+            UNION
+
+            SELECT child.id
+            FROM comments child
+            INNER JOIN comment_tree parent ON child.parent_id = parent.id
+          )
+          SELECT id FROM comment_tree
+        `);
+        const commentIds = commentRows.rows.map((comment) => comment.id);
 
         await tx.delete(videoReactions).where(eq(videoReactions.videoId, id));
         await tx.delete(videoViews).where(eq(videoViews.videoId, id));
@@ -168,12 +178,19 @@ export const studioRouter = createTRPCRouter({
 
         if (commentIds.length > 0) {
           await tx.delete(commentReactions).where(inArray(commentReactions.commentId, commentIds));
-          await tx.delete(comments).where(eq(comments.videoId, id));
+          await tx.delete(comments).where(inArray(comments.id, commentIds));
         }
 
-        await tx.delete(videos).where(and(eq(videos.id, id), eq(videos.userId, userId)));
+        const [deletedVideo] = await tx
+          .delete(videos)
+          .where(and(eq(videos.id, id), eq(videos.userId, userId)))
+          .returning();
 
-        return existingVideo;
+        if (!deletedVideo) {
+          throw new TRPCError({ code: "NOT_FOUND" });
+        }
+
+        return deletedVideo;
       });
 
       try {

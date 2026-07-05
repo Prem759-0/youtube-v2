@@ -865,7 +865,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onDelete} disabled={isDeleting}>
+              <AlertDialogAction type="button" onClick={onDelete} disabled={isDeleting}>
                 {isDeleting ? "Deleting..." : "Continue"}
               </AlertDialogAction>
             </AlertDialogFooter>
