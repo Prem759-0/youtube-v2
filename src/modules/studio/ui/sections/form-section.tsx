@@ -180,7 +180,24 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
   const utils = trpc.useUtils();
   const [thumbnailModalOpen, setThumbnailModalOpen] = useState(false);
   const [thumbnailGenerateModalOpen, setThumbnailGenerateModalOpen] = useState(false);
-  const [video] = trpc.studio.getOne.useSuspenseQuery({ id: videoId });
+  const [video] = trpc.studio.getOne.useSuspenseQuery(
+    { id: videoId },
+    {
+      refetchInterval: (query) => {
+        const latestVideo = query.state.data;
+
+        if (!latestVideo) {
+          return 5_000;
+        }
+
+        const isVideoReady = latestVideo.muxStatus === "ready" && !!latestVideo.muxPlaybackId;
+        const areSubtitlesReady = latestVideo.muxTrackStatus === "ready" && !!latestVideo.muxTrackId;
+
+        return isVideoReady && areSubtitlesReady ? false : 5_000;
+      },
+      refetchOnWindowFocus: true,
+    }
+  );
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -249,10 +266,12 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     });
 
   const revalidate = trpc.videos.revalidate.useMutation({
-    onSuccess: () => {
-      utils.studio.getMany.invalidate();
-      utils.studio.getOne.invalidate({ id: videoId });
-      utils.videos.getOne.invalidate({ id: videoId });
+    onSuccess: async () => {
+      await Promise.all([
+        utils.studio.getMany.invalidate(),
+        utils.studio.getOne.invalidate({ id: videoId }),
+        utils.videos.getOne.invalidate({ id: videoId }),
+      ]);
       toast.success("Video revalidated successfully ✅");
     },
     onError: () =>
