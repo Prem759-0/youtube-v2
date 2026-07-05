@@ -240,13 +240,12 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     trpc.studio.delete.useMutation({
       onSuccess: async () => {
         await utils.studio.getMany.invalidate();
+        await utils.studio.getOne.invalidate({ id: videoId });
         toast.success("Video deleted successfully ✅");
         router.replace("/studio");
       },
-      onError: (error) => {
-        setIsDeleteDialogOpen(false);
-        toast.error(error.message || "Something went wrong, please try again later ❌");
-      },
+      onError: (error) =>
+        toast.error(error.message || "Something went wrong, please try again later ❌"),
     });
 
   const revalidate = trpc.videos.revalidate.useMutation({
