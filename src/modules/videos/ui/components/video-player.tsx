@@ -1,6 +1,7 @@
 "use client";
 
 import MuxPlayer from "@mux/mux-player-react";
+import { useState } from "react";
 import "@player.style/yt";
 
 interface VideoPlayerProps {
@@ -31,6 +32,7 @@ export const VideoPlayer = ({
   title,
 }: VideoPlayerProps) => {
   const effectiveMuted = autoPlay ? true : muted;
+  const [isBuffering, setIsBuffering] = useState(false);
 
   return (
     <div
@@ -85,13 +87,11 @@ export const VideoPlayer = ({
           --media-playback-rate-button-display: inline-flex !important;
         }
 
-        /* Force the actual button elements visible regardless of theme hiding */
+        /* Keep these buttons available at small sizes without overriding the player's YouTube-style auto-hide opacity. */
         mux-player media-captions-button,
         mux-player media-settings-menu-button,
         mux-player media-rendition-selectmenu {
           display: inline-flex !important;
-          visibility: visible !important;
-          opacity: 1 !important;
         }
 
         /* Fix icon sizes inside buttons on all screen sizes */
@@ -141,6 +141,12 @@ export const VideoPlayer = ({
         playbackRates={[0.5, 1, 1.25, 1.5, 2]}
         crossOrigin="anonymous"
         playsInline
+        onLoadStart={() => setIsBuffering(true)}
+        onWaiting={() => setIsBuffering(true)}
+        onStalled={() => setIsBuffering(true)}
+        onCanPlay={() => setIsBuffering(false)}
+        onPlaying={() => setIsBuffering(false)}
+        onError={() => setIsBuffering(false)}
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onEnded}
@@ -154,6 +160,18 @@ export const VideoPlayer = ({
           objectFit: "contain",
         }}
       />
+      {isBuffering && (
+        <div
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-black/20"
+          role="status"
+          aria-label="Loading video"
+        >
+          <div
+            className="size-12 rounded-full border-[3px] border-white/25 border-t-[#FF0000] animate-spin"
+            style={{ animationDuration: "0.75s" }}
+          />
+        </div>
+      )}
     </div>
   );
 };
