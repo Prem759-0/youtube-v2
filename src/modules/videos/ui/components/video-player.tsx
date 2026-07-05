@@ -1,6 +1,8 @@
 "use client";
 
 import MuxPlayer from "@mux/mux-player-react";
+import type MuxPlayerElement from "@mux/mux-player";
+import { useEffect, useRef, useState } from "react";
 import "@player.style/yt";
 
 interface VideoPlayerProps {
@@ -31,6 +33,28 @@ export const VideoPlayer = ({
   title,
 }: VideoPlayerProps) => {
   const effectiveMuted = autoPlay ? true : muted;
+  const playerRef = useRef<MuxPlayerElement>(null);
+  const [isBuffering, setIsBuffering] = useState(false);
+
+  useEffect(() => {
+    let frameId = 0;
+
+    const applyAutohide = () => {
+      const mediaController = playerRef.current?.mediaController;
+
+      if (!mediaController) {
+        frameId = window.requestAnimationFrame(applyAutohide);
+        return;
+      }
+
+      mediaController.autohide = "1";
+      mediaController.autohideOverControls = true;
+    };
+
+    applyAutohide();
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
 
   return (
     <div
@@ -43,56 +67,7 @@ export const VideoPlayer = ({
       }}
     >
       <style>{`
-        /*
-         * ROOT CAUSE: media-chrome adds breakpoint attributes (breakpointsm,
-         * breakpointmd, etc.) to media-controller based on CONTAINER SIZE.
-         * The YT theme uses these to hide buttons when player is "small".
-         * 
-         * FIX: Override every breakpoint state to force buttons always visible.
-         * These CSS vars cascade into the shadow DOM via the custom property
-         * inheritance mechanism — this is the ONLY way to style inside shadow DOM.
-         */
-
-        mux-player {
-          /* Force all key buttons visible at ALL container sizes */
-          --media-captions-button-display: inline-flex;
-          --media-settings-menu-button-display: inline-flex;
-          --media-rendition-selectmenu-display: inline-flex;
-          --media-playback-rate-button-display: inline-flex;
-
-          /* Prevent cinema mode */
-          position: relative !important;
-          width: 100% !important;
-          height: 100% !important;
-          max-width: 100% !important;
-          max-height: 100% !important;
-          display: block !important;
-        }
-
-        /*
-         * The YT theme hides buttons at small/medium breakpoints.
-         * Target EVERY breakpoint attribute state to force override.
-         * media-controller gets breakpointsm / breakpointmd attrs when small.
-         */
-        mux-player media-controller,
-        mux-player media-controller[breakpointsm],
-        mux-player media-controller[breakpointmd],
-        mux-player media-controller[breakpointlg],
-        mux-player media-controller[breakpointxl] {
-          --media-captions-button-display: inline-flex !important;
-          --media-settings-menu-button-display: inline-flex !important;
-          --media-rendition-selectmenu-display: inline-flex !important;
-          --media-playback-rate-button-display: inline-flex !important;
-        }
-
-        /* Force the actual button elements visible regardless of theme hiding */
-        mux-player media-captions-button,
-        mux-player media-settings-menu-button,
-        mux-player media-rendition-selectmenu {
-          display: inline-flex !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-        }
+        /* Let the YouTube player theme handle normal touch/click auto-hide behavior. */
 
         /* Fix icon sizes inside buttons on all screen sizes */
         mux-player media-captions-button svg,
@@ -102,12 +77,6 @@ export const VideoPlayer = ({
           height: 20px !important;
           min-width: 20px !important;
           min-height: 20px !important;
-        }
-
-        /* Ensure control bar doesn't clip/overflow-hide buttons */
-        mux-player media-control-bar {
-          overflow: visible !important;
-          flex-wrap: wrap !important;
         }
 
         /* Fix settings menu not getting clipped on small screens */
@@ -128,6 +97,7 @@ export const VideoPlayer = ({
       `}</style>
 
       <MuxPlayer
+        ref={playerRef}
         theme="yt"
         playbackId={playbackId || ""}
         poster={thumbnailUrl || "/placeholder.svg"}
@@ -141,6 +111,12 @@ export const VideoPlayer = ({
         playbackRates={[0.5, 1, 1.25, 1.5, 2]}
         crossOrigin="anonymous"
         playsInline
+        onLoadStart={() => setIsBuffering(true)}
+        onWaiting={() => setIsBuffering(true)}
+        onStalled={() => setIsBuffering(true)}
+        onCanPlay={() => setIsBuffering(false)}
+        onPlaying={() => setIsBuffering(false)}
+        onError={() => setIsBuffering(false)}
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onEnded}
@@ -154,6 +130,18 @@ export const VideoPlayer = ({
           objectFit: "contain",
         }}
       />
+      {isBuffering && (
+        <div
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-black/20"
+          role="status"
+          aria-label="Loading video"
+        >
+          <div
+            className="size-12 rounded-full border-[3px] border-white/25 border-t-[#FF0000] animate-spin"
+            style={{ animationDuration: "0.75s" }}
+          />
+        </div>
+      )}
     </div>
   );
 };
