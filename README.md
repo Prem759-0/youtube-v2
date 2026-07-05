@@ -474,6 +474,18 @@ Contributions are welcome. If you want to help improve the project:
 
 ---
 
+## :star2: Star History
+
+<a href="https://star-history.com/#Prem759-0/youtube-v2&Timeline">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Prem759-0/youtube-v2&type=Timeline&theme=dark" />
+  <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Prem759-0/youtube-v2&type=Timeline" />
+  <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Prem759-0/youtube-v2&type=Timeline" />
+</picture>
+</a>
+
+---
+
 ## ✅ Summary
 
 This project is already a strong full-stack foundation for a YouTube-like product. With the right services configured, it can become a powerful media platform with AI-assisted content creation, scalable uploads, rich creator tools, and a polished user experience.
