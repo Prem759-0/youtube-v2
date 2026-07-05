@@ -17,7 +17,6 @@
   <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/tRPC-2596BE?style=for-the-badge&logo=trpc&logoColor=white" alt="tRPC" />
-</div>
 
 <p align="center">
 
@@ -28,11 +27,12 @@
   <a href="https://github.com/Prem759-0/youtube-v2/commits" title="Github commits" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/commits/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="Github commits" /></a>
   <a href="https://github.com/Prem759-0/youtube-v2/issues" title="GitHub issues" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/issues/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub issues" /></a>
   <a href="https://github.com/Prem759-0/youtube-v2/pulls" title="GitHub pull requests" style="margin: 4px; display: inline-block;"><img src="https://flat.badgen.net/github/prs/Prem759-0/youtube-v2?icon=github&color=black&scale=1.01" alt="GitHub pull requests" /></a>
-  <a href="https://newtube-clone.vercel.app" title="Vercel status" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
+  <a href="https://youtube-v2.vercel.app" title="Vercel status" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel status" /></a>
   <a href="https://github.com/Prem759-0/youtube-v2" title="Views" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Views-Open%20Live-blue?style=for-the-badge&logo=github&logoColor=white" alt="Views" /></a>
   <a href="https://github.com/Prem759-0/youtube-v2" title="Stars" style="margin: 4px; display: inline-block;"><img src="https://img.shields.io/badge/Stars-⭐%20Coming%20Soon-yellow?style=for-the-badge" alt="Stars" /></a>
 
 </p>
+</div>
 
 ---
 
