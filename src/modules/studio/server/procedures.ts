@@ -162,22 +162,23 @@ export const studioRouter = createTRPCRouter({
           .where(eq(comments.videoId, id));
         const commentIds = videoComments.map((comment) => comment.id);
 
-        if (commentIds.length > 0) {
-          await tx.delete(commentReactions).where(inArray(commentReactions.commentId, commentIds));
-          await tx.delete(comments).where(inArray(comments.id, commentIds));
-        }
-
         await tx.delete(videoReactions).where(eq(videoReactions.videoId, id));
         await tx.delete(videoViews).where(eq(videoViews.videoId, id));
         await tx.delete(playlistVideos).where(eq(playlistVideos.videoId, id));
-        await tx.delete(videos).where(eq(videos.id, id));
+
+        if (commentIds.length > 0) {
+          await tx.delete(commentReactions).where(inArray(commentReactions.commentId, commentIds));
+          await tx.delete(comments).where(eq(comments.videoId, id));
+        }
+
+        await tx.delete(videos).where(and(eq(videos.id, id), eq(videos.userId, userId)));
 
         return existingVideo;
       });
 
-      const utapi = new UTApi();
-
       try {
+        const utapi = new UTApi();
+
         if (removedVideo.thumbnailKey) {
           await utapi.deleteFiles(removedVideo.thumbnailKey);
         }

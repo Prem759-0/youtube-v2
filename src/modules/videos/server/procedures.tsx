@@ -55,21 +55,46 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
   let previewKey: string | null | undefined;
   let previewUrl: string | null | undefined;
 
-  if (playbackId) {
-    const utapi = new UTApi();
-    const [uploadedThumbnail, uploadedPreview] = await utapi.uploadFilesFromUrl([
-      `${MUX_IMAGE_BASE_URL}/${playbackId}/thumbnail.jpg`,
-      `${MUX_IMAGE_BASE_URL}/${playbackId}/animated.gif`,
-    ]);
+  const [existingVideo] = await db
+    .select({
+      thumbnailKey: videos.thumbnailKey,
+      thumbnailUrl: videos.thumbnailUrl,
+      previewKey: videos.previewKey,
+      previewUrl: videos.previewUrl,
+    })
+    .from(videos)
+    .where(eq(videos.muxUploadId, uploadId));
 
-    if (uploadedThumbnail.data) {
-      thumbnailKey = uploadedThumbnail.data.key;
-      thumbnailUrl = uploadedThumbnail.data.ufsUrl;
+  const shouldUploadMuxThumbnail = playbackId && !existingVideo?.thumbnailKey && !existingVideo?.thumbnailUrl;
+  const shouldUploadMuxPreview = playbackId && !existingVideo?.previewKey && !existingVideo?.previewUrl;
+
+  if (playbackId && (shouldUploadMuxThumbnail || shouldUploadMuxPreview)) {
+    const utapi = new UTApi();
+    const uploadRequests = [
+      shouldUploadMuxThumbnail ? `${MUX_IMAGE_BASE_URL}/${playbackId}/thumbnail.jpg` : null,
+      shouldUploadMuxPreview ? `${MUX_IMAGE_BASE_URL}/${playbackId}/animated.gif` : null,
+    ].filter((url): url is string => Boolean(url));
+
+    const uploadResults = await utapi.uploadFilesFromUrl(uploadRequests);
+    const results = Array.isArray(uploadResults) ? uploadResults : [uploadResults];
+    let resultIndex = 0;
+
+    if (shouldUploadMuxThumbnail) {
+      const uploadedThumbnail = results[resultIndex++];
+
+      if (uploadedThumbnail?.data) {
+        thumbnailKey = uploadedThumbnail.data.key;
+        thumbnailUrl = uploadedThumbnail.data.ufsUrl;
+      }
     }
 
-    if (uploadedPreview.data) {
-      previewKey = uploadedPreview.data.key;
-      previewUrl = uploadedPreview.data.ufsUrl;
+    if (shouldUploadMuxPreview) {
+      const uploadedPreview = results[resultIndex];
+
+      if (uploadedPreview?.data) {
+        previewKey = uploadedPreview.data.key;
+        previewUrl = uploadedPreview.data.ufsUrl;
+      }
     }
   }
 
@@ -81,10 +106,10 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
       muxStatus: asset.status,
       muxTrackId: textTrack?.id,
       muxTrackStatus: textTrack?.status,
-      thumbnailKey,
-      thumbnailUrl,
-      previewKey,
-      previewUrl,
+      thumbnailKey: thumbnailKey ?? existingVideo?.thumbnailKey,
+      thumbnailUrl: thumbnailUrl ?? existingVideo?.thumbnailUrl,
+      previewKey: previewKey ?? existingVideo?.previewKey,
+      previewUrl: previewUrl ?? existingVideo?.previewUrl,
       duration,
       updatedAt: new Date(),
     })

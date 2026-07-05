@@ -133,22 +133,7 @@ export const { POST } = serve(async (context) => {
     throw new Error("Timed out waiting for Leonardo image");
   }
 
-  // ✅ 3) Cleanup old thumbnail (if any)
-  await context.run("cleanup-thumbnail", async () => {
-    if (video.thumbnailKey) {
-      await utapi.deleteFiles(video.thumbnailKey);
-
-      await db
-        .update(videos)
-        .set({
-          thumbnailKey: null,
-          thumbnailUrl: null,
-        })
-        .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
-    }
-  });
-
-  // ✅ 4) Upload Leonardo image URL to UploadThing
+  // ✅ 3) Upload Leonardo image URL to UploadThing before deleting the old thumbnail.
   const uploadedThumbnail = await context.run("upload-thumbnail", async () => {
     // Single URL → single result (not array)
     const result = await utapi.uploadFilesFromUrl(tempThumbnailUrl!);
@@ -164,15 +149,23 @@ export const { POST } = serve(async (context) => {
     };
   });
 
-  // ✅ 5) Update video thumbnail in DB
+  // ✅ 4) Update video thumbnail in DB
   await context.run("update-video", async () => {
     await db
       .update(videos)
       .set({
         thumbnailKey: uploadedThumbnail.key,
         thumbnailUrl: uploadedThumbnail.url,
+        updatedAt: new Date(),
       })
       .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
+  });
+
+  // ✅ 5) Cleanup old thumbnail only after the new thumbnail is safely stored.
+  await context.run("cleanup-old-thumbnail", async () => {
+    if (video.thumbnailKey && video.thumbnailKey !== uploadedThumbnail.key) {
+      await utapi.deleteFiles(video.thumbnailKey);
+    }
   });
 
   // No return value: Upstash workflow route expects Promise<void>
