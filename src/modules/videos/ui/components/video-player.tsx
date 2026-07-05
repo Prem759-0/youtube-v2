@@ -45,54 +45,7 @@ export const VideoPlayer = ({
       }}
     >
       <style>{`
-        /*
-         * ROOT CAUSE: media-chrome adds breakpoint attributes (breakpointsm,
-         * breakpointmd, etc.) to media-controller based on CONTAINER SIZE.
-         * The YT theme uses these to hide buttons when player is "small".
-         * 
-         * FIX: Override every breakpoint state to force buttons always visible.
-         * These CSS vars cascade into the shadow DOM via the custom property
-         * inheritance mechanism — this is the ONLY way to style inside shadow DOM.
-         */
-
-        mux-player {
-          /* Force all key buttons visible at ALL container sizes */
-          --media-captions-button-display: inline-flex;
-          --media-settings-menu-button-display: inline-flex;
-          --media-rendition-selectmenu-display: inline-flex;
-          --media-playback-rate-button-display: inline-flex;
-
-          /* Prevent cinema mode */
-          position: relative !important;
-          width: 100% !important;
-          height: 100% !important;
-          max-width: 100% !important;
-          max-height: 100% !important;
-          display: block !important;
-        }
-
-        /*
-         * The YT theme hides buttons at small/medium breakpoints.
-         * Target EVERY breakpoint attribute state to force override.
-         * media-controller gets breakpointsm / breakpointmd attrs when small.
-         */
-        mux-player media-controller,
-        mux-player media-controller[breakpointsm],
-        mux-player media-controller[breakpointmd],
-        mux-player media-controller[breakpointlg],
-        mux-player media-controller[breakpointxl] {
-          --media-captions-button-display: inline-flex !important;
-          --media-settings-menu-button-display: inline-flex !important;
-          --media-rendition-selectmenu-display: inline-flex !important;
-          --media-playback-rate-button-display: inline-flex !important;
-        }
-
-        /* Keep these buttons available at small sizes without overriding the player's YouTube-style auto-hide opacity. */
-        mux-player media-captions-button,
-        mux-player media-settings-menu-button,
-        mux-player media-rendition-selectmenu {
-          display: inline-flex !important;
-        }
+        /* Let the YouTube player theme handle normal touch/click auto-hide behavior. */
 
         /* Fix icon sizes inside buttons on all screen sizes */
         mux-player media-captions-button svg,
@@ -102,12 +55,6 @@ export const VideoPlayer = ({
           height: 20px !important;
           min-width: 20px !important;
           min-height: 20px !important;
-        }
-
-        /* Ensure control bar doesn't clip/overflow-hide buttons */
-        mux-player media-control-bar {
-          overflow: visible !important;
-          flex-wrap: wrap !important;
         }
 
         /* Fix settings menu not getting clipped on small screens */
