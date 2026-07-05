@@ -17,6 +17,24 @@ const getPublicPlaybackId = (
   return publicPlaybackId ?? playbackIds?.[0]?.id ?? null;
 };
 
+
+const getReadyTextTrack = (
+  tracks?: Array<{
+    id?: string | null;
+    type?: string | null;
+    status?: string | null;
+    text_type?: string | null;
+  }> | null
+) => {
+  return tracks?.find(
+    (track) =>
+      track.type === "text" &&
+      track.status === "ready" &&
+      (!track.text_type || track.text_type === "subtitles" || track.text_type === "captions")
+  );
+};
+
+
 export const updateVideoFromMuxUpload = async (uploadId: string) => {
   const upload = await mux.video.uploads.retrieve(uploadId);
 
@@ -29,6 +47,7 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
 
   const asset = await mux.video.assets.retrieve(upload.asset_id);
   const playbackId = getPublicPlaybackId(asset.playback_ids);
+  const textTrack = getReadyTextTrack(asset.tracks);
   const duration = asset.duration ? Math.round(asset.duration * 1000) : 0;
 
   let thumbnailKey: string | null | undefined;
@@ -60,6 +79,8 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
       muxAssetId: asset.id,
       muxPlaybackId: playbackId,
       muxStatus: asset.status,
+      muxTrackId: textTrack?.id,
+      muxTrackStatus: textTrack?.status,
       thumbnailKey,
       thumbnailUrl,
       previewKey,

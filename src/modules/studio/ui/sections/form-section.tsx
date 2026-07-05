@@ -322,6 +322,11 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     }/videos/${videoId}`;
 
   const [isCopied, setIsCopied] = useState(false);
+  const needsMuxSync =
+    video.muxStatus !== "ready" ||
+    !video.muxPlaybackId ||
+    video.muxTrackStatus !== "ready" ||
+    !video.muxTrackId;
 
   const onCopy = async () => {
     await navigator.clipboard.writeText(fullUrl);
@@ -422,6 +427,43 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
               </DropdownMenu>
             </div>
           </div>
+
+          {needsMuxSync && (
+            <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-900 dark:border-yellow-900/50 dark:bg-yellow-950/30 dark:text-yellow-100">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="space-y-1">
+                  <p className="font-semibold">Video is still syncing from Mux</p>
+                  <p>
+                    If your video, thumbnail, or subtitles already appear in Mux but not here yet, wait a minute and click
+                    revalidate again. Subtitles can arrive after the video becomes ready.
+                  </p>
+                  <p className="text-xs">
+                    Current video status: {snakeCaseToTitle(video.muxStatus || "preparing")} · Subtitles status:{" "}
+                    {snakeCaseToTitle(video.muxTrackStatus || "no_subtitles")}
+                  </p>
+                </div>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={revalidate.isPending}
+                  onClick={() => revalidate.mutate({ id: videoId })}
+                  className="shrink-0"
+                >
+                  {revalidate.isPending ? (
+                    <>
+                      <Loader2Icon className="mr-2 size-4 animate-spin" />
+                      Syncing...
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCwIcon className="mr-2 size-4" />
+                      Revalidate now
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* GRID */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
