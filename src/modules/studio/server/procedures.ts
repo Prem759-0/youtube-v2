@@ -4,6 +4,8 @@ import { comments, ReactionType, users, videoReactions, videos, videoUpdateSchem
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { and, desc, eq, getTableColumns, lt, or } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
+import { UTApi } from "uploadthing/server";
+import { mux } from "@/lib/mux";
 
 export const studioRouter = createTRPCRouter({
   getOne: protectedProcedure
@@ -63,8 +65,6 @@ export const studioRouter = createTRPCRouter({
 					),
 				})
         .from(videos)
-        .innerJoin(users, eq(videos.userId, users.id))
-
         .where(
           and(
             eq(videos.userId, userId),
@@ -141,7 +141,7 @@ export const studioRouter = createTRPCRouter({
       const { id } = input;
       const { id: userId } = ctx.user;
 
-      const result = await db
+      const [removedVideo] = await db
         .delete(videos)
         .where(
           and(
@@ -151,10 +151,24 @@ export const studioRouter = createTRPCRouter({
         )
         .returning();
 
-      if (!result.length) {
+      if (!removedVideo) {
         throw new TRPCError({ code: "NOT_FOUND" });
       }
 
-      return result[0];
+      const utapi = new UTApi();
+
+      if (removedVideo.thumbnailKey) {
+        await utapi.deleteFiles(removedVideo.thumbnailKey);
+      }
+
+      if (removedVideo.previewKey) {
+        await utapi.deleteFiles(removedVideo.previewKey);
+      }
+
+      if (removedVideo.muxAssetId) {
+        await mux.video.assets.delete(removedVideo.muxAssetId);
+      }
+
+      return removedVideo;
     }),
 });
