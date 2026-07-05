@@ -48,14 +48,14 @@ const VideosSectionSkeleton = () => {
       <Table className="table-fixed w-full min-w-[1000px]">
         <TableHeader>
           <TableRow>
-            <TableHead className="pl-6 w-[40%]">Video</TableHead>
+            <TableHead className="pl-6 w-[39%]">Video</TableHead>
             <TableHead className="w-[12%]">Visibility</TableHead>
             <TableHead className="w-[10%]">Status</TableHead>
-            <TableHead className="w-[12%]">Date</TableHead>
-            <TableHead className="text-right w-[8%]">Views</TableHead>
-            <TableHead className="text-right w-[8%]">Comments</TableHead>
-            <TableHead className="text-right w-[8%]">Likes</TableHead>
-            <TableHead className="pr-6 text-right w-[6%]">Actions</TableHead>
+            <TableHead className="w-[14%] pr-8">Date</TableHead>
+            <TableHead className="w-[7%] pl-2 text-left">Views</TableHead>
+            <TableHead className="w-[7%] pl-2 text-left">Comments</TableHead>
+            <TableHead className="w-[6%] pl-2 text-left">Likes</TableHead>
+            <TableHead className="w-[5%] pr-6 text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -79,17 +79,17 @@ const VideosSectionSkeleton = () => {
               <TableCell>
                 <Skeleton className="h-4 w-24" />
               </TableCell>
-              <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+              <TableCell className="pl-2 text-left">
+                <Skeleton className="h-4 w-12" />
               </TableCell>
-              <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+              <TableCell className="pl-2 text-left">
+                <Skeleton className="h-4 w-12" />
               </TableCell>
-              <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+              <TableCell className="pl-2 text-left">
+                <Skeleton className="h-4 w-12" />
               </TableCell>
-              <TableCell className="pr-6 text-right">
-                <Skeleton className="h-8 w-8 ml-auto rounded-full" />
+              <TableCell className="pr-6 text-center">
+                <Skeleton className="h-8 w-8 mx-auto rounded-full" />
               </TableCell>
             </TableRow>
           ))}
@@ -174,14 +174,14 @@ export const VideosSectionSuspense = () => {
         <Table className="table-fixed w-full min-w-[1000px]">
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-6 w-[40%]">Video</TableHead>
+              <TableHead className="pl-6 w-[39%]">Video</TableHead>
               <TableHead className="w-[12%]">Visibility</TableHead>
               <TableHead className="w-[10%]">Status</TableHead>
-              <TableHead className="w-[12%]">Date</TableHead>
-              <TableHead className="text-right w-[8%]">Views</TableHead>
-              <TableHead className="text-right w-[8%]">Comments</TableHead>
-              <TableHead className="text-right w-[8%]">Likes</TableHead>
-              <TableHead className="pr-6 text-right w-[6%]">Actions</TableHead>
+              <TableHead className="w-[14%] pr-8">Date</TableHead>
+              <TableHead className="w-[7%] pl-2 text-left">Views</TableHead>
+              <TableHead className="w-[7%] pl-2 text-left">Comments</TableHead>
+              <TableHead className="w-[6%] pl-2 text-left">Likes</TableHead>
+              <TableHead className="w-[5%] pr-6 text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -235,13 +235,13 @@ export const VideosSectionSuspense = () => {
                       {snakeCaseToTitle(video.muxStatus || "error")}
                     </div>
                   </TableCell>
-                  <TableCell className="text-sm truncate">
+                  <TableCell className="pr-8 text-sm truncate">
                     {format(new Date(video.createdAt), "d MMM yyy")}
                   </TableCell>
-                  <TableCell className="text-right truncate">{video.viewCount}</TableCell>
-                  <TableCell className="text-right truncate">{video.commentCount}</TableCell>
-                  <TableCell className="text-right truncate">{video.likeCount}</TableCell>
-                  <TableCell className="pr-6 text-right" onClick={(event) => event.stopPropagation()}>
+                  <TableCell className="pl-2 text-left truncate">{video.viewCount}</TableCell>
+                  <TableCell className="pl-2 text-left truncate">{video.commentCount}</TableCell>
+                  <TableCell className="pl-2 text-left truncate">{video.likeCount}</TableCell>
+                  <TableCell className="pr-6 text-center" onClick={(event) => event.stopPropagation()}>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="icon" disabled={isDeleting}>
