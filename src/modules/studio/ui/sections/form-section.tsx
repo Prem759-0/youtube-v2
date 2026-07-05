@@ -238,12 +238,16 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   const { mutate: deleteVideo, isPending: isDeleting } =
     trpc.studio.delete.useMutation({
-      onSuccess: () => {
+      onSuccess: async () => {
+        await utils.studio.getMany.invalidate();
+        await utils.studio.getOne.invalidate({ id: videoId });
         toast.success("Video deleted successfully ✅");
-        router.push("/studio");
+        router.replace("/studio");
       },
-      onError: () =>
-        toast.error("Something went wrong, please try again later ❌"),
+      onError: (error) => {
+        setIsDeleteDialogOpen(false);
+        toast.error(error.message || "Something went wrong, please try again later ❌");
+      },
     });
 
   const revalidate = trpc.videos.revalidate.useMutation({
@@ -265,7 +269,6 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   const onDelete = () => {
     deleteVideo({ id: video.id });
-    setIsDeleteDialogOpen(false);
   };
 
   const getGuideStorageKey = (type: AIGeneratorType) => `studio_ai_guide_seen_${videoId}_${type}`;
@@ -334,6 +337,35 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
 
   return (
     <>
+      {isDeleting && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-red-600/20 overflow-hidden">
+            <div
+              className="h-full bg-red-600 w-1/3"
+              style={{ animation: "yt-progress 1.5s infinite linear", transform: "translateX(-100%)" }}
+            />
+            <style dangerouslySetInnerHTML={{
+              __html: `
+                @keyframes yt-progress {
+                  0% { transform: translateX(-100%); }
+                  100% { transform: translateX(300%); }
+                }
+             `}} />
+          </div>
+
+          <div className="flex flex-col items-center justify-center gap-5 rounded-2xl bg-background/95 px-8 py-7 text-center shadow-2xl">
+            <Loader2Icon className="size-12 animate-spin text-red-600" />
+            <div className="flex flex-col items-center gap-1">
+              <h3 className="text-xl font-semibold tracking-tight">
+                Deleting video...
+              </h3>
+              <p className="max-w-xs text-sm text-muted-foreground">
+                Please wait while we permanently remove this video and clean up its assets.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       {revalidate.isPending && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300">
           {/* Top Loading Bar */}
@@ -409,16 +441,17 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                   <RefreshCwIcon className={`size-5 ${revalidate.isPending ? "animate-spin" : ""}`} />
                 </Button>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <MoreVerticalIcon className="size-5" />
+                  <Button variant="ghost" size="icon" disabled={isDeleting}>
+                    {isDeleting ? <Loader2Icon className="size-5 animate-spin" /> : <MoreVerticalIcon className="size-5" />}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem
                     className="text-destructive"
+                    disabled={isDeleting}
                     onClick={() => setIsDeleteDialogOpen(true)}
                   >
-                    <TrashIcon className="size-4 mr-2" />
+                    {isDeleting ? <Loader2Icon className="size-4 mr-2 animate-spin" /> : <TrashIcon className="size-4 mr-2" />}
                     Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -864,9 +897,23 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction type="button" onClick={onDelete} disabled={isDeleting}>
-                {isDeleting ? "Deleting..." : "Continue"}
+              <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  onDelete();
+                }}
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <>
+                    <Loader2Icon className="mr-2 size-4 animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Continue"
+                )}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
