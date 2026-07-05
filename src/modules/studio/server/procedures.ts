@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { db } from "@/db";
-import { comments, commentReactions, playlistVideos, ReactionType, videoReactions, videos, videoUpdateSchema, videoViews } from "@/db/schema";
+import { comments, ReactionType, videoReactions, videos, videoUpdateSchema, videoViews } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
-import { and, desc, eq, getTableColumns, inArray, lt, or, sql } from "drizzle-orm";
+import { and, desc, eq, getTableColumns, lt, or, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { UTApi } from "uploadthing/server";
 import { mux } from "@/lib/mux";
@@ -141,57 +141,55 @@ export const studioRouter = createTRPCRouter({
       const { id } = input;
       const { id: userId } = ctx.user;
 
-      const removedVideo = await db.transaction(async (tx) => {
-        const [existingVideo] = await tx
-          .select()
-          .from(videos)
-          .where(
-            and(
-              eq(videos.id, id),
-              eq(videos.userId, userId)
-            )
-          );
+      const deleteResult = await db.execute<typeof videos.$inferSelect>(sql`
+        WITH existing_video AS (
+          SELECT *
+          FROM videos
+          WHERE id = ${id} AND user_id = ${userId}
+        ),
+        comment_tree AS (
+          SELECT c.id
+          FROM comments c
+          INNER JOIN existing_video v ON c.video_id = v.id
 
-        if (!existingVideo) {
-          throw new TRPCError({ code: "NOT_FOUND" });
-        }
+          UNION
 
-        const commentRows = await tx.execute<{ id: string }>(sql`
-          WITH RECURSIVE comment_tree AS (
-            SELECT id
-            FROM comments
-            WHERE video_id = ${id}
+          SELECT child.id
+          FROM comments child
+          INNER JOIN comment_tree parent ON child.parent_id = parent.id
+        ),
+        deleted_video_reactions AS (
+          DELETE FROM video_reactions
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_video_views AS (
+          DELETE FROM video_views
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_playlist_videos AS (
+          DELETE FROM playlist_videos
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_comment_reactions AS (
+          DELETE FROM comment_reactions
+          WHERE comment_id IN (SELECT id FROM comment_tree)
+        ),
+        deleted_comments AS (
+          DELETE FROM comments
+          WHERE id IN (SELECT id FROM comment_tree)
+        ),
+        deleted_video AS (
+          DELETE FROM videos
+          WHERE id IN (SELECT id FROM existing_video)
+          RETURNING *
+        )
+        SELECT * FROM deleted_video
+      `);
+      const removedVideo = deleteResult.rows[0];
 
-            UNION
-
-            SELECT child.id
-            FROM comments child
-            INNER JOIN comment_tree parent ON child.parent_id = parent.id
-          )
-          SELECT id FROM comment_tree
-        `);
-        const commentIds = commentRows.rows.map((comment) => comment.id);
-
-        await tx.delete(videoReactions).where(eq(videoReactions.videoId, id));
-        await tx.delete(videoViews).where(eq(videoViews.videoId, id));
-        await tx.delete(playlistVideos).where(eq(playlistVideos.videoId, id));
-
-        if (commentIds.length > 0) {
-          await tx.delete(commentReactions).where(inArray(commentReactions.commentId, commentIds));
-          await tx.delete(comments).where(inArray(comments.id, commentIds));
-        }
-
-        const [deletedVideo] = await tx
-          .delete(videos)
-          .where(and(eq(videos.id, id), eq(videos.userId, userId)))
-          .returning();
-
-        if (!deletedVideo) {
-          throw new TRPCError({ code: "NOT_FOUND" });
-        }
-
-        return deletedVideo;
-      });
+      if (!removedVideo) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
 
       try {
         const utapi = new UTApi();
