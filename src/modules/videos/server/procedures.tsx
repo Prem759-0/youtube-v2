@@ -55,21 +55,46 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
   let previewKey: string | null | undefined;
   let previewUrl: string | null | undefined;
 
-  if (playbackId) {
-    const utapi = new UTApi();
-    const [uploadedThumbnail, uploadedPreview] = await utapi.uploadFilesFromUrl([
-      `${MUX_IMAGE_BASE_URL}/${playbackId}/thumbnail.jpg`,
-      `${MUX_IMAGE_BASE_URL}/${playbackId}/animated.gif`,
-    ]);
+  const [existingVideo] = await db
+    .select({
+      thumbnailKey: videos.thumbnailKey,
+      thumbnailUrl: videos.thumbnailUrl,
+      previewKey: videos.previewKey,
+      previewUrl: videos.previewUrl,
+    })
+    .from(videos)
+    .where(eq(videos.muxUploadId, uploadId));
 
-    if (uploadedThumbnail.data) {
-      thumbnailKey = uploadedThumbnail.data.key;
-      thumbnailUrl = uploadedThumbnail.data.ufsUrl;
+  const shouldUploadMuxThumbnail = playbackId && !existingVideo?.thumbnailKey && !existingVideo?.thumbnailUrl;
+  const shouldUploadMuxPreview = playbackId && !existingVideo?.previewKey && !existingVideo?.previewUrl;
+
+  if (playbackId && (shouldUploadMuxThumbnail || shouldUploadMuxPreview)) {
+    const utapi = new UTApi();
+    const uploadRequests = [
+      shouldUploadMuxThumbnail ? `${MUX_IMAGE_BASE_URL}/${playbackId}/thumbnail.jpg` : null,
+      shouldUploadMuxPreview ? `${MUX_IMAGE_BASE_URL}/${playbackId}/animated.gif` : null,
+    ].filter((url): url is string => Boolean(url));
+
+    const uploadResults = await utapi.uploadFilesFromUrl(uploadRequests);
+    const results = Array.isArray(uploadResults) ? uploadResults : [uploadResults];
+    let resultIndex = 0;
+
+    if (shouldUploadMuxThumbnail) {
+      const uploadedThumbnail = results[resultIndex++];
+
+      if (uploadedThumbnail?.data) {
+        thumbnailKey = uploadedThumbnail.data.key;
+        thumbnailUrl = uploadedThumbnail.data.ufsUrl;
+      }
     }
 
-    if (uploadedPreview.data) {
-      previewKey = uploadedPreview.data.key;
-      previewUrl = uploadedPreview.data.ufsUrl;
+    if (shouldUploadMuxPreview) {
+      const uploadedPreview = results[resultIndex];
+
+      if (uploadedPreview?.data) {
+        previewKey = uploadedPreview.data.key;
+        previewUrl = uploadedPreview.data.ufsUrl;
+      }
     }
   }
 
@@ -81,10 +106,10 @@ export const updateVideoFromMuxUpload = async (uploadId: string) => {
       muxStatus: asset.status,
       muxTrackId: textTrack?.id,
       muxTrackStatus: textTrack?.status,
-      thumbnailKey,
-      thumbnailUrl,
-      previewKey,
-      previewUrl,
+      thumbnailKey: thumbnailKey ?? existingVideo?.thumbnailKey,
+      thumbnailUrl: thumbnailUrl ?? existingVideo?.thumbnailUrl,
+      previewKey: previewKey ?? existingVideo?.previewKey,
+      previewUrl: previewUrl ?? existingVideo?.previewUrl,
       duration,
       updatedAt: new Date(),
     })
@@ -270,7 +295,7 @@ export const videosRouter = createTRPCRouter({
       z.object({
        
         categoryId: z.string().uuid().nullish(),
-        userId: z.string().uuid().nullish(),
+        userId: z.union([z.literal("current"), z.string().uuid()]).nullish(),
         cursor: z
           .object({
             id: z.string().uuid(),
@@ -281,7 +306,8 @@ export const videosRouter = createTRPCRouter({
       })
     )
     .query(async ({  input, ctx }) => {
-      const { cursor, limit, categoryId , userId} = input;
+      const { cursor, limit, categoryId } = input;
+      let { userId } = input;
       const { clerkUserId } = ctx;
 
       let currentUserId: string | undefined;
@@ -293,6 +319,17 @@ export const videosRouter = createTRPCRouter({
 
       if (currentUser) {
         currentUserId = currentUser.id;
+      }
+
+      if (userId === "current") {
+        if (!currentUserId) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "You must be logged in to access this resource",
+          });
+        }
+
+        userId = currentUserId;
       }
 
       const isCurrentUser = !!userId && currentUserId === userId;
@@ -648,9 +685,9 @@ export const videoViewsRouter = createTRPCRouter({
           userId: ctx.user.id,
           videoId: input.videoId,
         });
-      } catch (err: any) {
-        if (err?.code !== "23505") {
-          throw err;
+      } catch (error) {
+        if (!(error instanceof Error) || !("code" in error) || error.code !== "23505") {
+          throw error;
         }
       }
     }),

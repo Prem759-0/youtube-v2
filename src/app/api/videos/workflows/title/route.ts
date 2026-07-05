@@ -3,11 +3,24 @@ import { videos } from "@/db/schema";
 import { serve } from "@upstash/workflow/nextjs";
 import { and, eq } from "drizzle-orm";
 import OpenAI from "openai";
+import { mux } from "@/lib/mux";
 
 interface InputType {
   userId: string;
   videoId: string;
 }
+
+
+const getReadyTextTrack = (
+  tracks?: Array<{ id?: string | null; type?: string | null; status?: string | null; text_type?: string | null }> | null
+) => {
+  return tracks?.find(
+    (track) =>
+      track.type === "text" &&
+      track.status === "ready" &&
+      (!track.text_type || track.text_type === "subtitles" || track.text_type === "captions")
+  );
+};
 
 const TITLE_SYSTEM_PROMPT = `Your task is to generate a compelling, SEO-focused YouTube title based on the video's transcript. Follow these rules strictly:
 - **Engaging & Clickable:** The title must be catchy and spark curiosity.
@@ -36,10 +49,36 @@ export const { POST } = serve(async (context) => {
   });
 
   const transcript = await context.run("get-transcript", async () => {
-    if (!video.muxPlaybackId || !video.muxTrackId) {
-        throw new Error("Mux data not available for this video.");
+    let muxPlaybackId = video.muxPlaybackId;
+    let muxTrackId = video.muxTrackId;
+
+    if ((!muxPlaybackId || !muxTrackId) && video.muxUploadId) {
+      const upload = await mux.video.uploads.retrieve(video.muxUploadId);
+
+      if (upload.asset_id) {
+        const asset = await mux.video.assets.retrieve(upload.asset_id);
+        const readyTrack = getReadyTextTrack(asset.tracks);
+        muxPlaybackId = muxPlaybackId ?? asset.playback_ids?.[0]?.id ?? null;
+        muxTrackId = readyTrack?.id ?? null;
+
+        await db
+          .update(videos)
+          .set({
+            muxAssetId: asset.id,
+            muxPlaybackId,
+            muxStatus: asset.status,
+            muxTrackId,
+            muxTrackStatus: readyTrack?.status,
+            updatedAt: new Date(),
+          })
+          .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
+      }
     }
-    const trackUrl = `https://stream.mux.com/${video.muxPlaybackId}/text/${video.muxTrackId}.txt`;
+
+    if (!muxPlaybackId || !muxTrackId) {
+        throw new Error("No subtitles are available for this video yet.");
+    }
+    const trackUrl = `https://stream.mux.com/${muxPlaybackId}/text/${muxTrackId}.txt`;
     const response = await fetch(trackUrl);
 
     if (!response.ok) {
@@ -83,6 +122,7 @@ export const { POST } = serve(async (context) => {
       .update(videos)
       .set({
         title: title || video.title,
+        updatedAt: new Date(),
       })
       .where(and(eq(videos.id, video.id), eq(videos.userId, video.userId)));
   });

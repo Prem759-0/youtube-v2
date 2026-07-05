@@ -322,11 +322,9 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
     }/videos/${videoId}`;
 
   const [isCopied, setIsCopied] = useState(false);
-  const needsMuxSync =
-    video.muxStatus !== "ready" ||
-    !video.muxPlaybackId ||
-    video.muxTrackStatus !== "ready" ||
-    !video.muxTrackId;
+  const hasReadySubtitles = video.muxTrackStatus === "ready" && !!video.muxTrackId;
+  const needsMuxSync = video.muxStatus !== "ready" || !video.muxPlaybackId;
+  const showMissingSubtitlesNotice = !needsMuxSync && !hasReadySubtitles;
 
   const onCopy = async () => {
     await navigator.clipboard.writeText(fullUrl);
@@ -434,8 +432,8 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                 <div className="space-y-1">
                   <p className="font-semibold">Video is still syncing from Mux</p>
                   <p>
-                    If your video, thumbnail, or subtitles already appear in Mux but not here yet, wait a minute and click
-                    revalidate again. Subtitles can arrive after the video becomes ready.
+                    If your video or thumbnail already appears in Mux but not here yet, wait a minute and click
+                    revalidate again.
                   </p>
                   <p className="text-xs">
                     Current video status: {snakeCaseToTitle(video.muxStatus || "preparing")} · Subtitles status:{" "}
@@ -484,7 +482,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                           type="button"
                           className="rounded-full size-6 [&_svg]:size-3"
                           onClick={() => handleAIGeneratorClick("title", () => generateTitle.mutate({ id: videoId }))}
-                          disabled={generateTitle.isPending || !video.muxTrackId}
+                          disabled={generateTitle.isPending || !hasReadySubtitles}
                         >
                           {generateTitle.isPending
                             ? <Loader2Icon className="animate-spin " />
@@ -500,6 +498,22 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         placeholder="Add a title to your video"
                       />
                     </FormControl>
+                    {showMissingSubtitlesNotice && (
+                      <div className="mt-3 max-w-[640px] rounded-lg border border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/40 dark:text-neutral-300">
+                        <div className="font-semibold">No subtitles available yet</div>
+                        <p className="mt-1">AI title generation needs a transcript. If Mux generated subtitles for this video, click Revalidate now to pull them in. If Mux has no subtitles, upload or enable subtitles first.</p>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          size="sm"
+                          disabled={revalidate.isPending}
+                          onClick={() => revalidate.mutate({ id: videoId })}
+                          className="mt-3"
+                        >
+                          {revalidate.isPending ? "Checking Mux..." : "Check subtitles from Mux"}
+                        </Button>
+                      </div>
+                    )}
                     {activeGuide === "title" && (
                       <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
                         <div className="font-semibold">{aiGuideContent.title.title}</div>
@@ -542,7 +556,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                           type="button"
                           className="rounded-full size-6 [&_svg]:size-3"
                           onClick={() => handleAIGeneratorClick("description", () => generateDescription.mutate({ id: videoId }))}
-                          disabled={generateDescription.isPending || !video.muxTrackId}
+                          disabled={generateDescription.isPending || !hasReadySubtitles}
                         >
                           {generateDescription.isPending
                             ? <Loader2Icon className="animate-spin " />
@@ -559,6 +573,22 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
                         placeholder="Add a description to your video"
                       />
                     </FormControl>
+                    {showMissingSubtitlesNotice && (
+                      <div className="mt-3 max-w-[640px] rounded-lg border border-neutral-200 bg-neutral-50 p-3 text-sm text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900/40 dark:text-neutral-300">
+                        <div className="font-semibold">No subtitles available yet</div>
+                        <p className="mt-1">AI description generation needs a transcript. If Mux generated subtitles for this video, click Revalidate now to pull them in. If Mux has no subtitles, upload or enable subtitles first.</p>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          size="sm"
+                          disabled={revalidate.isPending}
+                          onClick={() => revalidate.mutate({ id: videoId })}
+                          className="mt-3"
+                        >
+                          {revalidate.isPending ? "Checking Mux..." : "Check subtitles from Mux"}
+                        </Button>
+                      </div>
+                    )}
                     {activeGuide === "description" && (
                       <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-300">
                         <div className="font-semibold">{aiGuideContent.description.title}</div>
@@ -835,7 +865,7 @@ const FormSectionSuspense = ({ videoId }: FormSectionProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onDelete} disabled={isDeleting}>
+              <AlertDialogAction type="button" onClick={onDelete} disabled={isDeleting}>
                 {isDeleting ? "Deleting..." : "Continue"}
               </AlertDialogAction>
             </AlertDialogFooter>

@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { db } from "@/db";
-import { comments, ReactionType, users, videoReactions, videos, videoUpdateSchema, videoViews } from "@/db/schema";
+import { comments, ReactionType, videoReactions, videos, videoUpdateSchema, videoViews } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
-import { and, desc, eq, getTableColumns, lt, or } from "drizzle-orm";
+import { and, desc, eq, getTableColumns, lt, or, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import { UTApi } from "uploadthing/server";
 import { mux } from "@/lib/mux";
@@ -141,32 +141,72 @@ export const studioRouter = createTRPCRouter({
       const { id } = input;
       const { id: userId } = ctx.user;
 
-      const [removedVideo] = await db
-        .delete(videos)
-        .where(
-          and(
-            eq(videos.id, id),
-            eq(videos.userId, userId)
-          )
+      const deleteResult = await db.execute<typeof videos.$inferSelect>(sql`
+        WITH existing_video AS (
+          SELECT *
+          FROM videos
+          WHERE id = ${id} AND user_id = ${userId}
+        ),
+        comment_tree AS (
+          SELECT c.id
+          FROM comments c
+          INNER JOIN existing_video v ON c.video_id = v.id
+
+          UNION
+
+          SELECT child.id
+          FROM comments child
+          INNER JOIN comment_tree parent ON child.parent_id = parent.id
+        ),
+        deleted_video_reactions AS (
+          DELETE FROM video_reactions
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_video_views AS (
+          DELETE FROM video_views
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_playlist_videos AS (
+          DELETE FROM playlist_videos
+          WHERE video_id IN (SELECT id FROM existing_video)
+        ),
+        deleted_comment_reactions AS (
+          DELETE FROM comment_reactions
+          WHERE comment_id IN (SELECT id FROM comment_tree)
+        ),
+        deleted_comments AS (
+          DELETE FROM comments
+          WHERE id IN (SELECT id FROM comment_tree)
+        ),
+        deleted_video AS (
+          DELETE FROM videos
+          WHERE id IN (SELECT id FROM existing_video)
+          RETURNING *
         )
-        .returning();
+        SELECT * FROM deleted_video
+      `);
+      const removedVideo = deleteResult.rows[0];
 
       if (!removedVideo) {
         throw new TRPCError({ code: "NOT_FOUND" });
       }
 
-      const utapi = new UTApi();
+      try {
+        const utapi = new UTApi();
 
-      if (removedVideo.thumbnailKey) {
-        await utapi.deleteFiles(removedVideo.thumbnailKey);
-      }
+        if (removedVideo.thumbnailKey) {
+          await utapi.deleteFiles(removedVideo.thumbnailKey);
+        }
 
-      if (removedVideo.previewKey) {
-        await utapi.deleteFiles(removedVideo.previewKey);
-      }
+        if (removedVideo.previewKey) {
+          await utapi.deleteFiles(removedVideo.previewKey);
+        }
 
-      if (removedVideo.muxAssetId) {
-        await mux.video.assets.delete(removedVideo.muxAssetId);
+        if (removedVideo.muxAssetId) {
+          await mux.video.assets.delete(removedVideo.muxAssetId);
+        }
+      } catch (error) {
+        console.error("Video was deleted, but external asset cleanup failed", error);
       }
 
       return removedVideo;

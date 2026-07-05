@@ -10,7 +10,7 @@ interface PlaylistAddButtonProps {
 	playlist: {
 		id: string;
 		name: string;
-		containsVideo?: any;
+		containsVideo?: boolean | null;
 	};
 	videoId: string;
 	onSelectionChange?: () => void;
