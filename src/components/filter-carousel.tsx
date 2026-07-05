@@ -42,12 +42,13 @@ export const FilterCarousel = ({
       return;
     }
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
+    const updateCarouselState = () => {
+      setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap() + 1);
-    })
+    };
+
+    queueMicrotask(updateCarouselState);
+    api.on("select", updateCarouselState)
   }, [api])
 
   return (

@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { TRPCProvider } from "@/trpc/client";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineOverlay } from "@/modules/videos/ui/components/offline-overlay";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "YouTube",
@@ -32,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en" suppressHydrationWarning>
         <body
-          className={inter.className}
+          className="font-sans"
         >
           <TRPCProvider>
             <Toaster />

@@ -270,7 +270,7 @@ export const videosRouter = createTRPCRouter({
       z.object({
        
         categoryId: z.string().uuid().nullish(),
-        userId: z.string().uuid().nullish(),
+        userId: z.union([z.literal("current"), z.string().uuid()]).nullish(),
         cursor: z
           .object({
             id: z.string().uuid(),
@@ -281,7 +281,8 @@ export const videosRouter = createTRPCRouter({
       })
     )
     .query(async ({  input, ctx }) => {
-      const { cursor, limit, categoryId , userId} = input;
+      const { cursor, limit, categoryId } = input;
+      let { userId } = input;
       const { clerkUserId } = ctx;
 
       let currentUserId: string | undefined;
@@ -293,6 +294,17 @@ export const videosRouter = createTRPCRouter({
 
       if (currentUser) {
         currentUserId = currentUser.id;
+      }
+
+      if (userId === "current") {
+        if (!currentUserId) {
+          throw new TRPCError({
+            code: "UNAUTHORIZED",
+            message: "You must be logged in to access this resource",
+          });
+        }
+
+        userId = currentUserId;
       }
 
       const isCurrentUser = !!userId && currentUserId === userId;
@@ -648,9 +660,9 @@ export const videoViewsRouter = createTRPCRouter({
           userId: ctx.user.id,
           videoId: input.videoId,
         });
-      } catch (err: any) {
-        if (err?.code !== "23505") {
-          throw err;
+      } catch (error) {
+        if (!(error instanceof Error) || !("code" in error) || error.code !== "23505") {
+          throw error;
         }
       }
     }),
