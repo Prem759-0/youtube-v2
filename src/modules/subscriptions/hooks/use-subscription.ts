@@ -51,9 +51,17 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 				toast.error(error.message || 'Failed to subscribe this user!');
 			}
 		},
-		onSuccess: () => {
-			utils.videos.getManySubscribed.invalidate();
-			utils.subscriptions.getMany.invalidate();
+		onSuccess: async () => {
+			setOptimisticState((currentState) => ({
+				...currentState,
+				hasOptimisticUpdate: false,
+			}));
+			await Promise.all([
+				utils.videos.getOne.invalidate(),
+				utils.videos.getManySubscribed.invalidate(),
+				utils.subscriptions.getMany.invalidate(),
+				utils.users.getOne.invalidate({ id: userId }),
+			]);
 		},
 	});
 
@@ -71,9 +79,17 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 				toast.error(error.message || 'Failed to unsubscribe this user!');
 			}
 		},
-		onSuccess: () => {
-			utils.videos.getManySubscribed.invalidate();
-			utils.subscriptions.getMany.invalidate();
+		onSuccess: async () => {
+			setOptimisticState((currentState) => ({
+				...currentState,
+				hasOptimisticUpdate: false,
+			}));
+			await Promise.all([
+				utils.videos.getOne.invalidate(),
+				utils.videos.getManySubscribed.invalidate(),
+				utils.subscriptions.getMany.invalidate(),
+				utils.users.getOne.invalidate({ id: userId }),
+			]);
 		},
 	});
 
