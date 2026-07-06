@@ -15,9 +15,10 @@ interface VideoOwnerProps {
 
 export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
     const { userId: clerkUserId, isLoaded } = useAuth();
-    const { isPending, onClick } = useSubscription({
+    const { isPending, isSubscribed, onClick, subscriberCount } = useSubscription({
         userId: user.id,
         isSubscribed: user.viewerSubscribed,
+        initialSubscriberCount: user.subscriberCount,
     })
 
     return (
@@ -28,7 +29,7 @@ export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
                     <div className="flex flex-col gap-1 min-w-0">
                         <UserInfo name={user.name} size="lg" />
                         <span className="text-sm text-muted-foreground line-clamp-1">
-                            {user.subscriberCount} subscribers
+                            {subscriberCount} subscriber{subscriberCount === 1 ? "" : "s"}
                         </span>
                     </div>
                 </div>
@@ -47,7 +48,7 @@ export const VideoOwner = ({ user, videoId }: VideoOwnerProps) => {
                 <SubscriptionButton
                     onClick={onClick}
                     disabled={isPending || !isLoaded}
-                    isSubscribed={user.viewerSubscribed}
+                    isSubscribed={isSubscribed}
                     className="flex-none"
                 />
             )}

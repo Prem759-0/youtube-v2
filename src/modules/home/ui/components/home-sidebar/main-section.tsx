@@ -14,7 +14,8 @@ import Link from "next/link"
 import {
     HomeIcon,
     PlaySquareIcon,
-    FlameIcon
+    FlameIcon,
+    ClapperboardIcon
 } from "lucide-react"
 
 const items = [
@@ -22,6 +23,11 @@ const items = [
         title: "Home",
         url: "/",
         icon: HomeIcon,
+    },
+    {
+        title: "Shorts",
+        url: "/shorts",
+        icon: ClapperboardIcon,
     },
     {
         title: "Subscriptions",
