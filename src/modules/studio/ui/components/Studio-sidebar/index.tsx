@@ -11,7 +11,8 @@ import {
 import Link from "next/link"
 import {
   LogOutIcon,
-  VideoIcon
+  VideoIcon,
+  ClapperboardIcon
 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
@@ -27,10 +28,18 @@ export const StudioSidebar = () => {
           <SidebarMenu>
             <StudioSidebarHeader />
             <SidebarMenuItem>
-              <SidebarMenuButton isActive={pathname === "/studio"} tooltip="Exit studio" asChild>
+              <SidebarMenuButton isActive={pathname === "/studio"} tooltip="Content" asChild>
                 <Link prefetch  href="/studio">
                   <VideoIcon className="size-5" />
                   <span className="text-sm">Content</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive={pathname === "/studio/shorts"} tooltip="Shorts" asChild>
+                <Link prefetch  href="/studio/shorts">
+                  <ClapperboardIcon className="size-5" />
+                  <span className="text-sm">Shorts</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

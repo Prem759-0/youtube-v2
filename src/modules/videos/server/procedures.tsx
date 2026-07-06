@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { db } from "@/db";
 import { and, desc, eq, getTableColumns, inArray, isNotNull, lt, or } from "drizzle-orm"
-import {users, videos, videoUpdateSchema, videoViews,videoReactions, subscriptions } from "@/db/schema";
+import { comments, users, videos, videoUpdateSchema, videoViews,videoReactions, subscriptions } from "@/db/schema";
 import { baseProcedure,createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { mux } from "@/lib/mux";
 import { TRPCError } from "@trpc/server";
@@ -334,7 +334,18 @@ export const videosRouter = createTRPCRouter({
 
       const isCurrentUser = !!userId && currentUserId === userId;
 
+      const viewerReactions = db.$with("viewer_reactions").as(
+        db
+          .select({
+            videoId: videoReactions.videoId,
+            type: videoReactions.type,
+          })
+          .from(videoReactions)
+          .where(inArray(videoReactions.userId, currentUserId ? [currentUserId] : []))
+      );
+
       const data = await db
+        .with(viewerReactions)
         .select({
            ...getTableColumns(videos),
            user: users,
@@ -351,9 +362,12 @@ export const videosRouter = createTRPCRouter({
               eq(videoReactions.type, "dislike"),
             )
           ),
+          commentCount: db.$count(comments, eq(comments.videoId, videos.id)),
+          viewerReaction: viewerReactions.type,
         })
         .from(videos)
         .innerJoin(users, eq(videos.userId, users.id))
+        .leftJoin(viewerReactions, eq(viewerReactions.videoId, videos.id))
         .where(
           and(
             !isCurrentUser ? eq(videos.visibility, "public") : undefined,
