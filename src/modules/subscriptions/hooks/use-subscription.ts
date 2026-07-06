@@ -52,6 +52,8 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 			}
 		},
 		onSuccess: () => {
+			toast.success('Subscribed successfully');
+			utils.users.getOne.invalidate({ id: userId });
 			utils.videos.getManySubscribed.invalidate();
 			utils.subscriptions.getMany.invalidate();
 		},
@@ -72,6 +74,8 @@ export const useSubscription = ({ isSubscribed, userId, initialSubscriberCount }
 			}
 		},
 		onSuccess: () => {
+			toast.success('Unsubscribed successfully');
+			utils.users.getOne.invalidate({ id: userId });
 			utils.videos.getManySubscribed.invalidate();
 			utils.subscriptions.getMany.invalidate();
 		},
